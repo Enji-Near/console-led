@@ -19,6 +19,7 @@
 //   probe                toggle probe mode
 //   pulse <wire> <wire>  set the dial's pulse contacts, e.g. `pulse dial-red dial-blue`
 //   hook <wire> <wire>   set the hook switch contacts
+//   blink [seconds]      blink the onboard LED (GPIO 2) to find this board; default 30 s
 //   status               show settings
 #include <Arduino.h>
 #include <WiFi.h>
@@ -258,6 +259,16 @@ static void hookTick() {
   }
 }
 
+// ---- Onboard LED: `blink` finds this board among several on the bench -------------------
+static constexpr uint8_t LED_PIN = 2;
+static uint32_t blinkUntil = 0;
+
+static void blinkTick() {
+  if (!blinkUntil) return;
+  if ((int32_t)(millis() - blinkUntil) >= 0) { blinkUntil = 0; digitalWrite(LED_PIN, LOW); return; }
+  digitalWrite(LED_PIN, (millis() / 200) & 1);
+}
+
 // ---- Serial commands --------------------------------------------------------------------
 static String macStr(const uint8_t* m) {
   char b[13]; snprintf(b, sizeof(b), "%02x%02x%02x%02x%02x%02x", m[0], m[1], m[2], m[3], m[4], m[5]); return b;
@@ -275,7 +286,7 @@ static void status() {
   Serial.printf("  pulse pair: %s + %s\n  hook pair:  %s + %s\n", wname(pulseA), wname(pulseB), wname(hookA), wname(hookB));
   Serial.print("  wires:");
   for (auto& w : WIRES) Serial.printf(" %s=GPIO%d", w.name, w.pin);
-  Serial.println("\n  commands: 0-9 | target <mac>|broadcast | probe | pulse <wire> <wire> | hook <wire> <wire> | status");
+  Serial.println("\n  commands: 0-9 | target <mac>|broadcast | blink [s] | probe | pulse <wire> <wire> | hook <wire> <wire> | status");
 }
 
 static bool setPair(const String& args, int& a, int& b, const char* keyA, const char* keyB) {
@@ -310,6 +321,12 @@ static void command(String line) {
     if (args == "broadcast") memset(m, 0xFF, 6);
     else if (!parseMac(args, m)) { Serial.println("target <12 hex digits MAC> | target broadcast"); return; }
     memcpy(target, m, 6); prefs.putBytes("tgt", target, 6); addPeer(target); status();
+  } else if (cmd == "blink") {
+    const long secs = args.isEmpty() ? 30 : args.toInt();
+    pinMode(LED_PIN, OUTPUT);
+    blinkUntil = secs > 0 ? millis() + secs * 1000UL : 0;
+    if (!blinkUntil) digitalWrite(LED_PIN, LOW);
+    Serial.printf("blinking the onboard LED for %ld s\n", secs);
   } else if (cmd == "status") {
     status();
   } else {
@@ -335,6 +352,7 @@ void loop() {
     if (c == '\n' || c == '\r') { command(rxLine); rxLine = ""; }
     else if (rxLine.length() < 64) rxLine += c;
   }
+  blinkTick();
   if (probing) { probeTick(); delay(2); return; }
   dialTick();
   hookTick();
