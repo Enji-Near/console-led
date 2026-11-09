@@ -3,6 +3,7 @@
 # enable WLED's ESP-NOW, link Dialer's MAC as a remote, upload remote.json, reboot.
 #   tools/link-glorious-hole.sh <settings-PIN> [wled-ip] [dialer-mac]
 # The PIN is only sent to the board; it is not saved anywhere.
+# Rerun after any other config change: WLED 16.0.1 clears linked remotes on every /json/cfg POST.
 set -euo pipefail
 PIN=${1:?usage: $0 <settings-PIN> [wled-ip] [dialer-mac]}
 IP=${2:-192.168.0.15}

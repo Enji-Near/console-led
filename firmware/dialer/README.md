@@ -6,16 +6,32 @@ preset 10 (WLED has no preset 0, and 0 is 10 pulses on a rotary dial). Mapping l
 
 **PoC shortcut.** Glorious-Hole stays on stock WLED 16. WLED already accepts ESP-NOW "WiZmote"
 remote packets from a linked MAC and looks the button up in `/remote.json`, so Dialer sends
-WiZmote packets (button = 200 + digit) broadcast on channel 6. No auth beyond the MAC check, no
-reply, no lamp-os framing: the real console-led protocol replaces this after the spec.
+WiZmote packets (button = 200 + digit) unicast to Glorious-Hole's MAC. No auth beyond the MAC
+check and no lamp-os framing: the real console-led protocol replaces this after the spec.
+
+Tested 2026-11-09 on the bench: 20/20 digits applied, ACKed in 2-70 ms.
 
 ## Run it
 ```bash
 cd firmware/dialer && pio run -t upload --upload-port /dev/ttyUSB5
 pio device monitor -p /dev/ttyUSB5          # type a digit + Enter to send it, `status` for help
+#   then once, in the monitor:  target 3076f5e8d430   (Glorious-Hole's MAC, saved in flash)
 tools/link-glorious-hole.sh <settings-PIN>  # once: ESP-NOW on, link Dialer's MAC, remote.json
 ```
-Glorious-Hole must be on Wi-Fi channel 6 (it is: MonkeyCArtcade24). Dialer is fixed to channel 6.
+
+## What we learned getting it to work
+- **WLED's ESP-NOW listens on its router's channel.** The venue SSID `MonkeyCArtcade24` has
+  several access points (seen on channels 6 and 1) and Glorious-Hole joins whichever it likes at
+  boot. Dialer therefore sends unicast (the radio ACKs) and, if nothing ACKs, tries channels 1-13
+  and remembers the one that answers. This is the decision-5 problem in
+  `docs/02-handoff-architecture.md` showing up early: a venue router decides our channel.
+- **One frame is not enough.** On the bench about half the frames were lost, so Dialer retries
+  the same packet (same seq, so WLED acts once) up to 10 times until ACKed.
+- **WLED bug: any `/json/cfg` POST clears the linked remotes** unless it includes
+  `nw.linked_remote` again (WLED 16.0.1 `cfg.cpp`, `linked_remotes.clear()` runs unconditionally).
+  Changing any setting from a script, or saving the WiFi settings page without the remote listed,
+  unlinks Dialer. Rerun `tools/link-glorious-hole.sh` after config changes.
+- `firmware/sniffer/` (flash to a spare board) prints every ESP-NOW frame on channel 6.
 
 ## Phone wiring
 Every phone wire goes to its own GPIO, nothing to GND (table `WIRES` in `src/main.cpp`):

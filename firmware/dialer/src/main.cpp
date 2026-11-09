@@ -3,8 +3,8 @@
 // How it talks (PoC shortcut, not the final console-led protocol):
 //   Glorious-Hole runs stock WLED 16, which already accepts ESP-NOW "WiZmote" remote packets from
 //   a linked sender MAC and looks the button code up in /remote.json. Dialer sends a WiZmote-format
-//   packet with button = 200 + digit, broadcast on Wi-Fi channel 6 (Glorious-Hole's channel and
-//   the lamp-os mesh channel). firmware/glorious-hole/remote.json maps 200..209 to presets.
+//   packet with button = 200 + digit, unicast to Glorious-Hole's MAC (set with `target`), finding
+//   its Wi-Fi channel by ACK (see Radio). firmware/glorious-hole/remote.json maps 200..209 to presets.
 //
 // Wiring: every phone wire goes to its own GPIO (table WIRES below); no wire goes to GND. We
 // don't know yet which wires form which switch, so the firmware can drive any wire LOW as a
@@ -15,6 +15,7 @@
 //
 // Serial commands (115200, end with Enter):
 //   0..9                 send that digit, no phone needed
+//   target <mac>         send to this MAC (Glorious-Hole's) with ACK; `target broadcast` = no ACK
 //   probe                toggle probe mode
 //   pulse <wire> <wire>  set the dial's pulse contacts, e.g. `pulse dial-red dial-blue`
 //   hook <wire> <wire>   set the hook switch contacts
@@ -41,10 +42,40 @@ static int wireByName(const String& n) {
 }
 
 // ---- Radio ------------------------------------------------------------------------------
-static constexpr uint8_t CHANNEL = 6;
-static constexpr uint8_t BUTTON_BASE = 200;  // digit d -> WiZmote button 200 + d
+// Glorious-Hole's ESP-NOW listens on whatever channel its Wi-Fi router uses, and the venue SSID
+// has several access points on different channels (seen: 6 and 1), so it can move after a
+// reboot or a roam. Unicast gets a MAC-level ACK, so Dialer finds it: send on the last good
+// channel; no ACK -> try channels 1..13 until one ACKs, and remember it.
+static constexpr uint8_t START_CHANNEL = 6;    // lamp-os mesh channel; where we look first
+static constexpr uint8_t BUTTON_BASE = 200;    // digit d -> WiZmote button 200 + d
 static const uint8_t BCAST[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
 static uint32_t seq;
+static uint8_t target[6];                      // Glorious-Hole's MAC; all FF = broadcast (no ACK)
+static uint8_t channel = START_CHANNEL;
+static volatile bool sendDone = false, sendAcked = false;
+
+static void onSent(const uint8_t*, esp_now_send_status_t st) {
+  sendAcked = st == ESP_NOW_SEND_SUCCESS;
+  sendDone = true;
+}
+
+static bool isBroadcast() { return !memcmp(target, BCAST, 6); }
+
+static void addPeer(const uint8_t* mac) {
+  if (esp_now_is_peer_exist(mac)) return;
+  esp_now_peer_info_t p = {};
+  memcpy(p.peer_addr, mac, 6);
+  p.channel = 0;                               // 0 = whatever channel the radio is on now
+  p.ifidx = WIFI_IF_STA;
+  esp_now_add_peer(&p);
+}
+
+static void setChannel(uint8_t ch) {
+  esp_wifi_set_promiscuous(true);              // channel can only be forced like this when not associated
+  esp_wifi_set_channel(ch, WIFI_SECOND_CHAN_NONE);
+  esp_wifi_set_promiscuous(false);
+  channel = ch;
+}
 
 // WLED's WiZmote packet (wled00/remote.cpp): exactly 13 bytes or WLED ignores it.
 struct __attribute__((packed)) WizMsg {
@@ -59,18 +90,34 @@ struct __attribute__((packed)) WizMsg {
 static_assert(sizeof(WizMsg) == 13, "WLED needs 13 bytes");
 
 static void radioBegin() {
+  WiFi.persistent(false);                      // never save Wi-Fi settings; this board joins no router
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
-  esp_wifi_set_promiscuous(true);              // channel can only be forced like this when not associated
-  esp_wifi_set_channel(CHANNEL, WIFI_SECOND_CHAN_NONE);
-  esp_wifi_set_promiscuous(false);
   if (esp_now_init() != ESP_OK) { Serial.println("ESP-NOW init failed"); return; }
-  esp_now_peer_info_t p = {};
-  memcpy(p.peer_addr, BCAST, 6);
-  p.channel = CHANNEL;
-  p.ifidx = WIFI_IF_STA;
-  esp_now_add_peer(&p);
+  esp_now_register_send_cb(onSent);
+  addPeer(BCAST);
+  addPeer(target);
+  setChannel(START_CHANNEL);
   seq = esp_random();                          // a reboot must not reuse WLED's last seen seq
+}
+
+// One unicast send; true if the receiver's radio ACKed (the driver already retried it).
+static bool sendAck(const WizMsg& m) {
+  sendDone = false;
+  if (esp_now_send(target, (const uint8_t*)&m, sizeof(m)) != ESP_OK) return false;
+  const uint32_t t0 = millis();
+  while (!sendDone && millis() - t0 < 50) delay(1);
+  return sendDone && sendAcked;
+}
+
+// Retry the same packet (same seq, so WLED acts on it once) until it is ACKed. The bench link
+// to Glorious-Hole loses about half the frames, so one try is not enough.
+static int sendRetry(const WizMsg& m, int tries) {
+  for (int i = 1; i <= tries; i++) {
+    if (sendAck(m)) return i;
+    delay(10 + (esp_random() & 15));
+  }
+  return 0;
 }
 
 static void sendDigit(int d) {
@@ -79,10 +126,26 @@ static void sendDigit(int d) {
   ++seq;
   for (int i = 0; i < 4; i++) m.seq[i] = seq >> (8 * i);
   m.dt1 = 0x20; m.button = BUTTON_BASE + d; m.dt2 = 0x01; m.battery = 100;
-  // Broadcast has no ACK, so send three copies; WLED drops the repeats by seq.
-  int ok = 0;
-  for (int i = 0; i < 3; i++) { ok += esp_now_send(BCAST, (uint8_t*)&m, sizeof(m)) == ESP_OK; delay(8); }
-  Serial.printf("-> digit %d (button %d, seq %lu), %d/3 sent\n", d, m.button, (unsigned long)seq, ok);
+  const uint32_t t0 = millis();
+
+  if (isBroadcast()) {                         // no ACK: three copies, WLED drops repeats by seq
+    for (int i = 0; i < 3; i++) { esp_now_send(BCAST, (const uint8_t*)&m, sizeof(m)); delay(8); }
+    Serial.printf("-> digit %d (button %d), broadcast x3 on ch %d\n", d, m.button, channel);
+    return;
+  }
+  int n = sendRetry(m, 10);
+  if (n) { Serial.printf("-> digit %d, ACKed on ch %d, try %d (%lu ms)\n", d, channel, n, millis() - t0); return; }
+  const uint8_t was = channel;
+  for (uint8_t ch = 1; ch <= 13; ch++) {
+    if (ch == was) continue;
+    setChannel(ch);
+    if ((n = sendRetry(m, 3))) {
+      Serial.printf("-> digit %d, Glorious-Hole moved: ch %d -> %d, ACKed (%lu ms)\n", d, was, ch, millis() - t0);
+      return;
+    }
+  }
+  setChannel(was);
+  Serial.printf("-> digit %d, NOT ACKed on any channel: Glorious-Hole off or out of range\n", d);
 }
 
 // ---- Settings ---------------------------------------------------------------------------
@@ -94,6 +157,8 @@ static void loadSettings() {
   prefs.begin("dialer", false);
   pulseA = prefs.getChar("pa", -1); pulseB = prefs.getChar("pb", -1);
   hookA  = prefs.getChar("ha", -1); hookB  = prefs.getChar("hb", -1);
+  memset(target, 0xFF, 6);
+  prefs.getBytes("tgt", target, 6);
 }
 
 static const char* wname(int i) { return i >= 0 ? WIRES[i].name : "-"; }
@@ -194,12 +259,23 @@ static void hookTick() {
 }
 
 // ---- Serial commands --------------------------------------------------------------------
+static String macStr(const uint8_t* m) {
+  char b[13]; snprintf(b, sizeof(b), "%02x%02x%02x%02x%02x%02x", m[0], m[1], m[2], m[3], m[4], m[5]); return b;
+}
+
+static bool parseMac(String s, uint8_t* out) {
+  s.replace(":", ""); s.trim();
+  if (s.length() != 12) return false;
+  for (int i = 0; i < 6; i++) out[i] = strtoul(s.substring(2 * i, 2 * i + 2).c_str(), nullptr, 16);
+  return true;
+}
 static void status() {
-  Serial.printf("Dialer  MAC %s  channel %d  mode %s\n", WiFi.macAddress().c_str(), CHANNEL, probing ? "PROBE" : "normal");
+  Serial.printf("Dialer  MAC %s  channel %d  mode %s\n", WiFi.macAddress().c_str(), channel, probing ? "PROBE" : "normal");
+  Serial.printf("  target: %s\n", isBroadcast() ? "broadcast" : macStr(target).c_str());
   Serial.printf("  pulse pair: %s + %s\n  hook pair:  %s + %s\n", wname(pulseA), wname(pulseB), wname(hookA), wname(hookB));
   Serial.print("  wires:");
   for (auto& w : WIRES) Serial.printf(" %s=GPIO%d", w.name, w.pin);
-  Serial.println("\n  commands: 0-9 | probe | pulse <wire> <wire> | hook <wire> <wire> | status");
+  Serial.println("\n  commands: 0-9 | target <mac>|broadcast | probe | pulse <wire> <wire> | hook <wire> <wire> | status");
 }
 
 static bool setPair(const String& args, int& a, int& b, const char* keyA, const char* keyB) {
@@ -229,6 +305,11 @@ static void command(String line) {
     if (setPair(args, pulseA, pulseB, "pa", "pb")) { pRestKnown = false; pulses = 0; setupPins(); status(); }
   } else if (cmd == "hook") {
     if (setPair(args, hookA, hookB, "ha", "hb")) { hKnown = false; setupPins(); status(); }
+  } else if (cmd == "target") {
+    uint8_t m[6];
+    if (args == "broadcast") memset(m, 0xFF, 6);
+    else if (!parseMac(args, m)) { Serial.println("target <12 hex digits MAC> | target broadcast"); return; }
+    memcpy(target, m, 6); prefs.putBytes("tgt", target, 6); addPeer(target); status();
   } else if (cmd == "status") {
     status();
   } else {
