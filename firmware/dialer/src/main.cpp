@@ -71,6 +71,8 @@ static void addPeer(const uint8_t* mac) {
   esp_now_add_peer(&p);
 }
 
+static Preferences prefs;
+
 static void setChannel(uint8_t ch) {
   esp_wifi_set_promiscuous(true);              // channel can only be forced like this when not associated
   esp_wifi_set_channel(ch, WIFI_SECOND_CHAN_NONE);
@@ -98,7 +100,7 @@ static void radioBegin() {
   esp_now_register_send_cb(onSent);
   addPeer(BCAST);
   addPeer(target);
-  setChannel(START_CHANNEL);
+  setChannel(prefs.getUChar("ch", START_CHANNEL));   // where Glorious-Hole answered last time
   seq = esp_random();                          // a reboot must not reuse WLED's last seen seq
 }
 
@@ -136,11 +138,14 @@ static void sendDigit(int d) {
   }
   int n = sendRetry(m, 10);
   if (n) { Serial.printf("-> digit %d, ACKed on ch %d, try %d (%lu ms)\n", d, channel, n, millis() - t0); return; }
+  // Not answering here: sweep every channel, twice, before giving up.
   const uint8_t was = channel;
+  for (int pass = 0; pass < 2; pass++)
   for (uint8_t ch = 1; ch <= 13; ch++) {
-    if (ch == was) continue;
+    if (pass == 0 && ch == was) continue;
     setChannel(ch);
-    if ((n = sendRetry(m, 3))) {
+    if ((n = sendRetry(m, 4))) {
+      prefs.putUChar("ch", ch);
       Serial.printf("-> digit %d, Glorious-Hole moved: ch %d -> %d, ACKed (%lu ms)\n", d, was, ch, millis() - t0);
       return;
     }
@@ -150,7 +155,6 @@ static void sendDigit(int d) {
 }
 
 // ---- Settings ---------------------------------------------------------------------------
-static Preferences prefs;
 static int pulseA = -1, pulseB = -1, hookA = -1, hookB = -1;   // wire indexes, -1 = not set
 static bool probing = false;
 
