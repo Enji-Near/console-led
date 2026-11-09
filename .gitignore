@@ -1,2 +1,3 @@
 backups/
 .pio/
+__pycache__/
