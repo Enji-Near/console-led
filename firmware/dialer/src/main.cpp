@@ -114,7 +114,7 @@ static bool sendAck(const WizMsg& m) {
 }
 
 // Retry the same packet (same seq, so WLED acts on it once) until it is ACKed. The bench link
-// to Glorious-Hole loses about half the frames, so one try is not enough.
+// to Glorious-Hole (through walls) sometimes needs 10+ tries, so one try is not enough.
 static int sendRetry(const WizMsg& m, int tries) {
   for (int i = 1; i <= tries; i++) {
     if (sendAck(m)) return i;
@@ -136,7 +136,7 @@ static void sendDigit(int d) {
     Serial.printf("-> digit %d (button %d), broadcast x3 on ch %d\n", d, m.button, channel);
     return;
   }
-  int n = sendRetry(m, 10);
+  int n = sendRetry(m, 30);                    // ~1 s: a weak link needs patience; G-H rarely changes channel
   if (n) { Serial.printf("-> digit %d, ACKed on ch %d, try %d (%lu ms)\n", d, channel, n, millis() - t0); return; }
   // Not answering here: sweep every channel, twice, before giving up.
   const uint8_t was = channel;
