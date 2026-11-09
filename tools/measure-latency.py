@@ -1,96 +1,82 @@
 #!/usr/bin/env python3
-"""Measure Dialer -> Glorious-Hole response time from the laptop.
+"""Measure Dialer -> Glorious-Hole response time.
 
-Sends digits to Dialer over USB serial (as if dialed) and times when Glorious-Hole's WLED
-WebSocket reports the new preset. That is an upper bound on radio + WLED time: it includes
-WLED pushing the state back to the laptop over Wi-Fi. It does not include the dial itself
-(digit-end detection) or the LED frame/transition time.
+Sends digits to Dialer over USB serial (as if dialed), then reads both ends' own timers:
+  radio  Dialer: send until Glorious-Hole's radio ACKed (ms resolution; one-way is a bit less)
+  apply  Glorious-Hole (dial_presets usermod): radio arrival -> preset applied
+  LEDs   Glorious-Hole: radio arrival -> first frame with the new preset handed to the LEDs
+Response = radio + LEDs. Not included: the dial itself (digit-end detection), and the ~17 ms it
+takes to clock 553 pixels out (the first pixels change at the start of that). With a crossfade
+preset, the first new frame is the start of the fade.
 
-WLED only pushes state once per second (INTERFACE_UPDATE_COOLDOWN), so digits are 2 s apart.
-
-  tools/measure-latency.py [rounds] [--port /dev/ttyUSB5] [--ip 192.168.0.15]
+  tools/measure-latency.py [rounds] [--port /dev/ttyUSB0] [--ip 192.168.0.15]
 Needs pyserial (the PlatformIO Python has it: ~/.platformio/penv/bin/python).
 """
-import argparse, base64, json, os, socket, statistics, struct, time
+import argparse, json, re, statistics, time, urllib.request
 import serial
 
-def ws_connect(ip):
-    s = socket.create_connection((ip, 80), timeout=5)
-    key = base64.b64encode(os.urandom(16)).decode()
-    s.sendall((f"GET /ws HTTP/1.1\r\nHost: {ip}\r\nUpgrade: websocket\r\nConnection: Upgrade\r\n"
-               f"Sec-WebSocket-Key: {key}\r\nSec-WebSocket-Version: 13\r\n\r\n").encode())
-    hdr = b""
-    while b"\r\n\r\n" not in hdr:
-        hdr += s.recv(1)
-    if b" 101 " not in hdr.split(b"\r\n")[0]:
-        raise RuntimeError("WebSocket upgrade refused: " + hdr.split(b"\r\n")[0].decode())
-    return s
+def drain(port, secs):
+    """Read what is waiting for `secs` seconds. Only ever read in_waiting bytes: big read()
+    calls returned replayed old data with pyserial on Python 3.14 here."""
+    out, end = b"", time.time() + secs
+    while time.time() < end:
+        n = port.in_waiting
+        if n: out += port.read(n)
+        time.sleep(0.01)
+    return out
 
-def ws_frames(s):
-    """Yield (receive_time, text) for each complete text message. Server frames are unmasked."""
-    buf, msg = b"", b""
-    while True:
-        while True:
-            if len(buf) >= 2:
-                b1, b2 = buf[0], buf[1] & 0x7F
-                off = 2
-                if b2 == 126: off, n = 4, (struct.unpack(">H", buf[2:4])[0] if len(buf) >= 4 else None)
-                elif b2 == 127: off, n = 10, (struct.unpack(">Q", buf[2:10])[0] if len(buf) >= 10 else None)
-                else: n = b2
-                if n is not None and len(buf) >= off + n:
-                    msg += buf[off:off + n]; buf = buf[off + n:]
-                    if b1 & 0x80:                       # FIN: message complete
-                        if b1 & 0x0F in (0, 1): yield time.perf_counter(), msg.decode("utf-8", "replace")
-                        msg = b""
-                    continue
-            break
-        chunk = s.recv(65536)
-        if not chunk: return
-        buf += chunk
+def dial_stats(ip):
+    for attempt in range(3):                             # Wi-Fi to the laptop hiccups now and then
+        try:
+            with urllib.request.urlopen(f"http://{ip}/json/info", timeout=3) as r:
+                return json.load(r).get("dial")
+        except OSError:
+            if attempt == 2: raise
+            time.sleep(0.5)
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("rounds", nargs="?", type=int, default=20)
-    ap.add_argument("--port", default="/dev/ttyUSB5")
+    ap.add_argument("--port", default="/dev/ttyUSB0")
     ap.add_argument("--ip", default="192.168.0.15")
     a = ap.parse_args()
 
-    ws = ws_connect(a.ip); ws.settimeout(3)
-    frames = ws_frames(ws)
-    next(frames)                                         # initial full state on connect
+    if dial_stats(a.ip) is None:
+        raise SystemExit("Glorious-Hole has no dial_presets stats: is the custom WLED flashed?")
     dl = serial.Serial(a.port, 115200, timeout=0.05)
-    time.sleep(2.5); dl.reset_input_buffer()
+    t_end = time.time() + 10                             # opening the port may reset Dialer: wait for it
+    while time.time() < t_end:
+        drain(dl, 0.2)
+        dl.write(b"status\n")
+        if b"Dialer  MAC" in drain(dl, 0.5): break
+    else:
+        raise SystemExit(f"Dialer not answering on {a.port}")
 
-    digits = [1, 2, 3, 4, 5, 7, 9, 0]                    # 6 and 8 are playlists: skip
-    results = []
-    last = None
+    digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+    rows = []
     for i in range(a.rounds):
         d = digits[i % len(digits)]
-        if d == last: d = digits[(i + 1) % len(digits)]
-        want = 10 if d == 0 else d
-        time.sleep(2.0)                                  # let WLED's 1 s push cooldown expire
-        dl.reset_input_buffer()
-        t0 = time.perf_counter()
+        before = dial_stats(a.ip)
+        drain(dl, 0.05)
         dl.write(f"{d}\n".encode())
-        got = None
-        try:
-            while got is None:
-                t, txt = next(frames)
-                try: st = json.loads(txt).get("state", json.loads(txt))
-                except ValueError: continue
-                if st.get("ps") == want: got = (t - t0) * 1000
-        except (socket.timeout, StopIteration):
-            pass
-        time.sleep(0.1)
-        dline = next((l for l in dl.read(2000).decode("utf-8", "replace").splitlines() if "-> digit" in l), "?")
-        results.append(got)
-        print(f"digit {d}: {'%6.1f ms' % got if got is not None else '  MISS   '}   dialer: {dline}")
-        last = d
+        out = drain(dl, 0.5).decode("utf-8", "replace")
+        m = re.search(rf"-> digit {d}, ACKed on ch \d+, try (\d+) \((\d+) ms\)", out)
+        after = dial_stats(a.ip)
+        if not m or after["presses"] == before["presses"] or after["digit"] != d:
+            print(f"digit {d}: MISS  dialer: {out.strip()[:90]}")
+            rows.append(None)
+            continue
+        tries, radio = int(m.group(1)), int(m.group(2))
+        apply_ms, led_ms = after["applyUs"] / 1000, after["frameUs"] / 1000
+        total = radio + led_ms
+        rows.append(total)
+        print(f"digit {d}: {total:5.1f} ms   radio {radio:2d} ms (try {tries})   apply {apply_ms:4.1f} ms   "
+              f"LEDs {led_ms:5.1f} ms" + ("   from FILE" if after["fromFile"] != before["fromFile"] else ""))
+        time.sleep(0.3)
 
-    ok = [r for r in results if r is not None]
-    print(f"\n{len(ok)}/{len(results)} applied", end="")
+    ok = sorted(r for r in rows if r is not None)
+    print(f"\n{len(ok)}/{len(rows)} applied", end="")
     if ok:
-        ok.sort()
         print(f"; median {statistics.median(ok):.1f} ms, best {ok[0]:.1f}, worst {ok[-1]:.1f}, "
               f"under 30 ms: {sum(r < 30 for r in ok)}/{len(ok)}")
     else:

@@ -4,18 +4,25 @@ A rotary phone that tells Glorious-Hole which preset to play. Dial 1..9 -> prese
 preset 10 (WLED has no preset 0, and 0 is 10 pulses on a rotary dial). Mapping lives in
 `../glorious-hole/remote.json`.
 
-**PoC shortcut.** Glorious-Hole stays on stock WLED 16. WLED already accepts ESP-NOW "WiZmote"
-remote packets from a linked MAC and looks the button up in `/remote.json`, so Dialer sends
-WiZmote packets (button = 200 + digit) unicast to Glorious-Hole's MAC. No auth beyond the MAC
-check and no lamp-os framing: the real console-led protocol replaces this after the spec.
+**PoC shortcut.** Dialer sends WLED "WiZmote" remote packets (button = 200 + digit) unicast to
+Glorious-Hole's MAC; Glorious-Hole's `dial_presets` usermod (`firmware/wled/`) applies the preset
+in ~1.5 ms. Without the usermod, stock WLED handles the same packets via `/remote.json` (~100 ms).
+No auth beyond the linked-MAC check and no lamp-os framing: the real protocol comes from the spec.
 
-Tested 2026-11-09 on the bench: 20/20 digits applied, ACKed in 2-70 ms.
+Response time: see `firmware/wled/README.md` (median 9.9 ms, 30/30 under 30 ms).
+
+End of a digit: the off-normal contacts return to rest when the dial is home, so the digit is sent
+at once (`offnormal dial-red dial-white`). Without them Dialer must wait 200 ms of silence.
+Channel: Dialer scores ch-2..ch+2 around Glorious-Hole at boot and after a search, by ACKs and ACK
+time, because neighbouring channels overlap and half-work (seen: ch 5 ACKed, slowly, for ch 6).
 
 ## Run it
 ```bash
 cd firmware/dialer && pio run -t upload --upload-port /dev/ttyUSB5
 pio device monitor -p /dev/ttyUSB5          # type a digit + Enter to send it, `status` for help
 #   then once, in the monitor:  target 3076f5e8d430   (Glorious-Hole's MAC, saved in flash)
+# Serial on this laptop: read only in_waiting bytes (see tools/measure-latency.py); large reads
+# returned replayed old data with pyserial on Python 3.14.
 tools/link-glorious-hole.sh <settings-PIN>  # once: ESP-NOW on, link Dialer's MAC, remote.json
 ```
 

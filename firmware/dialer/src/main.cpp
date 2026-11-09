@@ -18,7 +18,9 @@
 //   target <mac>         send to this MAC (Glorious-Hole's) with ACK; `target broadcast` = no ACK
 //   probe                toggle probe mode
 //   pulse <wire> <wire>  set the dial's pulse contacts, e.g. `pulse dial-red dial-blue`
+//   offnormal <w> <w>    set the dial's off-normal contacts (ends a digit without waiting)
 //   hook <wire> <wire>   set the hook switch contacts
+//   channel <n>|scan     use this Wi-Fi channel / re-score channels around the current one
 //   blink [seconds]      blink the onboard LED (GPIO 2) to find this board; default 30 s
 //   status               show settings
 #include <Arduino.h>
@@ -96,11 +98,13 @@ static void radioBegin() {
   WiFi.persistent(false);                      // never save Wi-Fi settings; this board joins no router
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
+  esp_wifi_set_ps(WIFI_PS_NONE);               // no modem sleep: radio always ready (latency)
   if (esp_now_init() != ESP_OK) { Serial.println("ESP-NOW init failed"); return; }
   esp_now_register_send_cb(onSent);
   addPeer(BCAST);
   addPeer(target);
   setChannel(prefs.getUChar("ch", START_CHANNEL));   // where Glorious-Hole answered last time
+  // settleChannel() runs at the end of setup(), once the target MAC is known
   seq = esp_random();                          // a reboot must not reuse WLED's last seen seq
 }
 
@@ -123,6 +127,43 @@ static int sendRetry(const uint8_t* to, const WizMsg& m, int tries) {
   return 0;
 }
 
+// Neighbouring 2.4 GHz channels overlap, so Glorious-Hole on ch 6 still ACKs some frames sent on
+// ch 5 or 7, just unreliably (retries, 20-70 ms). After finding it, score ch-2..ch+2 with 1-byte
+// probes (WLED ignores them; the radio still ACKs) and keep the channel with the most ACKs.
+// Score = ACKs out of n probes; ties broken by mean time to ACK (the real channel answers on the
+// first air attempt, a neighbour needs the radio's own retries and is slower).
+struct Score { int acks; uint32_t meanUs; };
+static Score probeScore(int n) {
+  static const uint8_t ping[1] = { 0 };
+  Score sc = { 0, 0 };
+  uint32_t total = 0;
+  for (int i = 0; i < n; i++) {
+    sendDone = false;
+    const uint32_t t0 = micros();
+    if (esp_now_send(target, ping, 1) != ESP_OK) continue;
+    while (!sendDone && micros() - t0 < 50000) delayMicroseconds(50);
+    if (sendDone && sendAcked) { sc.acks++; total += micros() - t0; }
+  }
+  sc.meanUs = sc.acks ? total / sc.acks : 0;
+  return sc;
+}
+
+static void settleChannel(uint8_t around) {
+  if (isBroadcast()) return;
+  int best = around;
+  Score bestSc = { -1, 0 };
+  Serial.print("channel scores:");
+  for (int c = max(1, around - 2); c <= min(13, around + 2); c++) {
+    setChannel(c);
+    const Score sc = probeScore(12);
+    Serial.printf(" ch%d=%d/12@%.1fms", c, sc.acks, sc.meanUs / 1000.0f);
+    if (sc.acks > bestSc.acks || (sc.acks == bestSc.acks && sc.acks > 0 && sc.meanUs < bestSc.meanUs)) { best = c; bestSc = sc; }
+  }
+  setChannel(best);
+  if (prefs.getUChar("ch", 0) != best) prefs.putUChar("ch", best);
+  Serial.printf(" -> ch %d\n", best);
+}
+
 static void sendDigit(int d) {
   WizMsg m = {};
   m.program = 0x81;
@@ -137,7 +178,11 @@ static void sendDigit(int d) {
     return;
   }
   int n = sendRetry(target, m, 30);            // ~1 s: a weak link needs patience; G-H rarely changes channel
-  if (n) { Serial.printf("-> digit %d, ACKed on ch %d, try %d (%lu ms)\n", d, channel, n, millis() - t0); return; }
+  if (n) {
+    Serial.printf("-> digit %d, ACKed on ch %d, try %d (%lu ms)\n", d, channel, n, millis() - t0);
+    if (prefs.getUChar("ch", 0) != channel) prefs.putUChar("ch", channel);   // so a reboot starts here
+    return;
+  }
   // Nobody answering here: sweep every channel, twice, before giving up.
   const uint8_t was = channel;
   for (int pass = 0; pass < 2; pass++)
@@ -145,8 +190,8 @@ static void sendDigit(int d) {
     if (pass == 0 && ch == was) continue;
     setChannel(ch);
     if ((n = sendRetry(target, m, 4))) {
-      prefs.putUChar("ch", ch);
       Serial.printf("-> digit %d, Glorious-Hole moved: ch %d -> %d, ACKed (%lu ms)\n", d, was, ch, millis() - t0);
+      settleChannel(ch);                       // the first channel that answers may be a neighbour
       return;
     }
   }
@@ -156,12 +201,14 @@ static void sendDigit(int d) {
 
 // ---- Settings ---------------------------------------------------------------------------
 static int pulseA = -1, pulseB = -1, hookA = -1, hookB = -1;   // wire indexes, -1 = not set
+static int offA = -1, offB = -1;                                // dial off-normal contacts
 static bool probing = false;
 
 static void loadSettings() {
   prefs.begin("dialer", false);
   pulseA = prefs.getChar("pa", -1); pulseB = prefs.getChar("pb", -1);
   hookA  = prefs.getChar("ha", -1); hookB  = prefs.getChar("hb", -1);
+  offA   = prefs.getChar("oa", -1); offB   = prefs.getChar("ob", -1);
   memset(target, 0xFF, 6);
   prefs.getBytes("tgt", target, 6);
   prefs.remove("via");                         // left over from the removed relay experiment
@@ -175,6 +222,7 @@ static void setupPins() {
   if (probing) return;
   if (pulseA >= 0) { pinMode(WIRES[pulseA].pin, OUTPUT); digitalWrite(WIRES[pulseA].pin, LOW); }
   if (hookA  >= 0) { pinMode(WIRES[hookA].pin,  OUTPUT); digitalWrite(WIRES[hookA].pin,  LOW); }
+  if (offA   >= 0) { pinMode(WIRES[offA].pin,   OUTPUT); digitalWrite(WIRES[offA].pin,   LOW); }
 }
 
 // ---- Probe: which wires are connected to which ------------------------------------------
@@ -215,37 +263,61 @@ static void probeTick() {
 
 // ---- Dial: count pulses on the pulse contacts --------------------------------------------
 // The dial opens (or closes) its pulse contacts once per count as it unwinds, 10 times a second:
-// digit N = N pulses, 0 = 10 pulses. We learn the resting state instead of assuming it.
-static constexpr uint32_t DEBOUNCE_MS = 8, DIGIT_GAP_MS = 200, REST_LEARN_MS = 600;
-static bool pState, pRaw, pRest = false, pRestKnown = false;
-static uint32_t pRawSince = 0, pStableSince = 0;
+// digit N = N pulses, 0 = 10 pulses. We learn each contact's resting state instead of assuming it.
+// End of digit: the off-normal contacts return to rest when the dial is home, right after the
+// last pulse, so the digit is sent at once. Without an off-normal pair we must instead wait for
+// a gap longer than any gap between pulses (DIGIT_GAP_MS), which costs that much latency.
+static constexpr uint32_t DEBOUNCE_MS = 5, DIGIT_GAP_MS = 200, REST_LEARN_MS = 600;
+
+struct Contact {                               // one debounced contact pair with a learned rest state
+  bool state = false, raw = false, rest = false, restKnown = false;
+  uint32_t rawSince = 0, stableSince = 0;
+  // Returns true when the debounced state changed.
+  bool update(bool r, uint32_t now) {
+    if (r != raw) { raw = r; rawSince = now; }
+    if (now - rawSince >= DEBOUNCE_MS && raw != state) { state = raw; stableSince = now; return true; }
+    return false;
+  }
+  bool atRest() const { return restKnown && state == rest; }
+};
+static Contact pc, oc;                         // pulse, off-normal
 static int pulses = 0;
+static uint32_t lastPulseEnd = 0;              // when the pulse contacts last returned to rest
+
+static void learnRest(Contact& c, const char* name, uint32_t now) {
+  if (pulses == 0 && now - c.stableSince >= REST_LEARN_MS && (!c.restKnown || c.rest != c.state)) {
+    c.rest = c.state; c.restKnown = true;
+    Serial.printf("dial at rest: %s contacts %s\n", name, c.state ? "closed" : "open");
+  }
+}
+
+static void finishDigit(const char* how, uint32_t now) {
+  const int n = pulses;
+  pulses = 0;
+  if (n > 10) { Serial.printf("ignored %d pulses (more than 10)\n", n); return; }
+  Serial.printf("dialed %d (%s, %lu ms after the last pulse)\n", n % 10, how, (unsigned long)(now - lastPulseEnd));
+  sendDigit(n % 10);
+}
 
 static void dialTick() {
   if (pulseA < 0 || pulseB < 0) return;
-  const bool raw = digitalRead(WIRES[pulseB].pin) == LOW;    // true = contacts closed
   const uint32_t now = millis();
-  if (raw != pRaw) { pRaw = raw; pRawSince = now; }
-  if (now - pRawSince >= DEBOUNCE_MS && pRaw != pState) {
-    pState = pRaw;
-    pStableSince = now;
-    if (pRestKnown && pState != pRest) pulses++;
+  const bool haveOff = offA >= 0 && offB >= 0;
+
+  if (pc.update(digitalRead(WIRES[pulseB].pin) == LOW, now) && pc.restKnown) {
+    if (pc.state != pc.rest) pulses++;
+    else lastPulseEnd = now;
   }
-  const uint32_t held = now - pStableSince;
-  if (!pRestKnown || (pulses == 0 && held >= REST_LEARN_MS)) {
-    if (held >= REST_LEARN_MS) {
-      if (!pRestKnown || pRest != pState) Serial.printf("dial at rest: pulse contacts %s\n", pState ? "closed" : "open");
-      pRest = pState; pRestKnown = true;
-    }
-  }
-  if (pulses > 0 && pState == pRest && held >= DIGIT_GAP_MS) {
-    const int n = pulses;
-    pulses = 0;
-    if (n <= 10) sendDigit(n % 10);
-    else Serial.printf("ignored %d pulses (more than 10)\n", n);
-  } else if (pulses > 0 && pState != pRest && held >= 1000) {
+  learnRest(pc, "pulse", now);
+  if (haveOff) { oc.update(digitalRead(WIRES[offB].pin) == LOW, now); learnRest(oc, "off-normal", now); }
+
+  if (pulses > 0 && pc.atRest()) {
+    if (haveOff && oc.atRest()) finishDigit("off-normal", now);
+    else if ((!haveOff || !oc.restKnown) && now - pc.stableSince >= DIGIT_GAP_MS) finishDigit("gap", now);
+    else if (haveOff && now - pc.stableSince >= 1500) finishDigit("off-normal never returned; gap", now);
+  } else if (pulses > 0 && !pc.atRest() && now - pc.stableSince >= 1000) {
     Serial.println("pulse contacts stuck away from rest; wrong pair?");
-    pulses = 0; pRestKnown = false;
+    pulses = 0; pc.restKnown = false;
   }
 }
 
@@ -288,10 +360,11 @@ static bool parseMac(String s, uint8_t* out) {
 static void status() {
   Serial.printf("Dialer  MAC %s  channel %d  mode %s\n", WiFi.macAddress().c_str(), channel, probing ? "PROBE" : "normal");
   Serial.printf("  target: %s\n", isBroadcast() ? "broadcast" : macStr(target).c_str());
-  Serial.printf("  pulse pair: %s + %s\n  hook pair:  %s + %s\n", wname(pulseA), wname(pulseB), wname(hookA), wname(hookB));
+  Serial.printf("  pulse pair: %s + %s\n  off-normal: %s + %s\n  hook pair:  %s + %s\n", wname(pulseA), wname(pulseB),
+                wname(offA), wname(offB), wname(hookA), wname(hookB));
   Serial.print("  wires:");
   for (auto& w : WIRES) Serial.printf(" %s=GPIO%d", w.name, w.pin);
-  Serial.println("\n  commands: 0-9 | target <mac>|broadcast | blink [s] | probe | pulse <wire> <wire> | hook <wire> <wire> | status");
+  Serial.println("\n  commands: 0-9 | target <mac>|broadcast | channel <n>|scan | blink [s] | probe | pulse <wire> <wire> | offnormal <wire> <wire> | hook <wire> <wire> | status");
 }
 
 static bool setPair(const String& args, int& a, int& b, const char* keyA, const char* keyB) {
@@ -318,7 +391,9 @@ static void command(String line) {
                            : "PROBE off");
     setupPins();
   } else if (cmd == "pulse") {
-    if (setPair(args, pulseA, pulseB, "pa", "pb")) { pRestKnown = false; pulses = 0; setupPins(); status(); }
+    if (setPair(args, pulseA, pulseB, "pa", "pb")) { pc = Contact(); pulses = 0; setupPins(); status(); }
+  } else if (cmd == "offnormal") {
+    if (setPair(args, offA, offB, "oa", "ob")) { oc = Contact(); pulses = 0; setupPins(); status(); }
   } else if (cmd == "hook") {
     if (setPair(args, hookA, hookB, "ha", "hb")) { hKnown = false; setupPins(); status(); }
   } else if (cmd == "target") {
@@ -332,6 +407,10 @@ static void command(String line) {
     blinkUntil = secs > 0 ? millis() + secs * 1000UL : 0;
     if (!blinkUntil) digitalWrite(LED_PIN, LOW);
     Serial.printf("blinking the onboard LED for %ld s\n", secs);
+  } else if (cmd == "channel") {
+    const int c = args.toInt();
+    if (c < 1 || c > 13) { Serial.println("channel <1-13> | channel scan"); if (args != "scan") return; settleChannel(channel); return; }
+    setChannel(c); prefs.putUChar("ch", c); status();
   } else if (cmd == "status") {
     status();
   } else {
@@ -348,6 +427,7 @@ void setup() {
   radioBegin();
   setupPins();
   Serial.println("\n=== Dialer PoC ===");
+  settleChannel(channel);                      // ~0.3 s: confirm Glorious-Hole's exact channel
   status();
 }
 
