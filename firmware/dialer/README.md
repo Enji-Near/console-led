@@ -53,3 +53,9 @@ Then in the serial monitor:
 2. The pair that flickers while the dial unwinds is the pulse pair: `pulse dial-x dial-y`.
 3. A pair that changes with the handset: `hook hook-x hook-y`. (Hook is only logged for now.)
 4. `probe` again to leave probe mode. Pairs are saved in flash.
+
+Found on this phone (2026-11-09): pulse contacts `dial-blue + dial-yellow` (closed at rest, open
+once per count); off-normal `dial-red + dial-white`. Hook switch is a changeover with `hook-red`
+as common: `hook-red + hook-white` closes when the handset is lifted, `hook-red + hook-green` when
+it is on the hook; `hook-black`/`hook-yellow`/`hook-orange` form a second changeover. Settings:
+`pulse dial-blue dial-yellow`, `hook hook-red hook-white` (closed = lifted).
