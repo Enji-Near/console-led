@@ -32,12 +32,8 @@ tools/link-glorious-hole.sh <settings-PIN>  # once: ESP-NOW on, link Dialer's MA
   Changing any setting from a script, or saving the WiFi settings page without the remote listed,
   unlinks Dialer. Rerun `tools/link-glorious-hole.sh` after config changes.
 - `firmware/sniffer/` (flash to a spare board) prints every ESP-NOW frame on channel 6.
-- **Through several walls of an old building the direct link is marginal** (and the phone's metal
-  base blocked it completely). `firmware/relay/` on a board halfway between is the fix: Dialer
-  tries the relay first (`via 48aff371942c`), then Glorious-Hole directly; the relay keeps itself
-  on Glorious-Hole's channel and forwards each press once. Glorious-Hole links both MACs
-  (`tools/link-glorious-hole.sh` does it). A relay ACK is hop-by-hop, not end-to-end: the real
-  protocol needs a delivery confirmation from the light node.
+- **Range:** through several walls of an old building the direct link was marginal, and the
+  phone's metal base blocked it completely. Keep the antenna end of the board in the open.
 
 ## Phone wiring
 Every phone wire goes to its own GPIO, nothing to GND (table `WIRES` in `src/main.cpp`):

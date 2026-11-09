@@ -2,13 +2,13 @@
 # Set up a stock-WLED Glorious-Hole to take digits from Dialer (PoC, see firmware/dialer/README.md):
 # enable WLED's ESP-NOW, link Dialer's MAC as a remote, upload remote.json, reboot.
 #   tools/link-glorious-hole.sh <settings-PIN> [wled-ip] [remote-macs]
-# remote-macs: comma-separated, default Dialer + Relay. WLED replaces the whole list on each save.
+# remote-macs: comma-separated, default Dialer. WLED replaces the whole list on each save.
 # The PIN is only sent to the board; it is not saved anywhere.
 # Rerun after any other config change: WLED 16.0.1 clears linked remotes on every /json/cfg POST.
 set -euo pipefail
 PIN=${1:?usage: $0 <settings-PIN> [wled-ip] [remote-macs]}
 IP=${2:-192.168.0.15}
-MACS=${3:-48aff36a0898,48aff371942c}   # Dialer, Relay
+MACS=${3:-48aff36a0898}   # Dialer
 MAC_JSON=$(python3 -c "import sys,json;print(json.dumps(sys.argv[1].split(',')))" "$MACS")
 HERE=$(cd "$(dirname "$0")/.." && pwd)
 

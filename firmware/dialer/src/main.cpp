@@ -16,7 +16,6 @@
 // Serial commands (115200, end with Enter):
 //   0..9                 send that digit, no phone needed
 //   target <mac>         send to this MAC (Glorious-Hole's) with ACK; `target broadcast` = no ACK
-//   via <mac>|none       try this relay first (firmware/relay), then Glorious-Hole directly
 //   probe                toggle probe mode
 //   pulse <wire> <wire>  set the dial's pulse contacts, e.g. `pulse dial-red dial-blue`
 //   hook <wire> <wire>   set the hook switch contacts
@@ -53,7 +52,6 @@ static constexpr uint8_t BUTTON_BASE = 200;    // digit d -> WiZmote button 200 
 static const uint8_t BCAST[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
 static uint32_t seq;
 static uint8_t target[6];                      // Glorious-Hole's MAC; all FF = broadcast (no ACK)
-static uint8_t via[6];                         // relay's MAC, tried first; all 00 = no relay
 static uint8_t channel = START_CHANNEL;
 static volatile bool sendDone = false, sendAcked = false;
 
@@ -63,7 +61,6 @@ static void onSent(const uint8_t*, esp_now_send_status_t st) {
 }
 
 static bool isBroadcast() { return !memcmp(target, BCAST, 6); }
-static bool hasVia() { static const uint8_t z[6] = {}; return memcmp(via, z, 6) != 0; }
 
 static void addPeer(const uint8_t* mac) {
   if (esp_now_is_peer_exist(mac)) return;
@@ -103,7 +100,6 @@ static void radioBegin() {
   esp_now_register_send_cb(onSent);
   addPeer(BCAST);
   addPeer(target);
-  if (hasVia()) addPeer(via);
   setChannel(prefs.getUChar("ch", START_CHANNEL));   // where Glorious-Hole answered last time
   seq = esp_random();                          // a reboot must not reuse WLED's last seen seq
 }
@@ -127,18 +123,6 @@ static int sendRetry(const uint8_t* to, const WizMsg& m, int tries) {
   return 0;
 }
 
-// Try the relay first (if set), then Glorious-Hole directly, on the current channel.
-// The relay lives on Glorious-Hole's channel, so one channel serves both. A relay ACK only means
-// the relay heard us, not that it reached Glorious-Hole, so even then we try a few direct sends
-// too: WLED drops the duplicate seq, and a press gets through if either path works.
-static const char* tryHere(const WizMsg& m, int relayTries, int directTries, int& n) {
-  if (hasVia() && (n = sendRetry(via, m, relayTries))) {
-    return sendRetry(target, m, 4) ? "via relay + direct" : "via relay";
-  }
-  if ((n = sendRetry(target, m, directTries))) return "direct";
-  return nullptr;
-}
-
 static void sendDigit(int d) {
   WizMsg m = {};
   m.program = 0x81;
@@ -152,23 +136,22 @@ static void sendDigit(int d) {
     Serial.printf("-> digit %d (button %d), broadcast x3 on ch %d\n", d, m.button, channel);
     return;
   }
-  int n = 0;
-  const char* how = tryHere(m, 15, hasVia() ? 15 : 30, n);   // ~1 s in all
-  if (how) { Serial.printf("-> digit %d, ACKed %s on ch %d, try %d (%lu ms)\n", d, how, channel, n, millis() - t0); return; }
+  int n = sendRetry(target, m, 30);            // ~1 s: a weak link needs patience; G-H rarely changes channel
+  if (n) { Serial.printf("-> digit %d, ACKed on ch %d, try %d (%lu ms)\n", d, channel, n, millis() - t0); return; }
   // Nobody answering here: sweep every channel, twice, before giving up.
   const uint8_t was = channel;
   for (int pass = 0; pass < 2; pass++)
   for (uint8_t ch = 1; ch <= 13; ch++) {
     if (pass == 0 && ch == was) continue;
     setChannel(ch);
-    if ((how = tryHere(m, 2, 3, n))) {
+    if ((n = sendRetry(target, m, 4))) {
       prefs.putUChar("ch", ch);
-      Serial.printf("-> digit %d, moved ch %d -> %d, ACKed %s (%lu ms)\n", d, was, ch, how, millis() - t0);
+      Serial.printf("-> digit %d, Glorious-Hole moved: ch %d -> %d, ACKed (%lu ms)\n", d, was, ch, millis() - t0);
       return;
     }
   }
   setChannel(was);
-  Serial.printf("-> digit %d, NOT ACKed on any channel: relay and Glorious-Hole off or out of range\n", d);
+  Serial.printf("-> digit %d, NOT ACKed on any channel: Glorious-Hole off or out of range\n", d);
 }
 
 // ---- Settings ---------------------------------------------------------------------------
@@ -181,8 +164,7 @@ static void loadSettings() {
   hookA  = prefs.getChar("ha", -1); hookB  = prefs.getChar("hb", -1);
   memset(target, 0xFF, 6);
   prefs.getBytes("tgt", target, 6);
-  memset(via, 0, 6);
-  prefs.getBytes("via", via, 6);
+  prefs.remove("via");                         // left over from the removed relay experiment
 }
 
 static const char* wname(int i) { return i >= 0 ? WIRES[i].name : "-"; }
@@ -306,11 +288,10 @@ static bool parseMac(String s, uint8_t* out) {
 static void status() {
   Serial.printf("Dialer  MAC %s  channel %d  mode %s\n", WiFi.macAddress().c_str(), channel, probing ? "PROBE" : "normal");
   Serial.printf("  target: %s\n", isBroadcast() ? "broadcast" : macStr(target).c_str());
-  Serial.printf("  via:    %s\n", hasVia() ? macStr(via).c_str() : "none (direct only)");
   Serial.printf("  pulse pair: %s + %s\n  hook pair:  %s + %s\n", wname(pulseA), wname(pulseB), wname(hookA), wname(hookB));
   Serial.print("  wires:");
   for (auto& w : WIRES) Serial.printf(" %s=GPIO%d", w.name, w.pin);
-  Serial.println("\n  commands: 0-9 | target <mac>|broadcast | via <mac>|none | blink [s] | probe | pulse <wire> <wire> | hook <wire> <wire> | status");
+  Serial.println("\n  commands: 0-9 | target <mac>|broadcast | blink [s] | probe | pulse <wire> <wire> | hook <wire> <wire> | status");
 }
 
 static bool setPair(const String& args, int& a, int& b, const char* keyA, const char* keyB) {
@@ -351,10 +332,6 @@ static void command(String line) {
     blinkUntil = secs > 0 ? millis() + secs * 1000UL : 0;
     if (!blinkUntil) digitalWrite(LED_PIN, LOW);
     Serial.printf("blinking the onboard LED for %ld s\n", secs);
-  } else if (cmd == "via") {
-    uint8_t m[6] = {};
-    if (args != "none" && !parseMac(args, m)) { Serial.println("via <12 hex digits MAC> | via none"); return; }
-    memcpy(via, m, 6); prefs.putBytes("via", via, 6); if (hasVia()) addPeer(via); status();
   } else if (cmd == "status") {
     status();
   } else {
