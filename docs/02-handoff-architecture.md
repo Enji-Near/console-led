@@ -30,6 +30,8 @@ These sharpen the intent. Record them as ADRs (see step 4).
      diverge from lamp-os. Lay out the options (e.g. Pi/laptop gateway over USB serial or
      Ethernet, wired Ethernet node, LTE, channel-6-only router join) but **do not decide; ask
      Nick when he is fresh.**
+   - 2026-11-13 input: `docs/03-gateway-hardware.md` proposes our own OpenWrt router (SamKnows
+     Whitebox 8, AP pinned to channel 6, phone/LTE uplink over USB). Feed it into idea-refine.
 
 ## Run these four skills, in this order
 1. **`/agent-skills:idea-refine`** on the open architecture questions from the intent:
