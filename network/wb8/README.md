@@ -71,9 +71,20 @@ Applied over the serial console: OpenWrt's serial shell has no login (`ttylogin=
     Meanwhile the chip *is* asserting INTx: PCI status `0x0018` (interrupt bit set),
     `INT_SOURCE=0x00300000` with `INT_MASK=0x00703ff3` (read via debugfs `regidx`/`regval`).
     Device tree interrupt-map is standard (port 0/1/2 to GIC 4/24/25), PERST on GPIO 19.
-  - The MT7602 is not reset on warm reboot: its BAR keeps `0x60200000` across reboots while
-    the MT7612's is cleared. All failures so far were after warm reboots; cold boot not yet tested.
+  - The MT7602 is not reset on warm reboot (its BAR keeps `0x60200000`; the MT7612's is cleared),
+    but that is **not** the cause: 2.4 GHz worked after warm reboots too.
   - A PCI bus reset (`reset_method=bus`) drops the MT7602 off the bus until power cycle. Don't use it.
+  - Test results (2026-11-14), radio1 = 2.4 GHz:
+
+    | Boot | radio1 started | IRQ 30 | Result |
+    |---|---|---|---|
+    | warm | ~14.5 min after boot (enabled late in LuCI) | 0 | **fails**, restart loop |
+    | cold | ~1-2 min after boot | 1492 | works |
+    | warm (after bus reset) | at boot (enabled in config) | 4683 | works |
+    | warm (plain `reboot`) | at boot | 2384 | works |
+
+    Hypothesis under test: the MT7602 breaks if it sits idle for a long time after probe
+    before its radio is first started. Production config starts it at boot.
 
 ## Images (OpenWrt 25.12.5, checksums in `openwrt-25.12.5-sha256sums`)
 
