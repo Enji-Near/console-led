@@ -37,17 +37,17 @@ menu appears (U-Boot command line, writes nothing), and sends whatever is writte
    Loaded high so the 7.6 MB image can't overlap the kernel unpacking at `0x80001000`.
 3. In the RAM-booted OpenWrt: both radios found (MT7612 = 5g, MT7602 = 2g), switch up as `lan1-4` + `wan`.
 4. Full flash backup over SSH (`cat /dev/mtd0..3`), checksums verified on both ends.
-   Kept locally in `stock-flash-backup/`, **gitignored**: it holds SamKnows firmware and this unit's calibration.
+   Never committed (SamKnows firmware + this unit's calibration). **Deleted 2026-11-14**: not needed.
 5. `scp -O` the sysupgrade image, `sysupgrade -T` (check), then `sysupgrade -n`.
 6. Verified: boots from flash; jffs2 overlay persists across reboot.
 
 ### Notes
-- OpenWrt's `firmware` partition runs to the end of flash, over the stock `recovery` area. The backup is the only copy of it.
+- OpenWrt's `firmware` partition runs to the end of flash, over the stock `recovery` area, so the stock firmware is gone for good.
 - First boot logs `mount_root: failed to sync jffs2 overlay`; harmless (configs present, marker file survived reboot).
 - Flash chip ID `ef 40 18` (Winbond W25Q128), not the Spansion part the wiki lists.
 - `Failed to find NVMEM device`: LAN MAC is stable (`90:0a:1a:ff:90:ec`) but `wan` gets a random MAC every boot.
   The U-Boot `ethaddr` is `00:1F:A4:93:DF:E5`.
-- To go back to stock: TFTP `stock-flash-backup/mtd3-firmware.bin` via U-Boot, or `mtd write` it from OpenWrt.
+- No way back to stock firmware (backup deleted). Recovery is U-Boot TFTP with an OpenWrt image.
 
 ## Switch + AP setup (2026-11-14)
 
