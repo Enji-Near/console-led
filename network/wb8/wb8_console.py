@@ -2,7 +2,7 @@
 """Log the Whitebox serial console to a file; stop U-Boot at its menu.
 
 - Everything received is appended (raw) to LOG.
-- When U-Boot prints its operation menu, send "4" once (enter U-Boot
+- Unless --log-only is given: when U-Boot prints its operation menu, send "4" once (enter U-Boot
   command line -- read-only, writes nothing to flash).
 - Anything written to the FIFO is sent to the console (so commands can be
   issued from another shell: printf 'printenv\n' > FIFO).
@@ -11,6 +11,7 @@ import os, sys, threading, serial
 
 PORT = sys.argv[1]
 DIR = sys.argv[2]
+STOP_AT_UBOOT = "--log-only" not in sys.argv[3:]
 LOG = os.path.join(DIR, "console.log")
 FIFO = os.path.join(DIR, "tx.fifo")
 TRIGGER = b"Please choose the operation"
@@ -40,7 +41,7 @@ with open(LOG, "ab", buffering=0) as log:
         log.write(data)
         window = tail + data
         tail = window[-(len(TRIGGER) - 1):]  # enough to catch a split match, never a whole one
-        if TRIGGER in window:
+        if STOP_AT_UBOOT and TRIGGER in window:
             # Press "4" a few times to make sure one lands inside the countdown.
             ser.write(b"4")
             log.write(b"\n=== logger: sent '4' (U-Boot command line) ===\n")
