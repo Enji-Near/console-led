@@ -65,6 +65,10 @@ Applied over the serial console: OpenWrt's serial shell has no login (`ttylogin=
   (to the router alone: avg 7.2 ms). Uplink cable was suspected flaky; link speed/errors not yet checked.
 - The console ESP32 firmware (dialer, sniffer) uses ESP-NOW only and never joins Wi-Fi,
   so it won't appear on Console-Net. Testing Console-Net needs an ESP32 that joins Wi-Fi (e.g. WLED).
+- **ESP32 acceptance test passed** (`esp32-wifi-test/`, classic ESP32-D0WDQ5 V3, 2.4 GHz only):
+  `CONNECTED ip=192.168.0.176 gw=192.168.0.1 bssid=90:0A:1A:FF:90:ED channel=6`, i.e. the WB8's
+  2.4 GHz radio; then `rssi=-37..-40 dBm dns=ok internet=ok` every 5 s for 40 s.
+  Create `include/secrets.h` from `secrets.h.example` (gitignored) before building.
 
 ## Known issues
 
