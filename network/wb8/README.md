@@ -49,6 +49,22 @@ menu appears (U-Boot command line, writes nothing), and sends whatever is writte
   The U-Boot `ethaddr` is `00:1F:A4:93:DF:E5`.
 - To go back to stock: TFTP `stock-flash-backup/mtd3-firmware.bin` via U-Boot, or `mtd write` it from OpenWrt.
 
+## Switch + AP setup (2026-11-14)
+
+`ap-setup.sh` (run on the box). Root password and Wi-Fi key are set in LuCI, never in the repo.
+Applied over the serial console: OpenWrt's serial shell has no login (`ttylogin=0`).
+
+- `Console-Net`, WPA2/WPA3 (`sae-mixed`), country `CA`, hostname `console-net-ap`.
+- All 5 ports bridged; `lan` is a DHCP client of the home router; firewall, dnsmasq, odhcpd disabled.
+- U-Boot `bootcount` (wiki note #1): OpenWrt's `S99bootcount` resets it each boot; checked `bootcount=0`.
+
+## Known issues
+
+- **2.4 GHz radio (MT7602, radio1) crash-loops** on 25.12.5: `MCU message 02 (seq 3) timed out`
+  on the first command at radio start, then `Hardware restart was requested` about once a second
+  (111 restarts in ~2 min). Fixed channel 6 didn't help. Disabled for now; 5 GHz (MT7612) is fine.
+  Wiki note #2: the MT7602 reports itself as 0x14c3:0x7612 and needed an mt76 patch.
+
 ## Images (OpenWrt 25.12.5, checksums in `openwrt-25.12.5-sha256sums`)
 
 - `…samknows_whitebox-v8-initramfs-kernel.bin`: RAM-only test boot (U-Boot option 1).
