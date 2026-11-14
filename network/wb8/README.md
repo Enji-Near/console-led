@@ -58,6 +58,14 @@ Applied over the serial console: OpenWrt's serial shell has no login (`ttylogin=
 - All 5 ports bridged; `lan` is a DHCP client of the home router; firewall, dnsmasq, odhcpd disabled.
 - U-Boot `bootcount` (wiki note #1): OpenWrt's `S99bootcount` resets it each boot; checked `bootcount=0`.
 
+### On the home network (2026-11-14)
+- WB8 got `192.168.0.174` by DHCP from the home router (`console-net-ap.ht.home`); LuCI reachable there.
+- A laptop wired through the WB8 got `192.168.0.175` from the home router: bridging works.
+- 100 pings laptop Wi-Fi → router → uplink cable → WB8: 0% loss, avg 13.8 ms, max 143 ms
+  (to the router alone: avg 7.2 ms). Uplink cable was suspected flaky; link speed/errors not yet checked.
+- The console ESP32 firmware (dialer, sniffer) uses ESP-NOW only and never joins Wi-Fi,
+  so it won't appear on Console-Net. Testing Console-Net needs an ESP32 that joins Wi-Fi (e.g. WLED).
+
 ## Known issues
 
 - **2.4 GHz radio (MT7602, radio1) crash-looped once** on 25.12.5: `MCU message 02 (seq 3) timed out`
