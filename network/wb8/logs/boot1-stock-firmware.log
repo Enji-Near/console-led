@@ -1,0 +1,392 @@
+
+=== logger started ===
+
+===================================================================
+     		MT7621   stage1 code Mar 12 2015 14:43:30 (ASIC)
+     		CPU=500000000 HZ BUS=125000000 HZ
+==================================================================
+Change MPLL source from XTAL to CR...
+do MEMPLL setting..
+MEMPLL Config : 0x31100000
+3PLL mode + External loopback
+=== XTAL-40Mhz === DDR-800Mhz ===
+PLL2 FB_DL: 0xb, 1/0 = 606/418 2D000000
+PLL3 FB_DL: 0x16, 1/0 = 707/317 59000000
+PLL4 FB_DL: 0x1b, 1/0 = 588/436 6D000000
+do DDR setting..[01F40000]
+Apply DDR2 Setting...(use customer AC)
+          0    8   16   24   32   40   48   56   64   72   80   88   96  104  112  120
+      --------------------------------------------------------------------------------
+0000:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0001:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0002:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0003:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0004:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0005:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0006:|    0    0    0    0    0    0    0    0    0    0    0    0    1    1    1    1
+0007:|    0    0    0    0    1    1    1    1    1    1    1    1    1    1    1    1
+0008:|    1    1    1    1    1    1    1    1    1    1    1    0    0    0    0    0
+0009:|    1    1    1    1    0    0    0    0    0    0    0    0    0    0    0    0
+000A:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000B:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000C:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000D:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000E:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000F:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0010:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0011:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0012:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0013:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0014:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0015:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0016:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0017:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0018:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0019:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001A:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001B:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001C:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001D:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001E:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001F:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+DRAMC_DQSCTL1[0e0]=19000000
+DRAMC_DQSGCTL[124]=80000033
+rank 0 coarse = 7
+rank 0 fine = 80
+B:|    0    0    0    0    0    1    1    1    0    0    0    0    0    0    0    0
+opt_dle value:6
+DRAMC_DDR2CTL[07c]=40001263
+DRAMC_PADCTL4[0e4]=00000005
+DRAMC_DQIDLY1[210]=0A0B090B
+DRAMC_DQIDLY2[214]=070A0709
+DRAMC_DQIDLY3[218]=0D080809
+DRAMC_DQIDLY4[21c]=0A080C0A
+DRAMC_R0DELDLY[018]=00002C2C
+==================================================================
+		RX	DQS perbit delay software calibration 
+==================================================================
+1.0-15 bit dq delay value
+==================================================================
+bit|     0  1  2  3  4  5  6  7  8  9
+--------------------------------------
+0 |    10 9 9 9 9 7 9 6 7 7 
+10 |    7 13 8 11 6 9 
+--------------------------------------
+
+==================================================================
+2.dqs window
+x=pass dqs delay value (min~max)center 
+y=0-7bit DQ of every group
+input delay:DQS0 =44 DQS1 = 44
+==================================================================
+bit	DQS0	 bit      DQS1
+0  (1~85)43  8  (1~84)42
+1  (1~87)44  9  (1~86)43
+2  (1~84)42  10  (1~85)43
+3  (2~84)43  11  (1~87)44
+4  (2~86)44  12  (2~83)42
+5  (2~87)44  13  (2~84)43
+6  (1~85)43  14  (2~83)42
+7  (1~86)43  15  (1~85)43
+==================================================================
+3.dq delay value last
+==================================================================
+bit|    0  1  2  3  4  5  6  7  8   9
+--------------------------------------
+0 |    11 9 11 10 9 7 10 7 9 8 
+10 |    8 13 10 12 8 10 
+==================================================================
+==================================================================
+     TX  perbyte calibration 
+==================================================================
+DQS loop = 15, cmp_err_1 = ffff0000 
+dqs_perbyte_dly.last_dqsdly_pass[0]=15,  finish count=1 
+dqs_perbyte_dly.last_dqsdly_pass[1]=15,  finish count=2 
+DQ loop=15, cmp_err_1 = ffff0000
+dqs_perbyte_dly.last_dqdly_pass[0]=15,  finish count=1 
+dqs_perbyte_dly.last_dqdly_pass[1]=15,  finish count=2 
+byte:0, (DQS,DQ)=(8,8)
+byte:1, (DQS,DQ)=(8,8)
+DRAMC_DQODLY1[200]=88888888
+DRAMC_DQODLY2[204]=88888888
+20,data:88
+[EMI] DRAMC calibration passed
+
+===================================================================
+     		MT7621   stage1 code done 
+     		CPU=500000000 HZ BUS=125000000 HZ
+===================================================================
+
+
+U-Boot 1.1.3 (Jan 15 2016 - 09:47:18)
+
+Board: Ralink APSoC DRAM:  128 MB
+relocate_code Pointer at: 87fb8000
+
+Config XHCI 40M PLL 
+flash manufacture id: ef, device id 40 18
+find flash: W25Q128BV
+============================================ 
+Ralink UBoot Version: 4.3.0.0
+-------------------------------------------- 
+ASIC MT7621A DualCore (MAC to MT7530 Mode)
+DRAM_CONF_FROM: Auto-Detection 
+DRAM_TYPE: DDR2 
+DRAM bus: 16 bit
+Xtal Mode=3 OCP Ratio=1/4
+Flash component: SPI Flash
+Date:Jan 15 2016  Time:09:47:18
+============================================ 
+icache: sets:256, ways:4, linesz:32 ,total:32768
+dcache: sets:256, ways:4, linesz:32 ,total:32768 
+
+ ##### The CPU freq = 880 MHZ #### 
+ estimate memory size =128 Mbytes
+#Reset_MT7530
+
+Please choose the operation: 
+   1: Load system code to SDRAM via TFTP. 
+   2: Load system code then write to Flash via TFTP. 
+   3: Boot system code via Flash (default).
+   4: Entr boot command line interface.
+   7: Load Boot Loader code then write to Flash via Serial. 
+   9: Load Boot Loader code then write to Flash via TFTP. 
+ 4  3  2  1  0 
+bootcount: 0
+   
+3: System Boot system code via Flash.
+Erasing SPI Flash...
+.
+Writing to SPI Flash...
+.
+done
+## Booting image at bc050000 ...
+   Image Name:   MIPS LEDE Linux-4.4.79
+   Image Type:   MIPS Linux Kernel Image (lzma compressed)
+   Data Size:    1665765 Bytes =  1.6 MB
+   Load Address: 80001000
+   Entry Point:  80001000
+   Verifying Checksum ... OK
+   Uncompressing Kernel Image ... OK
+No initrd
+## Transferring control to Linux (at address 80001000) ...
+## Giving linux memsize in MB, 128
+
+Starting kernel ...
+
+[    0.000000] Linux version 4.4.79 (samknows@toolchain1) (gcc version 5.4.0 (LEDE GCC 5.4.0 r3436+83-2da512e) ) #0 SMP Tue Aug 1 07:07:43 2017
+[    0.000000] SoC Type: MediaTek MT7621 ver:1 eco:3
+[    0.000000] bootconsole [early0] enabled
+[    0.000000] CPU0 revision is: 0001992f (MIPS 1004Kc)
+[    0.000000] MIPS: machine is SamKnows Whitebox 8
+[    0.000000] Determined physical RAM map:
+[    0.000000]  memory: 08000000 @ 00000000 (usable)
+[    0.000000] Initrd not found or empty - disabling initrd
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000]   HighMem  empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] VPE topology {2,2} total 4
+[    0.000000] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.000000] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.000000] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.000000] PERCPU: Embedded 11 pages/cpu @8110c000 s13664 r8192 d23200 u45056
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 32512
+[    0.000000] Kernel command line: console=ttyS0,57600 rootfstype=squashfs,jffs2
+[    0.000000] PID hash table entries: 512 (order: -1, 2048 bytes)
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.000000] Writing ErrCtl register=000433c0
+[    0.000000] Readback ErrCtl register=000433c0
+[    0.000000] Memory: 123972K/131072K available (3958K kernel code, 269K rwdata, 940K rodata, 260K init, 261K bss, 7100K reserved, 0K cma-reserved, 0K highmem)
+[    0.000000] SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+[    0.000000] Hierarchical RCU implementation.
+[    0.000000] NR_IRQS:256
+[    0.000000] clocksource: GIC: mask: 0xffffffffffffffff max_cycles: 0xcaf478abb4, max_idle_ns: 440795247997 ns
+[    0.000000] clocksource: MIPS: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 4343773742 ns
+[    0.000009] sched_clock: 32 bits at 440MHz, resolution 2ns, wraps every 4880645118ns
+[    0.015511] Calibrating delay loop... 586.13 BogoMIPS (lpj=2930688)
+[    0.080737] pid_max: default: 32768 minimum: 301
+[    0.090059] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.103074] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.118242] Performance counters: mips/1004K PMU enabled, 2 32-bit counters available to each CPU, irq 9
+[    0.139920] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.139933] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.139947] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.140127] CPU1 revision is: 0001992f (MIPS 1004Kc)
+[    0.248294] Synchronize counters for CPU 1: done.
+[    0.268397] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.268405] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.268411] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.268488] CPU2 revision is: 0001992f (MIPS 1004Kc)
+[    0.368509] Synchronize counters for CPU 2: done.
+[    0.379295] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.379302] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.379308] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.379395] CPU3 revision is: 0001992f (MIPS 1004Kc)
+[    0.488126] Synchronize counters for CPU 3: done.
+[    0.497555] Brought up 4 CPUs
+[    0.506863] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.526365] futex hash table entries: 1024 (order: 3, 32768 bytes)
+[    0.539062] pinctrl core: initialized pinctrl subsystem
+[    0.549983] NET: Registered protocol family 16
+[    0.599630] pull PCIe RST: RALINK_RSTCTRL = 0
+[    0.908351] release PCIe RST: RALINK_RSTCTRL = 7000000
+[    0.918412] ***** Xtal 40MHz *****
+[    0.925144] release PCIe RST: RALINK_RSTCTRL = 7000000
+[    0.935349] Port 0 N_FTS = 1b102800
+[    0.942249] Port 1 N_FTS = 1b102800
+[    0.949172] Port 2 N_FTS = 1b102800
+[    2.106808] PCIE2 no card, disable it(RST&CLK)
+[    2.115490]  -> 21007f2
+[    2.120315] PCIE0 enabled
+[    2.125510] PCIE1 enabled
+[    2.130687] PCI host bridge /pcie@1e140000 ranges:
+[    2.140213]  MEM 0x0000000060000000..0x000000006fffffff
+[    2.150574]   IO 0x000000001e160000..0x000000001e16ffff
+[    2.160945] PCI coherence region base: 0x60000000, mask/settings: 0xf0000002
+[    2.206408] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    2.217510] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    2.228550] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    2.240774] PCI host bridge to bus 0000:00
+[    2.248791] pci_bus 0000:00: root bus resource [mem 0x60000000-0x6fffffff]
+[    2.262458] pci_bus 0000:00: root bus resource [io  0xffffffff]
+[    2.274192] pci_bus 0000:00: root bus resource [??? 0x00000000 flags 0x0]
+[    2.287671] pci_bus 0000:00: No busn resource found for root bus, will use [bus 00-ff]
+[    2.304190] pci 0000:00:00.0: bridge configuration invalid ([bus 00-00]), reconfiguring
+[    2.319982] pci 0000:00:01.0: bridge configuration invalid ([bus 00-00]), reconfiguring
+[    2.337223] pci 0000:00:00.0: BAR 0: no space for [mem size 0x80000000]
+[    2.350242] pci 0000:00:00.0: BAR 0: failed to assign [mem size 0x80000000]
+[    2.364063] pci 0000:00:01.0: BAR 0: no space for [mem size 0x80000000]
+[    2.377190] pci 0000:00:01.0: BAR 0: failed to assign [mem size 0x80000000]
+[    2.391019] pci 0000:00:00.0: BAR 8: assigned [mem 0x60000000-0x600fffff]
+[    2.404498] pci 0000:00:00.0: BAR 9: assigned [mem 0x60100000-0x601fffff pref]
+[    2.418839] pci 0000:00:01.0: BAR 8: assigned [mem 0x60200000-0x602fffff]
+[    2.432319] pci 0000:00:01.0: BAR 9: assigned [mem 0x60300000-0x603fffff pref]
+[    2.446660] pci 0000:00:00.0: BAR 1: assigned [mem 0x60400000-0x6040ffff]
+[    2.460143] pci 0000:00:01.0: BAR 1: assigned [mem 0x60410000-0x6041ffff]
+[    2.473632] pci 0000:01:00.0: BAR 0: assigned [mem 0x60000000-0x600fffff 64bit]
+[    2.488142] pci 0000:01:00.0: BAR 6: assigned [mem 0x60100000-0x6010ffff pref]
+[    2.502472] pci 0000:00:00.0: PCI bridge to [bus 01]
+[    2.512312] pci 0000:00:00.0:   bridge window [mem 0x60000000-0x600fffff]
+[    2.525801] pci 0000:00:00.0:   bridge window [mem 0x60100000-0x601fffff pref]
+[    2.540150] pci 0000:02:00.0: BAR 0: assigned [mem 0x60200000-0x602fffff 64bit]
+[    2.554670] pci 0000:02:00.0: BAR 6: assigned [mem 0x60300000-0x6030ffff pref]
+[    2.568999] pci 0000:00:01.0: PCI bridge to [bus 02]
+[    2.578838] pci 0000:00:01.0:   bridge window [mem 0x60200000-0x602fffff]
+[    2.592331] pci 0000:00:01.0:   bridge window [mem 0x60300000-0x603fffff pref]
+[    2.606684] BAR0 at slot 0 = 0
+[    2.612698] bus=0x0, slot = 0x0
+[    2.618938] BAR0 at slot 1 = 0
+[    2.624967] bus=0x0, slot = 0x1
+[    2.631208] bus=0x1, slot = 0x0, irq=0xff
+[    2.639145] bus=0x2, slot = 0x1, irq=0xff
+[    2.648316] clocksource: Switched to clocksource GIC
+[    2.672702] NET: Registered protocol family 2
+[    2.682033] TCP established hash table entries: 1024 (order: 0, 4096 bytes)
+[    2.695765] TCP bind hash table entries: 1024 (order: 1, 8192 bytes)
+[    2.708380] TCP: Hash tables configured (established 1024 bind 1024)
+[    2.721053] UDP hash table entries: 256 (order: 1, 8192 bytes)
+[    2.732579] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes)
+[    2.745264] NET: Registered protocol family 1
+[    2.988252] 4 CPUs re-calibrate udelay(lpj = 2924544)
+[    3.000111] Crashlog allocated RAM at address 0x3f00000
+[    3.017611] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    3.029255] jffs2: version 2.2 (NAND) (SUMMARY) (LZMA) (RTIME) (CMODE_PRIORITY) (c) 2001-2006 Red Hat, Inc.
+[    3.051313] io scheduler noop registered
+[    3.059081] io scheduler deadline registered (default)
+[    3.069720] Serial: 8250/16550 driver, 3 ports, IRQ sharing disabled
+[    3.083504] console [ttyS0] disabled
+[    3.090536] 1e000c00.uartlite: ttyS0 at MMIO 0x1e000c00 (irq = 33, base_baud = 3125000) is a 16550A
+[    3.108494] console [ttyS0] enabled
+[    3.108494] console [ttyS0] enabled
+[    3.122276] bootconsole [early0] disabled
+[    3.122276] bootconsole [early0] disabled
+[    3.139640] MediaTek Nand driver init, version v2.1 Fix AHB virt2phys error
+[    3.153888] spi-mt7621 1e000b00.spi: sys_freq: 50000000
+[    3.165321] m25p80 spi32766.0: using chunked io (size=32)
+[    3.176117] m25p80 spi32766.0: w25q128 (16384 Kbytes)
+[    3.186217] 5 ofpart partitions found on MTD device spi32766.0
+[    3.197828] Creating 5 MTD partitions on "spi32766.0":
+[    3.208064] 0x000000000000-0x000000030000 : "u-boot"
+[    3.219239] 0x000000030000-0x000000040000 : "u-boot-env"
+[    3.231081] 0x000000040000-0x000000050000 : "factory"
+[    3.242393] 0x000000050000-0x000000e30000 : "firmware"
+[    3.280355] 2 uimage-fw partitions found on MTD device firmware
+[    3.292171] 0x000000050000-0x0000001e6b25 : "kernel"
+[    3.303248] 0x0000001e6b25-0x000000e30000 : "rootfs"
+[    3.314379] mtd: device 5 (rootfs) set to be root filesystem
+[    3.325784] 1 squashfs-split partitions found on MTD device rootfs
+[    3.338110] 0x000000d10000-0x000000e30000 : "rootfs_data"
+[    3.350145] 0x000000e30000-0x000001000000 : "recovery"
+[    3.362223] netif_napi_add() called with weight 128 on device eth%d
+[    3.440338] libphy: mdio: probed
+[    4.846192] mtk_soc_eth 1e100000.ethernet: loaded mt7530 driver
+[    4.858808] mtk_soc_eth 1e100000.ethernet eth0: mediatek frame engine at 0xbe100000, irq 10
+[    4.876554] mt7621_wdt 1e000100.wdt: Initialized
+[    4.887578] NET: Registered protocol family 10
+[    4.897834] NET: Registered protocol family 17
+[    4.906787] bridge: automatic filtering via arp/ip/ip6tables has been deprecated. Update your scripts to load br_netfilter if you need this.
+[    4.931897] 8021q: 802.1Q VLAN Support v1.8
+[    4.942758] hctosys: unable to open rtc device (rtc0)
+[    4.959406] VFS: Mounted root (squashfs filesystem) readonly on device 31:5.
+[    4.974132] Freeing unused kernel memory: 260K (8050f000 - 80550000)
+[    5.171505] random: nonblocking pool is initialized
+[    7.122307] init: Console is alive
+[    7.129452] init: - watchdog -
+[    8.602595] kmodloader: loading kernel modules from /etc/modules-boot.d/*
+[    8.680330] usbcore: registered new interface driver usbfs
+[    8.691408] usbcore: registered new interface driver hub
+[    8.702149] usbcore: registered new device driver usb
+[    8.722442] xhci-mtk 1e1c0000.xhci: xHCI Host Controller
+[    8.733115] xhci-mtk 1e1c0000.xhci: new USB bus registered, assigned bus number 1
+[    8.758518] xhci-mtk 1e1c0000.xhci: hcc params 0x01401198 hci version 0x96 quirks 0x00210010
+[    8.775425] xhci-mtk 1e1c0000.xhci: irq 29, io mem 0x1e1c0000
+[    8.787943] hub 1-0:1.0: USB hub found
+[    8.795527] hub 1-0:1.0: 2 ports detected
+[    8.803976] xhci-mtk 1e1c0000.xhci: xHCI Host Controller
+[    8.814607] xhci-mtk 1e1c0000.xhci: new USB bus registered, assigned bus number 2
+[    8.829700] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+[    8.846689] hub 2-0:1.0: USB hub found
+[    8.854243] hub 2-0:1.0: 1 port detected
+[    8.864590] kmodloader: done loading kernel modules from /etc/modules-boot.d/*
+[    8.898660] init: - preinit -
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+[   12.701386] mount_root: loading kmods from internal overlay
+[   12.740086] kmodloader: loading kernel modules from //etc/modules-boot.d/*
+[   12.756782] kmodloader: done loading kernel modules from //etc/modules-boot.d/*
+[   13.179006] jffs2: notice: (406) jffs2_build_xattr_subsystem: complete building xattr subsystem, 0 of xdatum (0 unchecked, 0 orphan) and 0 of xref (0 dead, 0 orphan) found.
+[   13.210290] block: attempting to load /tmp/jffs_cfg/upper/etc/config/fstab
+[   13.227639] block: extroot: not configured
+[   13.325655] jffs2: notice: (403) jffs2_build_xattr_subsystem: complete building xattr subsystem, 0 of xdatum (0 unchecked, 0 orphan) and 0 of xref (0 dead, 0 orphan) found.
+[   13.582095] block: attempting to load /tmp/jffs_cfg/upper/etc/config/fstab
+[   13.597986] block: extroot: not configured
+[   13.649530] mount_root: switching to jffs2 overlay
+[   13.666730] urandom-seed: Seeding with /etc/urandom.seed
+[   13.777417] procd: - early -
+[   13.783371] procd: - watchdog -
+Failed to connect to ubus
+[   14.458667] procd: - watchdog -
+[   14.465329] procd: - ubus -
+[   14.894088] procd: - init -
+Please press Enter to activate this console.
+[   15.227023] kmodloader: loading kernel modules from /etc/modules.d/*
+[   15.241365] Loading modules backported from Linux version wt-2017-01-31-0-ge882dff19e7f
+[   15.257348] Backport generated by backports.git backports-20160324-13-g24da7d3c
+[   15.352361] mt76x2e 0000:01:00.0: ASIC revision: 76120044
+[   15.388338] mt76x2e 0000:01:00.0: ROM patch already applied
+[   15.441373] mt76x2e 0000:01:00.0: Firmware Version: 0.0.00
+[   15.452344] mt76x2e 0000:01:00.0: Build: 1
+[   15.460503] mt76x2e 0000:01:00.0: Build Time: 201507311614____
+[   15.488324] mt76x2e 0000:01:00.0: Firmware running!
+[   15.503463] mt76x2e 0000:02:00.0: ASIC revision: 76020044
+[   15.538405] mt76x2e 0000:02:00.0: ROM patch already applied
+[   15.550515] mt76x2e 0000:02:00.0: Firmware Version: 0.0.00
+[   15.561475] mt76x2e 0000:02:00.0: Build: 1
+[   15.569644] mt76x2e 0000:02:00.0: Build Time: 201507311614____
+[   15.598391] mt76x2e 0000:02:00.0: Firmware running!
+[   15.613545] kmodloader: done loading kernel modules from /etc/modules.d/*
