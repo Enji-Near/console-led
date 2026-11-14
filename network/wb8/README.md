@@ -60,9 +60,9 @@ Applied over the serial console: OpenWrt's serial shell has no login (`ttylogin=
 
 ## Known issues
 
-- **2.4 GHz radio (MT7602, radio1) crash-loops** on 25.12.5: `MCU message 02 (seq 3) timed out`
+- **2.4 GHz radio (MT7602, radio1) crash-looped once** on 25.12.5: `MCU message 02 (seq 3) timed out`
   on the first command at radio start, then `Hardware restart was requested` about once a second
-  (111 restarts in ~2 min). Fixed channel 6 didn't help. Disabled for now; 5 GHz (MT7612) is fine.
+  (111 restarts in ~2 min). Fixed channel 6 didn't help. **Cleared by a cold power cycle; working since.**
   Wiki note #2: the MT7602 reports itself as 0x14c3:0x7612 and needed an mt76 patch.
   - Upstream bug: [openwrt/openwrt#19451](https://github.com/openwrt/openwrt/issues/19451) (open).
     Reporter: 2.4 GHz works on 18.06.9 to 21.02.7, broken from 22.03.0 (24.10.x too). No fix posted.
@@ -82,9 +82,16 @@ Applied over the serial console: OpenWrt's serial shell has no login (`ttylogin=
     | cold | ~1-2 min after boot | 1492 | works |
     | warm (after bus reset) | at boot (enabled in config) | 4683 | works |
     | warm (plain `reboot`) | at boot | 2384 | works |
+    | warm | 15 min idle after boot, then enabled | 1239 | works |
+    | (running) | `wifi reload` at ~15 min uptime (= LuCI Save & Apply) | 3025 → 4203 | works |
 
-    Hypothesis under test: the MT7602 breaks if it sits idle for a long time after probe
-    before its radio is first started. Production config starts it at boot.
+  - Conclusion: the failure is not caused by warm reboots or idle time. Most likely a bad MT7602
+    state was left by the install sequence (cold boot → U-Boot TFTP initramfs → sysupgrade →
+    two warm reboots, no power cut). Because warm reboots don't reset the MT7602, the state
+    survived until the first power cycle. Not reproduced since.
+  - **If 2.4 GHz ever stops working:** check `dmesg | grep "timed out"` or IRQ 30 in
+    `/proc/interrupts` staying at 0. Fix: unplug power for 10 s. A software reboot won't clear it.
+  - Possibly the same thing in #19451 (versions installed by sysupgrade, i.e. warm reboots). Unconfirmed.
 
 ## Images (OpenWrt 25.12.5, checksums in `openwrt-25.12.5-sha256sums`)
 

@@ -1,0 +1,2606 @@
+
+=== logger started ===
+ 4 
+You choosed 3
+
+ 0 
+bootcount: 0
+   
+3: System Boot system code via Flash.
+Erasing SPI Flash...
+.
+Writing to SPI Flash...
+.
+done
+## Booting image at bc050000 ...
+   Image Name:   MIPS OpenWrt Linux-6.12.94
+   Image Type:   MIPS Linux Kernel Image (uncompressed)
+   Data Size:    3321077 Bytes =  3.2 MB
+   Load Address: 80001000
+   Entry Point:  80001000
+   Verifying Checksum ... OK
+OK
+No initrd
+## Transferring control to Linux (at address 80001000) ...
+## Giving linux memsize in MB, 128
+
+Starting kernel ...
+
+
+
+OpenWrt kernel loader for MIPS based SoC
+Copyright (C) 2011 Gabor Juhos <juhosg@openwrt.org>
+Decompressing kernel... done!
+Starting kernel at 80001000...
+
+[    0.000000] Linux version 6.12.94 (builder@buildhost) (mipsel-openwrt-linux-musl-gcc (OpenWrt GCC 14.3.0 r33051-f5dae5ece4) 14.3.0, GNU ld (GNU Binutils) 2.44) #0 SMP Mon Jun 29 12:59:20 2026
+[    0.000000] SoC Type: MediaTek MT7621 ver:1 eco:3
+[    0.000000] printk: legacy bootconsole [early0] enabled
+[    0.000000] CPU0 revision is: 0001992f (MIPS 1004Kc)
+[    0.000000] MIPS: machine is SamKnows Whitebox 8
+[    0.000000] Initrd not found or empty - disabling initrd
+[    0.000000] VPE topology {2,2} total 4
+[    0.000000] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.000000] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.000000] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+[    0.000000] percpu: Embedded 13 pages/cpu s22928 r8192 d22128 u53248
+[    0.000000] Kernel command line: console=ttyS0,57600 rootfstype=squashfs,jffs2
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Writing ErrCtl register=000023c0
+[    0.000000] Readback ErrCtl register=000023c0
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 32768
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] RCU Tasks Trace: Setting shift to 2 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=4.
+[    0.000000] NR_IRQS: 256
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: GIC: mask: 0xffffffffffffffff max_cycles: 0xcaf478abb4, max_idle_ns: 440795247997 ns
+[    0.000005] sched_clock: 64 bits at 880MHz, resolution 1ns, wraps every 4398046511103ns
+[    0.016029] Calibrating delay loop... 586.13 BogoMIPS (lpj=2930688)
+[    0.088281] pid_max: default: 32768 minimum: 301
+[    0.107550] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.121967] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.147882] rcu: Hierarchical SRCU implementation.
+[    0.157288] rcu: 	Max phase no-delay instances is 1000.
+[    0.168217] Timer migration: 1 hierarchy levels; 8 children per group; 1 crossnode level
+[    0.185042] smp: Bringing up secondary CPUs ...
+[    0.194977] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.195007] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.195024] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.195152] CPU1 revision is: 0001992f (MIPS 1004Kc)
+[    0.256645] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.256674] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.256688] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.256791] CPU2 revision is: 0001992f (MIPS 1004Kc)
+[    0.316815] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.316840] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.316855] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.316967] CPU3 revision is: 0001992f (MIPS 1004Kc)
+[    0.375928] smp: Brought up 1 node, 4 CPUs
+[    0.536016] Memory: 116372K/131072K available (8771K kernel code, 651K rwdata, 1088K rodata, 1252K init, 236K bss, 13552K reserved, 0K cma-reserved)
+[    0.568903] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.588414] futex hash table entries: 1024 (order: 3, 32768 bytes, linear)
+[    0.607919] pinctrl core: initialized pinctrl subsystem
+[    0.621304] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.633830] thermal_sys: Registered thermal governor 'step_wise'
+[    0.636450] /pinctrl: Fixed dependency cycle(s) with /pinctrl/pinctrl0
+[    0.681560] clocksource: Switched to clocksource GIC
+[    0.701378] NET: Registered PF_INET protocol family
+[    0.711232] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.727180] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.743779] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.759094] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.774335] TCP bind hash table entries: 1024 (order: 2, 16384 bytes, linear)
+[    0.788546] TCP: Hash tables configured (established 1024 bind 1024)
+[    0.801805] MPTCP token hash table entries: 256 (order: 0, 4096 bytes, linear)
+[    0.816463] UDP hash table entries: 256 (order: 1, 8192 bytes, linear)
+[    0.829384] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes, linear)
+[    0.844271] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    0.855530] PCI: CLS 0 bytes, default 32
+[    0.866698] workingset: timestamp_bits=14 max_order=15 bucket_order=1
+[    0.881854] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.893362] jffs2: version 2.2 (NAND) (SUMMARY) (LZMA) (RTIME) (CMODE_PRIORITY) (c) 2001-2006 Red Hat, Inc.
+[    0.917788] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 251)
+[    0.936379] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    0.947902] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    0.959442] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    0.971098] mt7621-pci 1e140000.pcie: host bridge /pcie@1e140000 ranges:
+[    0.984361] mt7621-pci 1e140000.pcie:   No bus range found for /pcie@1e140000, using [bus 00-ff]
+[    1.001829] mt7621-pci 1e140000.pcie:      MEM 0x0060000000..0x006fffffff -> 0x0060000000
+[    1.018044] mt7621-pci 1e140000.pcie:       IO 0x001e160000..0x001e16ffff -> 0x0000000000
+[    1.361362] mt7621-pci 1e140000.pcie: pcie2 no card, disable it (RST & CLK)
+[    1.375191] mt7621-pci 1e140000.pcie: PCIE0 enabled
+[    1.384814] mt7621-pci 1e140000.pcie: PCIE1 enabled
+[    1.394679] PCI coherence region base: 0x60000000, mask/settings: 0xf0000002
+[    1.408766] mt7621-pci 1e140000.pcie: PCI host bridge to bus 0000:00
+[    1.421340] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    1.432176] pci_bus 0000:00: root bus resource [mem 0x60000000-0x6fffffff]
+[    1.445823] pci_bus 0000:00: root bus resource [io  0x0000-0xffff]
+[    1.458176] pci 0000:00:00.0: [0e8d:0801] type 01 class 0x060400 PCIe Root Port
+[    1.472642] pci 0000:00:00.0: BAR 0 [mem 0x00000000-0x7fffffff]
+[    1.484375] pci 0000:00:00.0: BAR 1 [mem 0x00000000-0x0000ffff]
+[    1.496129] pci 0000:00:00.0: PCI bridge to [bus 00]
+[    1.505965] pci 0000:00:00.0:   bridge window [io  0x0000-0x0fff]
+[    1.518054] pci 0000:00:00.0:   bridge window [mem 0x00000000-0x000fffff]
+[    1.531541] pci 0000:00:00.0:   bridge window [mem 0x00000000-0x000fffff pref]
+[    1.545953] pci 0000:00:00.0: supports D1
+[    1.553826] pci 0000:00:00.0: PME# supported from D0 D1 D3hot
+[    1.566186] pci 0000:00:01.0: [0e8d:0801] type 01 class 0x060400 PCIe Root Port
+[    1.580689] pci 0000:00:01.0: BAR 0 [mem 0x00000000-0x7fffffff]
+[    1.592412] pci 0000:00:01.0: BAR 1 [mem 0x00000000-0x0000ffff]
+[    1.604162] pci 0000:00:01.0: PCI bridge to [bus 00]
+[    1.613997] pci 0000:00:01.0:   bridge window [io  0x0000-0x0fff]
+[    1.626088] pci 0000:00:01.0:   bridge window [mem 0x00000000-0x000fffff]
+[    1.639570] pci 0000:00:01.0:   bridge window [mem 0x00000000-0x000fffff pref]
+[    1.653979] pci 0000:00:01.0: supports D1
+[    1.661870] pci 0000:00:01.0: PME# supported from D0 D1 D3hot
+[    1.675194] pci 0000:00:00.0: bridge configuration invalid ([bus 00-00]), reconfiguring
+[    1.691054] pci 0000:00:01.0: bridge configuration invalid ([bus 00-00]), reconfiguring
+[    1.707243] pci 0000:01:00.0: [14c3:7662] type 00 class 0x028000 PCIe Endpoint
+[    1.721577] pci 0000:01:00.0: BAR 0 [mem 0x00000000-0x000fffff 64bit]
+[    1.734329] pci 0000:01:00.0: ROM [mem 0x00000000-0x0000ffff pref]
+[    1.746688] pci 0000:01:00.0: PME# supported from D0 D3hot D3cold
+[    1.759105] pci 0000:00:00.0: PCI bridge to [bus 01-ff]
+[    1.769423] pci_bus 0000:01: busn_res: [bus 01-ff] end is updated to 01
+[    1.782815] pci 0000:02:00.0: [14c3:7662] type 00 class 0x028000 PCIe Endpoint
+[    1.797119] pci 0000:02:00.0: BAR 0 [mem 0x00000000-0x000fffff 64bit]
+[    1.809907] pci 0000:02:00.0: ROM [mem 0x00000000-0x0000ffff pref]
+[    1.822265] pci 0000:02:00.0: PME# supported from D0 D3hot D3cold
+[    1.834644] pci 0000:00:01.0: PCI bridge to [bus 02-ff]
+[    1.844970] pci_bus 0000:02: busn_res: [bus 02-ff] end is updated to 02
+[    1.858112] pci 0000:00:00.0: BAR 0 [mem size 0x80000000]: can't assign; no space
+[    1.872925] pci 0000:00:00.0: BAR 0 [mem size 0x80000000]: failed to assign
+[    1.886749] pci 0000:00:01.0: BAR 0 [mem size 0x80000000]: can't assign; no space
+[    1.901626] pci 0000:00:01.0: BAR 0 [mem size 0x80000000]: failed to assign
+[    1.915439] pci 0000:00:00.0: bridge window [mem 0x60000000-0x600fffff]: assigned
+[    1.930298] pci 0000:00:00.0: bridge window [mem 0x60100000-0x601fffff pref]: assigned
+[    1.946025] pci 0000:00:01.0: bridge window [mem 0x60200000-0x602fffff]: assigned
+[    1.960880] pci 0000:00:01.0: bridge window [mem 0x60300000-0x603fffff pref]: assigned
+[    1.976611] pci 0000:00:00.0: BAR 1 [mem 0x60400000-0x6040ffff]: assigned
+[    1.990093] pci 0000:00:01.0: BAR 1 [mem 0x60410000-0x6041ffff]: assigned
+[    2.003572] pci 0000:00:00.0: bridge window [io  0x0000-0x0fff]: assigned
+[    2.017039] pci 0000:00:01.0: bridge window [io  0x1000-0x1fff]: assigned
+[    2.030526] pci 0000:01:00.0: BAR 0 [mem 0x60000000-0x600fffff 64bit]: assigned
+[    2.045056] pci 0000:01:00.0: ROM [mem 0x60100000-0x6010ffff pref]: assigned
+[    2.059035] pci 0000:00:00.0: PCI bridge to [bus 01]
+[    2.068878] pci 0000:00:00.0:   bridge window [io  0x0000-0x0fff]
+[    2.080975] pci 0000:00:00.0:   bridge window [mem 0x60000000-0x600fffff]
+[    2.094456] pci 0000:00:00.0:   bridge window [mem 0x60100000-0x601fffff pref]
+[    2.108814] pci 0000:02:00.0: BAR 0 [mem 0x60200000-0x602fffff 64bit]: assigned
+[    2.123321] pci 0000:02:00.0: ROM [mem 0x60300000-0x6030ffff pref]: assigned
+[    2.137307] pci 0000:00:01.0: PCI bridge to [bus 02]
+[    2.147155] pci 0000:00:01.0:   bridge window [io  0x1000-0x1fff]
+[    2.159256] pci 0000:00:01.0:   bridge window [mem 0x60200000-0x602fffff]
+[    2.172742] pci 0000:00:01.0:   bridge window [mem 0x60300000-0x603fffff pref]
+[    2.187078] pci_bus 0000:00: Some PCI device resources are unassigned, try booting with pci=realloc
+[    2.205042] pci_bus 0000:00: resource 4 [mem 0x60000000-0x6fffffff]
+[    2.217493] pci_bus 0000:00: resource 5 [io  0x0000-0xffff]
+[    2.228543] pci_bus 0000:01: resource 0 [io  0x0000-0x0fff]
+[    2.239609] pci_bus 0000:01: resource 1 [mem 0x60000000-0x600fffff]
+[    2.252061] pci_bus 0000:01: resource 2 [mem 0x60100000-0x601fffff pref]
+[    2.265365] pci_bus 0000:02: resource 0 [io  0x1000-0x1fff]
+[    2.276418] pci_bus 0000:02: resource 1 [mem 0x60200000-0x602fffff]
+[    2.288864] pci_bus 0000:02: resource 2 [mem 0x60300000-0x603fffff pref]
+[    2.304963] Serial: 8250/16550 driver, 16 ports, IRQ sharing enabled
+[    2.326575] printk: legacy console [ttyS0] disabled
+[    2.337127] 1e000c00.uartlite: ttyS0 at MMIO 0x1e000c00 (irq = 18, base_baud = 3125000) is a 16550A
+[    2.355132] printk: legacy console [ttyS0] enabled
+[    2.355132] printk: legacy console [ttyS0] enabled
+[    2.374105] printk: legacy bootconsole [early0] disabled
+[    2.374105] printk: legacy bootconsole [early0] disabled
+[    2.400915] spi-mt7621 1e000b00.spi: sys_freq: 220000000
+[    2.413375] 4 fixed-partitions partitions found on MTD device spi0.0
+[    2.426571] Creating 4 MTD partitions on "spi0.0":
+[    2.436351] 0x000000000000-0x000000030000 : "u-boot"
+[    2.448030] 0x000000030000-0x000000040000 : "u-boot-env"
+[    2.459777] 0x000000040000-0x000000050000 : "factory"
+[    2.471909] 0x000000050000-0x000001000000 : "firmware"
+[    2.483549] 2 uimage-fw partitions found on MTD device firmware
+[    2.495415] Creating 2 MTD partitions on "firmware":
+[    2.505358] 0x000000000000-0x00000032ad35 : "kernel"
+[    2.515269] mtd: partition "kernel" doesn't end on an erase/write block -- force read-only
+[    2.532951] 0x00000032ad35-0x000000fb0000 : "rootfs"
+[    2.542915] mtd: partition "rootfs" doesn't start on an erase/write block boundary -- force read-only
+[    2.562246] mtd: setting mtd5 (rootfs) as root device
+[    2.572503] 1 squashfs-split partitions found on MTD device rootfs
+[    2.584839] 0x000000770000-0x000000fb0000 : "rootfs_data"
+[    2.723048] mtk_soc_eth 1e100000.ethernet: generated random MAC address 20:08:02:00:00:00
+[    2.741099] mt7530-mdio mdio-bus:1f: MT7530 adapts as multi-chip module
+[    2.766336] mtk_soc_eth 1e100000.ethernet eth0: mediatek frame engine at 0xbe100000, irq 19
+[    2.786257] mtk_soc_eth 1e100000.ethernet eth1: mediatek frame engine at 0xbe100000, irq 19
+[    2.804763] i2c_dev: i2c /dev entries driver
+[    2.817315] NET: Registered PF_INET6 protocol family
+[    2.830824] Segment Routing with IPv6
+[    2.838305] In-situ OAM (IOAM) with IPv6
+[    2.846269] NET: Registered PF_PACKET protocol family
+[    2.856432] bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+[    2.882764] 8021q: 802.1Q VLAN Support v1.8
+[    2.921519] mt7530-mdio mdio-bus:1f: MT7530 adapts as multi-chip module
+[    2.960846] mt7530-mdio mdio-bus:1f: configuring for fixed/rgmii link mode
+[    2.976105] mt7530-mdio mdio-bus:1f lan1 (uninitialized): PHY [mt7530-0:00] driver [MediaTek MT7530 PHY] (irq=21)
+[    2.999485] mt7530-mdio mdio-bus:1f: Link is Up - 1Gbps/Full - flow control rx/tx
+[    3.002254] mt7530-mdio mdio-bus:1f lan2 (uninitialized): PHY [mt7530-0:01] driver [MediaTek MT7530 PHY] (irq=22)
+[    3.037706] mt7530-mdio mdio-bus:1f lan3 (uninitialized): PHY [mt7530-0:02] driver [MediaTek MT7530 PHY] (irq=23)
+[    3.060907] mt7530-mdio mdio-bus:1f lan4 (uninitialized): PHY [mt7530-0:03] driver [MediaTek MT7530 PHY] (irq=24)
+[    3.083827] mtk_soc_eth 1e100000.ethernet eth0: entered promiscuous mode
+[    3.097381] DSA: tree 0 setup
+[    3.104269] clk: Disabling unused clocks
+[    3.122686] VFS: Mounted root (squashfs filesystem) readonly on device 31:5.
+[    3.140947] Freeing unused kernel image (initmem) memory: 1252K
+[    3.152825] This architecture does not have kernel memory protection.
+[    3.165696] Run /sbin/init as init process
+[    4.319308] init: Console is alive
+[    4.326570] init: - watchdog -
+[    5.963941] kmodloader: loading kernel modules from /etc/modules-boot.d/*
+[    6.078020] usbcore: registered new interface driver usbfs
+[    6.089182] usbcore: registered new interface driver hub
+[    6.099997] usbcore: registered new device driver usb
+[    6.112021] gpio_button_hotplug: loading out-of-tree module taints kernel.
+[    6.138090] xhci-mtk 1e1c0000.xhci: xHCI Host Controller
+[    6.148813] xhci-mtk 1e1c0000.xhci: new USB bus registered, assigned bus number 1
+[    6.168874] xhci-mtk 1e1c0000.xhci: hcc params 0x01401198 hci version 0x96 quirks 0x0000000000280010
+[    6.187247] xhci-mtk 1e1c0000.xhci: irq 27, io mem 0x1e1c0000
+[    6.199029] xhci-mtk 1e1c0000.xhci: xHCI Host Controller
+[    6.209666] xhci-mtk 1e1c0000.xhci: new USB bus registered, assigned bus number 2
+[    6.224614] xhci-mtk 1e1c0000.xhci: Host supports USB 3.0 SuperSpeed
+[    6.238423] hub 1-0:1.0: USB hub found
+[    6.246090] hub 1-0:1.0: 2 ports detected
+[    6.255265] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+[    6.272439] hub 2-0:1.0: USB hub found
+[    6.280056] hub 2-0:1.0: 1 port detected
+[    6.299361] kmodloader: done loading kernel modules from /etc/modules-boot.d/*
+[    6.324876] init: - preinit -
+[    7.883688] mtk_soc_eth 1e100000.ethernet wan: renamed from eth1
+[    9.411258] random: crng init done
+Cannot parse config file '/etc/fw_env.config': No such file or directory
+Failed to find NVMEM device
+[   10.744828] mtk_soc_eth 1e100000.ethernet eth0: configuring for fixed/rgmii link mode
+[   10.765656] mtk_soc_eth 1e100000.ethernet eth0: Link is Up - 1Gbps/Full - flow control rx/tx
+[   10.766156] mt7530-mdio mdio-bus:1f lan1: configuring for phy/gmii link mode
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+[   13.930792] mt7530-mdio mdio-bus:1f lan1: Link is Up - 1Gbps/Full - flow control rx/tx
+[   15.440163] jffs2: notice: (641) jffs2_build_xattr_subsystem: complete building xattr subsystem, 11 of xdatum (8 unchecked, 2 orphan) and 12 of xref (2 dead, 0 orphan) found.
+[   15.473959] mount_root: switching to jffs2 overlay
+[   15.495660] overlayfs: upper fs does not support tmpfile.
+[   15.518222] urandom-seed: Seeding with /etc/urandom.seed
+[   15.828456] mt7530-mdio mdio-bus:1f lan1: Link is Down
+[   15.849354] procd: - early -
+[   15.855432] procd: - watchdog -
+[   16.509028] procd: - watchdog -
+[   16.517132] procd: - ubus -
+[   16.879356] procd: - init -
+Please press Enter to activate this console.
+[   18.410315] kmodloader: loading kernel modules from /etc/modules.d/*
+[   18.531471] mtk-eip93 1e004000.crypto: EIP93 Crypto Engine Initialized.
+[   19.104599] urngd: v1.0.2 started.
+[   19.199242] Loading modules backported from Linux version v6.18.26-0-g1fe060681
+[   19.213978] Backport generated by backports.git 6ecbb44
+[   19.609890] pci 0000:00:00.0: enabling device (0000 -> 0003)
+[   19.621293] mt76x2e 0000:01:00.0: enabling device (0000 -> 0002)
+[   19.633605] mt76x2e 0000:01:00.0: ASIC revision: 76120044
+[   20.294566] mt76x2e 0000:01:00.0: ROM patch build: 20141115060606a
+[   20.309432] mt76x2e 0000:01:00.0: Firmware Version: 0.0.00
+[   20.320537] mt76x2e 0000:01:00.0: Build: 1
+[   20.328725] mt76x2e 0000:01:00.0: Build Time: 201607111443____
+[   20.363843] mt76x2e 0000:01:00.0: Firmware running!
+[   20.373781] mt76x2e 0000:01:00.0: registering led 'mt76-phy0'
+[   20.426003] pci 0000:00:01.0: enabling device (0000 -> 0003)
+[   20.437594] mt76x2e 0000:02:00.0: enabling device (0000 -> 0002)
+[   20.450103] mt76x2e 0000:02:00.0: ASIC revision: 76020044
+[   21.113598] mt76x2e 0000:02:00.0: ROM patch already applied
+[   21.125559] mt76x2e 0000:02:00.0: Firmware Version: 0.0.00
+[   21.136613] mt76x2e 0000:02:00.0: Build: 1
+[   21.144788] mt76x2e 0000:02:00.0: Build Time: 201607111443____
+[   21.179916] mt76x2e 0000:02:00.0: Firmware running!
+[   21.189824] mt76x2e 0000:02:00.0: registering led 'mt76-phy1'
+[   21.316385] PPP generic driver version 2.4.2
+[   21.326977] NET: Registered PF_PPPOX protocol family
+[   21.344563] kmodloader: done loading kernel modules from /etc/modules.d/*
+[   28.160680] mtk_soc_eth 1e100000.ethernet eth0: Link is Down
+[   28.193942] mtk_soc_eth 1e100000.ethernet eth0: configuring for fixed/rgmii link mode
+[   28.210291] mtk_soc_eth 1e100000.ethernet eth0: Link is Up - 1Gbps/Full - flow control rx/tx
+[   28.232632] mt7530-mdio mdio-bus:1f lan1: configuring for phy/gmii link mode
+[   28.248609] br-lan: port 1(lan1) entered blocking state
+[   28.259261] br-lan: port 1(lan1) entered disabled state
+[   28.269991] mt7530-mdio mdio-bus:1f lan1: entered allmulticast mode
+[   28.282724] mtk_soc_eth 1e100000.ethernet eth0: entered allmulticast mode
+[   28.301813] mt7530-mdio mdio-bus:1f lan1: entered promiscuous mode
+[   28.325544] mt7530-mdio mdio-bus:1f lan2: configuring for phy/gmii link mode
+[   28.341749] br-lan: port 2(lan2) entered blocking state
+[   28.352376] br-lan: port 2(lan2) entered disabled state
+[   28.363164] mt7530-mdio mdio-bus:1f lan2: entered allmulticast mode
+[   28.377988] mt7530-mdio mdio-bus:1f lan2: entered promiscuous mode
+[   28.397650] mt7530-mdio mdio-bus:1f lan3: configuring for phy/gmii link mode
+[   28.413396] br-lan: port 3(lan3) entered blocking state
+[   28.424154] br-lan: port 3(lan3) entered disabled state
+[   28.434881] mt7530-mdio mdio-bus:1f lan3: entered allmulticast mode
+[   28.449698] mt7530-mdio mdio-bus:1f lan3: entered promiscuous mode
+[   28.469205] mt7530-mdio mdio-bus:1f lan4: configuring for phy/gmii link mode
+[   28.484786] br-lan: port 4(lan4) entered blocking state
+[   28.495406] br-lan: port 4(lan4) entered disabled state
+[   28.506077] mt7530-mdio mdio-bus:1f lan4: entered allmulticast mode
+[   28.521086] mt7530-mdio mdio-bus:1f lan4: entered promiscuous mode
+[   28.539749] mtk_soc_eth 1e100000.ethernet wan: PHY [mt7530-0:04] driver [MediaTek MT7530 PHY] (irq=POLL)
+[   28.558837] mtk_soc_eth 1e100000.ethernet wan: configuring for phy/rgmii link mode
+[   28.580274] br-lan: port 5(wan) entered blocking state
+[   28.590757] br-lan: port 5(wan) entered disabled state
+[   28.601271] mtk_soc_eth 1e100000.ethernet wan: entered allmulticast mode
+[   28.615271] mtk_soc_eth 1e100000.ethernet wan: entered promiscuous mode
+[   30.111512] br-lan: port 6(phy0-ap0) entered blocking state
+[   30.122867] br-lan: port 6(phy0-ap0) entered disabled state
+[   30.134275] mt76x2e 0000:01:00.0 phy0-ap0: entered allmulticast mode
+[   30.147803] mt76x2e 0000:01:00.0 phy0-ap0: entered promiscuous mode
+[   31.337643] mt7530-mdio mdio-bus:1f lan1: Link is Up - 1Gbps/Full - flow control rx/tx
+[   31.337722] br-lan: port 1(lan1) entered blocking state
+[   31.363932] br-lan: port 1(lan1) entered forwarding state
+
+
+
+BusyBox v1.37.0 (2026-06-29 12:59:20 UTC) built-in shell (ash)
+
+  _______                     ________        __
+ |       |.-----.-----.-----.|  |  |  |.----.|  |_
+ |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
+ |_______||   __|_____|__|__||________||__|  |____|
+          |__| W I R E L E S S   F R E E D O M
+ -----------------------------------------------------
+ OpenWrt 25.12.5, r33051-f5dae5ece4 Dave's Guitar
+ -----------------------------------------------------
+
+ OpenWrt recently switched to the "apk" package manager!
+
+ OPKG Command           APK Equivalent      Description
+ ------------------------------------------------------------------
+ opkg install <pkg>     apk add <pkg>       Install a package
+ opkg remove <pkg>      apk del <pkg>       Remove a package
+ opkg upgrade           apk upgrade         Upgrade all packages
+ opkg files <pkg>       apk info -L <pkg>   List package contents
+ opkg list-installed    apk info            List installed packages
+ opkg update            apk update          Update package lists
+ opkg search <pkg>      apk search <pkg>    Search for packages
+ ------------------------------------------------------------------
+
+For more information visit:
+https://openwrt.org/docs/guide-user/additional-software/opkg-to-apk-cheatsheet
+
+root@console-net-ap:~# echo 1 > /proc/sys/kernel/printk; grep mt76 /proc/interru
+pts; uci set wireless.radio1.disabled=0; uci commit wireless; wifi reload; echo 
+enabled; echo "@@""END"
+ 25:          0          0          0          0  mt7621-gpio  11  keys
+ 26:          0          0          0          0  mt7621-gpio   9  keys
+ 29:       1403          0          0          0  MIPS GIC  11  mt76x2e
+ 30:          2          0          0          0  MIPS GIC  31  mt76x2e
+enabled
+@@END
+root@console-net-ap:~# sleep 15; grep mt76 /proc/interrupts; echo restarts=$(dme
+sg | grep -c "Hardware restart"); echo timeouts=$(dmesg | grep -c "timed out"); 
+echo "@@""END"
+ 25:          0          0          0          0  mt7621-gpio  11  keys
+ 26:          0          0          0          0  mt7621-gpio   9  keys
+ 29:       1403          0          0          0  MIPS GIC  11  mt76x2e
+ 30:       1492          0          0          0  MIPS GIC  31  mt76x2e
+restarts=0
+timeouts=0
+@@END
+root@console-net-ap:~# iwinfo | grep -E "ESSID|Channel"; logread | grep -E "host
+apd: phy1|radio1" | tail -4 | cut -c1-140; echo "@@""END"
+phy0-ap0 ESSID: "Console-Net"
+         Mode: Master  Channel: 100 (5.500 GHz)  HT Mode: VHT80
+         Center Channel 1: 106 2: unknown
+         Channel offset: none
+phy1-ap0 ESSID: "Console-Net"
+         Mode: Master  Channel: 6 (2.437 GHz)  HT Mode: HT20
+         Center Channel 1: 6 2: unknown
+         Channel offset: none
+Mon Jun 29 13:30:17 2026 daemon.notice netifd: radio1 (2218): wifi-scripts: Preparing interface: phy1-ap0 with MAC: 90:0a:1a:ff:90:ed
+Mon Jun 29 13:30:18 2026 daemon.notice hostapd: phy1-ap0: interface state UNINITIALIZED->COUNTRY_UPDATE
+Mon Jun 29 13:30:19 2026 daemon.notice hostapd: phy1-ap0: interface state COUNTRY_UPDATE->ENABLED
+Mon Jun 29 13:30:19 2026 daemon.notice hostapd: phy1-ap0: AP-ENABLED
+@@END
+root@console-net-ap:~# wifi down radio1; echo 0000:02:00.0 > /sys/bus/pci/driver
+s/mt76x2e/unbind; echo bus > /sys/bus/pci/devices/0000:02:00.0/reset_method; ech
+o 1 > /sys/bus/pci/devices/0000:02:00.0/reset; echo reset-done; echo "@@""END"
+reboot
+ash: write error: Not a tty
+reset-done
+@@END
+root@console-net-ap:~# reboot
+root@console-net-ap:~# [  199.094675] reboot: Restarting system
+
+===================================================================
+     		MT7621   stage1 code Mar 12 2015 14:43:30 (ASIC)
+     		CPU=500000000 HZ BUS=125000000 HZ
+==================================================================
+Change MPLL source from XTAL to CR...
+do MEMPLL setting..
+MEMPLL Config : 0x31100000
+3PLL mode + External loopback
+=== XTAL-40Mhz === DDR-800Mhz ===
+PLL2 FB_DL: 0x9, 1/0 = 540/484 25000000
+PLL3 FB_DL: 0x15, 1/0 = 611/413 55000000
+PLL4 FB_DL: 0x1a, 1/0 = 613/411 69000000
+do DDR setting..[01F40000]
+Apply DDR2 Setting...(use customer AC)
+          0    8   16   24   32   40   48   56   64   72   80   88   96  104  112  120
+      --------------------------------------------------------------------------------
+0000:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0001:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0002:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0003:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0004:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0005:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0006:|    0    0    0    0    0    0    0    0    0    0    0    0    1    1    1    1
+0007:|    0    0    0    0    1    1    1    1    1    1    1    1    1    1    1    1
+0008:|    1    1    1    1    1    1    1    1    1    1    1    0    0    0    0    0
+0009:|    1    1    1    1    0    0    0    0    0    0    0    0    0    0    0    0
+000A:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000B:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000C:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000D:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000E:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000F:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0010:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0011:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0012:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0013:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0014:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0015:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0016:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0017:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0018:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0019:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001A:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001B:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001C:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001D:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001E:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001F:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+DRAMC_DQSCTL1[0e0]=19000000
+DRAMC_DQSGCTL[124]=80000033
+rank 0 coarse = 7
+rank 0 fine = 80
+B:|    0    0    0    0    0    0    1    1    1    0    0    0    0    0    0    0
+opt_dle value:7
+DRAMC_DDR2CTL[07c]=40001273
+DRAMC_PADCTL4[0e4]=00000005
+DRAMC_DQIDLY1[210]=0B0B090B
+DRAMC_DQIDLY2[214]=070A0709
+DRAMC_DQIDLY3[218]=0D080807
+DRAMC_DQIDLY4[21c]=0A070B0A
+DRAMC_R0DELDLY[018]=00002B2B
+==================================================================
+		RX	DQS perbit delay software calibration 
+==================================================================
+1.0-15 bit dq delay value
+==================================================================
+bit|     0  1  2  3  4  5  6  7  8  9
+--------------------------------------
+0 |    10 9 9 9 9 7 9 6 6 7 
+10 |    7 13 8 10 6 9 
+--------------------------------------
+
+==================================================================
+2.dqs window
+x=pass dqs delay value (min~max)center 
+y=0-7bit DQ of every group
+input delay:DQS0 =43 DQS1 = 43
+==================================================================
+bit	DQS0	 bit      DQS1
+0  (1~84)42  8  (1~83)42
+1  (1~86)43  9  (1~84)42
+2  (1~82)41  10  (1~83)42
+3  (1~82)41  11  (1~86)43
+4  (2~85)43  12  (2~81)41
+5  (2~85)43  13  (1~84)42
+6  (1~84)42  14  (2~83)42
+7  (1~84)42  15  (1~83)42
+==================================================================
+3.dq delay value last
+==================================================================
+bit|    0  1  2  3  4  5  6  7  8   9
+--------------------------------------
+0 |    11 9 11 11 9 7 10 7 7 8 
+10 |    8 13 10 11 7 10 
+==================================================================
+==================================================================
+     TX  perbyte calibration 
+==================================================================
+DQS loop = 15, cmp_err_1 = ffff0000 
+dqs_perbyte_dly.last_dqsdly_pass[0]=15,  finish count=1 
+dqs_perbyte_dly.last_dqsdly_pass[1]=15,  finish count=2 
+DQ loop=15, cmp_err_1 = ffff0000
+dqs_perbyte_dly.last_dqdly_pass[0]=15,  finish count=1 
+dqs_perbyte_dly.last_dqdly_pass[1]=15,  finish count=2 
+byte:0, (DQS,DQ)=(8,8)
+byte:1, (DQS,DQ)=(8,8)
+DRAMC_DQODLY1[200]=88888888
+DRAMC_DQODLY2[204]=88888888
+20,data:88
+[EMI] DRAMC calibration passed
+
+===================================================================
+     		MT7621   stage1 code done 
+     		CPU=500000000 HZ BUS=125000000 HZ
+===================================================================
+
+
+U-Boot 1.1.3 (Jan 15 2016 - 09:47:18)
+
+Board: Ralink APSoC DRAM:  128 MB
+relocate_code Pointer at: 87fb8000
+
+Config XHCI 40M PLL 
+******************************
+Software System Reset Occurred
+******************************
+flash manufacture id: ef, device id 40 18
+find flash: W25Q128BV
+============================================ 
+Ralink UBoot Version: 4.3.0.0
+-------------------------------------------- 
+ASIC MT7621A DualCore (MAC to MT7530 Mode)
+DRAM_CONF_FROM: Auto-Detection 
+DRAM_TYPE: DDR2 
+DRAM bus: 16 bit
+Xtal Mode=3 OCP Ratio=1/4
+Flash component: SPI Flash
+Date:Jan 15 2016  Time:09:47:18
+============================================ 
+icache: sets:256, ways:4, linesz:32 ,total:32768
+dcache: sets:256, ways:4, linesz:32 ,total:32768 
+
+ ##### The CPU freq = 880 MHZ #### 
+ estimate memory size =128 Mbytes
+#Reset_MT7530
+
+Please choose the operation: 
+   1: Load system code to SDRAM via TFTP. 
+   2: Load system code then write to Flash via TFTP. 
+   3: Boot system code via Flash (default).
+   4: Entr boot command line interface.
+   7: Load Boot Loader code then write to Flash via Serial. 
+   9: Load Boot Loader code then write to Flash via TFTP. 
+ 4  3  2  1  0 
+bootcount: 0
+   
+3: System Boot system code via Flash.
+Erasing SPI Flash...
+.
+Writing to SPI Flash...
+.
+done
+## Booting image at bc050000 ...
+   Image Name:   MIPS OpenWrt Linux-6.12.94
+   Image Type:   MIPS Linux Kernel Image (uncompressed)
+   Data Size:    3321077 Bytes =  3.2 MB
+   Load Address: 80001000
+   Entry Point:  80001000
+   Verifying Checksum ... OK
+OK
+No initrd
+## Transferring control to Linux (at address 80001000) ...
+## Giving linux memsize in MB, 128
+
+Starting kernel ...
+
+
+
+OpenWrt kernel loader for MIPS based SoC
+Copyright (C) 2011 Gabor Juhos <juhosg@openwrt.org>
+Decompressing kernel... done!
+Starting kernel at 80001000...
+
+[    0.000000] Linux version 6.12.94 (builder@buildhost) (mipsel-openwrt-linux-musl-gcc (OpenWrt GCC 14.3.0 r33051-f5dae5ece4) 14.3.0, GNU ld (GNU Binutils) 2.44) #0 SMP Mon Jun 29 12:59:20 2026
+[    0.000000] SoC Type: MediaTek MT7621 ver:1 eco:3
+[    0.000000] printk: legacy bootconsole [early0] enabled
+[    0.000000] CPU0 revision is: 0001992f (MIPS 1004Kc)
+[    0.000000] MIPS: machine is SamKnows Whitebox 8
+[    0.000000] Initrd not found or empty - disabling initrd
+[    0.000000] VPE topology {2,2} total 4
+[    0.000000] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.000000] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.000000] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+[    0.000000] percpu: Embedded 13 pages/cpu s22928 r8192 d22128 u53248
+[    0.000000] Kernel command line: console=ttyS0,57600 rootfstype=squashfs,jffs2
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Writing ErrCtl register=000023c0
+[    0.000000] Readback ErrCtl register=000023c0
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 32768
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] RCU Tasks Trace: Setting shift to 2 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=4.
+[    0.000000] NR_IRQS: 256
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: GIC: mask: 0xffffffffffffffff max_cycles: 0xcaf478abb4, max_idle_ns: 440795247997 ns
+[    0.000005] sched_clock: 64 bits at 880MHz, resolution 1ns, wraps every 4398046511103ns
+[    0.016030] Calibrating delay loop... 586.13 BogoMIPS (lpj=2930688)
+[    0.088284] pid_max: default: 32768 minimum: 301
+[    0.107528] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.121945] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.147872] rcu: Hierarchical SRCU implementation.
+[    0.157278] rcu: 	Max phase no-delay instances is 1000.
+[    0.168203] Timer migration: 1 hierarchy levels; 8 children per group; 1 crossnode level
+[    0.185046] smp: Bringing up secondary CPUs ...
+[    0.194991] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.195021] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.195038] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.195169] CPU1 revision is: 0001992f (MIPS 1004Kc)
+[    0.256679] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.256705] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.256719] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.256822] CPU2 revision is: 0001992f (MIPS 1004Kc)
+[    0.316799] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.316825] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.316839] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.316952] CPU3 revision is: 0001992f (MIPS 1004Kc)
+[    0.375929] smp: Brought up 1 node, 4 CPUs
+[    0.536017] Memory: 116372K/131072K available (8771K kernel code, 651K rwdata, 1088K rodata, 1252K init, 236K bss, 13552K reserved, 0K cma-reserved)
+[    0.568956] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.588469] futex hash table entries: 1024 (order: 3, 32768 bytes, linear)
+[    0.607977] pinctrl core: initialized pinctrl subsystem
+[    0.621381] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.633919] thermal_sys: Registered thermal governor 'step_wise'
+[    0.636554] /pinctrl: Fixed dependency cycle(s) with /pinctrl/pinctrl0
+[    0.682559] clocksource: Switched to clocksource GIC
+[    0.702318] NET: Registered PF_INET protocol family
+[    0.712272] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.728266] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.744856] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.760181] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.775422] TCP bind hash table entries: 1024 (order: 2, 16384 bytes, linear)
+[    0.789644] TCP: Hash tables configured (established 1024 bind 1024)
+[    0.802921] MPTCP token hash table entries: 256 (order: 0, 4096 bytes, linear)
+[    0.817547] UDP hash table entries: 256 (order: 1, 8192 bytes, linear)
+[    0.830466] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes, linear)
+[    0.845369] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    0.856615] PCI: CLS 0 bytes, default 32
+[    0.867885] workingset: timestamp_bits=14 max_order=15 bucket_order=1
+[    0.882911] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.894406] jffs2: version 2.2 (NAND) (SUMMARY) (LZMA) (RTIME) (CMODE_PRIORITY) (c) 2001-2006 Red Hat, Inc.
+[    0.918789] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 251)
+[    0.936872] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    0.948438] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    0.960004] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    0.971728] mt7621-pci 1e140000.pcie: host bridge /pcie@1e140000 ranges:
+[    0.985034] mt7621-pci 1e140000.pcie:   No bus range found for /pcie@1e140000, using [bus 00-ff]
+[    1.002474] mt7621-pci 1e140000.pcie:      MEM 0x0060000000..0x006fffffff -> 0x0060000000
+[    1.018683] mt7621-pci 1e140000.pcie:       IO 0x001e160000..0x001e16ffff -> 0x0000000000
+[    1.362575] mt7621-pci 1e140000.pcie: pcie2 no card, disable it (RST & CLK)
+[    1.376380] mt7621-pci 1e140000.pcie: PCIE0 enabled
+[    1.386011] mt7621-pci 1e140000.pcie: PCIE1 enabled
+[    1.395881] PCI coherence region base: 0x60000000, mask/settings: 0xf0000002
+[    1.409963] mt7621-pci 1e140000.pcie: PCI host bridge to bus 0000:00
+[    1.422598] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    1.433426] pci_bus 0000:00: root bus resource [mem 0x60000000-0x6fffffff]
+[    1.447071] pci_bus 0000:00: root bus resource [io  0x0000-0xffff]
+[    1.459434] pci 0000:00:00.0: [0e8d:0801] type 01 class 0x060400 PCIe Root Port
+[    1.473891] pci 0000:00:00.0: BAR 0 [mem 0x00000000-0x7fffffff]
+[    1.485648] pci 0000:00:00.0: BAR 1 [mem 0x60400000-0x6040ffff]
+[    1.497374] pci 0000:00:00.0: PCI bridge to [bus 01]
+[    1.507223] pci 0000:00:00.0:   bridge window [io  0x0000-0x0fff]
+[    1.519314] pci 0000:00:00.0:   bridge window [mem 0x60000000-0x600fffff]
+[    1.532796] pci 0000:00:00.0:   bridge window [mem 0x60100000-0x601fffff pref]
+[    1.547221] pci 0000:00:00.0: supports D1
+[    1.555082] pci 0000:00:00.0: PME# supported from D0 D1 D3hot
+[    1.567370] pci 0000:00:01.0: [0e8d:0801] type 01 class 0x060400 PCIe Root Port
+[    1.581891] pci 0000:00:01.0: BAR 0 [mem 0x00000000-0x7fffffff]
+[    1.593604] pci 0000:00:01.0: BAR 1 [mem 0x00000000-0x0000ffff]
+[    1.605359] pci 0000:00:01.0: PCI bridge to [bus 00]
+[    1.615188] pci 0000:00:01.0:   bridge window [io  0x0000-0x0fff]
+[    1.627281] pci 0000:00:01.0:   bridge window [mem 0x00000000-0x000fffff]
+[    1.640763] pci 0000:00:01.0:   bridge window [mem 0x00000000-0x000fffff pref]
+[    1.655176] pci 0000:00:01.0: supports D1
+[    1.663064] pci 0000:00:01.0: PME# supported from D0 D1 D3hot
+[    1.676416] pci 0000:00:01.0: bridge configuration invalid ([bus 00-00]), reconfiguring
+[    1.692660] pci 0000:01:00.0: [14c3:7662] type 00 class 0x028000 PCIe Endpoint
+[    1.706992] pci 0000:01:00.0: BAR 0 [mem 0x00000000-0x000fffff 64bit]
+[    1.719761] pci 0000:01:00.0: ROM [mem 0x00000000-0x0000ffff pref]
+[    1.732129] pci 0000:01:00.0: PME# supported from D0 D3hot D3cold
+[    1.744526] pci 0000:00:00.0: PCI bridge to [bus 01-ff]
+[    1.754856] pci_bus 0000:01: busn_res: [bus 01-ff] end is updated to 01
+[    1.768238] pci 0000:02:00.0: [14c3:7662] type 00 class 0x028000 PCIe Endpoint
+[    1.782601] pci 0000:02:00.0: BAR 0 [mem 0x60200000-0x602fffff 64bit]
+[    1.795336] pci 0000:02:00.0: ROM [mem 0x00000000-0x0000ffff pref]
+[    1.807699] pci 0000:02:00.0: PME# supported from D0 D3hot D3cold
+[    1.820113] pci 0000:00:01.0: PCI bridge to [bus 02-ff]
+[    1.830440] pci_bus 0000:02: busn_res: [bus 02-ff] end is updated to 02
+[    1.843600] pci 0000:00:00.0: BAR 0 [mem size 0x80000000]: can't assign; no space
+[    1.858395] pci 0000:00:00.0: BAR 0 [mem size 0x80000000]: failed to assign
+[    1.872222] pci 0000:00:01.0: BAR 0 [mem size 0x80000000]: can't assign; no space
+[    1.887076] pci 0000:00:01.0: BAR 0 [mem size 0x80000000]: failed to assign
+[    1.900915] pci 0000:00:00.0: bridge window [mem 0x60000000-0x600fffff]: assigned
+[    1.915774] pci 0000:00:00.0: bridge window [mem 0x60100000-0x601fffff pref]: assigned
+[    1.931499] pci 0000:00:01.0: bridge window [mem 0x60200000-0x602fffff]: assigned
+[    1.946351] pci 0000:00:01.0: bridge window [mem 0x60300000-0x603fffff pref]: assigned
+[    1.962081] pci 0000:00:00.0: BAR 1 [mem 0x60400000-0x6040ffff]: assigned
+[    1.975568] pci 0000:00:01.0: BAR 1 [mem 0x60410000-0x6041ffff]: assigned
+[    1.989037] pci 0000:00:00.0: bridge window [io  0x0000-0x0fff]: assigned
+[    2.002545] pci 0000:00:01.0: bridge window [io  0x1000-0x1fff]: assigned
+[    2.016000] pci 0000:01:00.0: BAR 0 [mem 0x60000000-0x600fffff 64bit]: assigned
+[    2.030517] pci 0000:01:00.0: ROM [mem 0x60100000-0x6010ffff pref]: assigned
+[    2.044515] pci 0000:00:00.0: PCI bridge to [bus 01]
+[    2.054352] pci 0000:00:00.0:   bridge window [io  0x0000-0x0fff]
+[    2.066451] pci 0000:00:00.0:   bridge window [mem 0x60000000-0x600fffff]
+[    2.079926] pci 0000:00:00.0:   bridge window [mem 0x60100000-0x601fffff pref]
+[    2.094279] pci 0000:02:00.0: BAR 0 [mem 0x60200000-0x602fffff 64bit]: assigned
+[    2.108802] pci 0000:02:00.0: ROM [mem 0x60300000-0x6030ffff pref]: assigned
+[    2.122782] pci 0000:00:01.0: PCI bridge to [bus 02]
+[    2.132638] pci 0000:00:01.0:   bridge window [io  0x1000-0x1fff]
+[    2.144721] pci 0000:00:01.0:   bridge window [mem 0x60200000-0x602fffff]
+[    2.158209] pci 0000:00:01.0:   bridge window [mem 0x60300000-0x603fffff pref]
+[    2.172568] pci_bus 0000:00: Some PCI device resources are unassigned, try booting with pci=realloc
+[    2.190517] pci_bus 0000:00: resource 4 [mem 0x60000000-0x6fffffff]
+[    2.202955] pci_bus 0000:00: resource 5 [io  0x0000-0xffff]
+[    2.214022] pci_bus 0000:01: resource 0 [io  0x0000-0x0fff]
+[    2.225075] pci_bus 0000:01: resource 1 [mem 0x60000000-0x600fffff]
+[    2.237524] pci_bus 0000:01: resource 2 [mem 0x60100000-0x601fffff pref]
+[    2.250830] pci_bus 0000:02: resource 0 [io  0x1000-0x1fff]
+[    2.261882] pci_bus 0000:02: resource 1 [mem 0x60200000-0x602fffff]
+[    2.274327] pci_bus 0000:02: resource 2 [mem 0x60300000-0x603fffff pref]
+[    2.290560] Serial: 8250/16550 driver, 16 ports, IRQ sharing enabled
+[    2.312044] printk: legacy console [ttyS0] disabled
+[    2.322830] 1e000c00.uartlite: ttyS0 at MMIO 0x1e000c00 (irq = 18, base_baud = 3125000) is a 16550A
+[    2.340834] printk: legacy console [ttyS0] enabled
+[    2.340834] printk: legacy console [ttyS0] enabled
+[    2.359790] printk: legacy bootconsole [early0] disabled
+[    2.359790] printk: legacy bootconsole [early0] disabled
+[    2.386674] spi-mt7621 1e000b00.spi: sys_freq: 220000000
+[    2.399163] 4 fixed-partitions partitions found on MTD device spi0.0
+[    2.412328] Creating 4 MTD partitions on "spi0.0":
+[    2.422107] 0x000000000000-0x000000030000 : "u-boot"
+[    2.434003] 0x000000030000-0x000000040000 : "u-boot-env"
+[    2.446056] 0x000000040000-0x000000050000 : "factory"
+[    2.458216] 0x000000050000-0x000001000000 : "firmware"
+[    2.469841] 2 uimage-fw partitions found on MTD device firmware
+[    2.481818] Creating 2 MTD partitions on "firmware":
+[    2.491730] 0x000000000000-0x00000032ad35 : "kernel"
+[    2.501625] mtd: partition "kernel" doesn't end on an erase/write block -- force read-only
+[    2.519272] 0x00000032ad35-0x000000fb0000 : "rootfs"
+[    2.529219] mtd: partition "rootfs" doesn't start on an erase/write block boundary -- force read-only
+[    2.548480] mtd: setting mtd5 (rootfs) as root device
+[    2.558709] 1 squashfs-split partitions found on MTD device rootfs
+[    2.571032] 0x000000770000-0x000000fb0000 : "rootfs_data"
+[    2.714369] mtk_soc_eth 1e100000.ethernet: generated random MAC address 20:08:02:00:00:00
+[    2.732491] mt7530-mdio mdio-bus:1f: MT7530 adapts as multi-chip module
+[    2.757724] mtk_soc_eth 1e100000.ethernet eth0: mediatek frame engine at 0xbe100000, irq 19
+[    2.777485] mtk_soc_eth 1e100000.ethernet eth1: mediatek frame engine at 0xbe100000, irq 19
+[    2.796000] i2c_dev: i2c /dev entries driver
+[    2.808746] NET: Registered PF_INET6 protocol family
+[    2.822719] Segment Routing with IPv6
+[    2.830138] In-situ OAM (IOAM) with IPv6
+[    2.838114] NET: Registered PF_PACKET protocol family
+[    2.848289] bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+[    2.874657] 8021q: 802.1Q VLAN Support v1.8
+[    2.913283] mt7530-mdio mdio-bus:1f: MT7530 adapts as multi-chip module
+[    2.953506] mt7530-mdio mdio-bus:1f: configuring for fixed/rgmii link mode
+[    2.968659] mt7530-mdio mdio-bus:1f lan1 (uninitialized): PHY [mt7530-0:00] driver [MediaTek MT7530 PHY] (irq=21)
+[    2.991614] mt7530-mdio mdio-bus:1f: Link is Up - 1Gbps/Full - flow control rx/tx
+[    2.993547] mt7530-mdio mdio-bus:1f lan2 (uninitialized): PHY [mt7530-0:01] driver [MediaTek MT7530 PHY] (irq=22)
+[    3.029974] mt7530-mdio mdio-bus:1f lan3 (uninitialized): PHY [mt7530-0:02] driver [MediaTek MT7530 PHY] (irq=23)
+[    3.053309] mt7530-mdio mdio-bus:1f lan4 (uninitialized): PHY [mt7530-0:03] driver [MediaTek MT7530 PHY] (irq=24)
+[    3.076207] mtk_soc_eth 1e100000.ethernet eth0: entered promiscuous mode
+[    3.089800] DSA: tree 0 setup
+[    3.096708] clk: Disabling unused clocks
+[    3.115248] VFS: Mounted root (squashfs filesystem) readonly on device 31:5.
+[    3.133737] Freeing unused kernel image (initmem) memory: 1252K
+[    3.145649] This architecture does not have kernel memory protection.
+[    3.158528] Run /sbin/init as init process
+[    4.312734] init: Console is alive
+[    4.319845] init: - watchdog -
+[    5.959385] kmodloader: loading kernel modules from /etc/modules-boot.d/*
+[    6.073665] usbcore: registered new interface driver usbfs
+[    6.084810] usbcore: registered new interface driver hub
+[    6.095610] usbcore: registered new device driver usb
+[    6.107394] gpio_button_hotplug: loading out-of-tree module taints kernel.
+[    6.134208] xhci-mtk 1e1c0000.xhci: xHCI Host Controller
+[    6.144979] xhci-mtk 1e1c0000.xhci: new USB bus registered, assigned bus number 1
+[    6.164973] xhci-mtk 1e1c0000.xhci: hcc params 0x01401198 hci version 0x96 quirks 0x0000000000280010
+[    6.183303] xhci-mtk 1e1c0000.xhci: irq 27, io mem 0x1e1c0000
+[    6.195082] xhci-mtk 1e1c0000.xhci: xHCI Host Controller
+[    6.205699] xhci-mtk 1e1c0000.xhci: new USB bus registered, assigned bus number 2
+[    6.220621] xhci-mtk 1e1c0000.xhci: Host supports USB 3.0 SuperSpeed
+[    6.234469] hub 1-0:1.0: USB hub found
+[    6.242107] hub 1-0:1.0: 2 ports detected
+[    6.251219] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+[    6.268464] hub 2-0:1.0: USB hub found
+[    6.276228] hub 2-0:1.0: 1 port detected
+[    6.295763] kmodloader: done loading kernel modules from /etc/modules-boot.d/*
+[    6.312065] init: - preinit -
+[    7.875871] mtk_soc_eth 1e100000.ethernet wan: renamed from eth1
+[    9.422620] random: crng init done
+Cannot parse config file '/etc/fw_env.config': No such file or directory
+Failed to find NVMEM device
+[   10.749080] mtk_soc_eth 1e100000.ethernet eth0: configuring for fixed/rgmii link mode
+[   10.769978] mt7530-mdio mdio-bus:1f lan1: configuring for phy/gmii link mode
+[   10.784210] mtk_soc_eth 1e100000.ethernet eth0: Link is Up - 1Gbps/Full - flow control rx/tx
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+[   13.995556] mt7530-mdio mdio-bus:1f lan1: Link is Up - 1Gbps/Full - flow control rx/tx
+[   15.402671] jffs2: notice: (647) jffs2_build_xattr_subsystem: complete building xattr subsystem, 12 of xdatum (8 unchecked, 3 orphan) and 13 of xref (3 dead, 0 orphan) found.
+[   15.436593] mount_root: switching to jffs2 overlay
+[   15.456786] overlayfs: upper fs does not support tmpfile.
+[   15.479844] urandom-seed: Seeding with /etc/urandom.seed
+[   15.791509] mt7530-mdio mdio-bus:1f lan1: Link is Down
+[   15.812504] procd: - early -
+[   15.818660] procd: - watchdog -
+[   16.472763] procd: - watchdog -
+[   16.480920] procd: - ubus -
+[   16.843746] procd: - init -
+Please press Enter to activate this console.
+[   18.350212] kmodloader: loading kernel modules from /etc/modules.d/*
+[   18.471482] mtk-eip93 1e004000.crypto: EIP93 Crypto Engine Initialized.
+[   19.062229] urngd: v1.0.2 started.
+[   19.142279] Loading modules backported from Linux version v6.18.26-0-g1fe060681
+[   19.156975] Backport generated by backports.git 6ecbb44
+[   19.556475] pci 0000:00:00.0: enabling device (0006 -> 0007)
+[   19.567941] mt76x2e 0000:01:00.0: enabling device (0000 -> 0002)
+[   19.580242] mt76x2e 0000:01:00.0: ASIC revision: 76120044
+[   20.235984] mt76x2e 0000:01:00.0: ROM patch build: 20141115060606a
+[   20.250865] mt76x2e 0000:01:00.0: Firmware Version: 0.0.00
+[   20.261923] mt76x2e 0000:01:00.0: Build: 1
+[   20.270111] mt76x2e 0000:01:00.0: Build Time: 201607111443____
+[   20.305242] mt76x2e 0000:01:00.0: Firmware running!
+[   20.315282] mt76x2e 0000:01:00.0: registering led 'mt76-phy0'
+[   20.378102] pci 0000:00:01.0: enabling device (0000 -> 0003)
+[   20.389634] mt76x2e 0000:02:00.0: enabling device (0400 -> 0402)
+[   20.402043] mt76x2e 0000:02:00.0: ASIC revision: 76020044
+[   21.064934] mt76x2e 0000:02:00.0: ROM patch already applied
+[   21.076910] mt76x2e 0000:02:00.0: Firmware Version: 0.0.00
+[   21.087969] mt76x2e 0000:02:00.0: Build: 1
+[   21.096135] mt76x2e 0000:02:00.0: Build Time: 201607111443____
+[   21.131283] mt76x2e 0000:02:00.0: Firmware running!
+[   21.141277] mt76x2e 0000:02:00.0: registering led 'mt76-phy1'
+[   21.265743] PPP generic driver version 2.4.2
+[   21.276618] NET: Registered PF_PPPOX protocol family
+[   21.293652] kmodloader: done loading kernel modules from /etc/modules.d/*
+[   28.072042] mtk_soc_eth 1e100000.ethernet eth0: Link is Down
+[   28.104656] mtk_soc_eth 1e100000.ethernet eth0: configuring for fixed/rgmii link mode
+[   28.121296] mtk_soc_eth 1e100000.ethernet eth0: Link is Up - 1Gbps/Full - flow control rx/tx
+[   28.145163] mt7530-mdio mdio-bus:1f lan1: configuring for phy/gmii link mode
+[   28.161362] br-lan: port 1(lan1) entered blocking state
+[   28.172060] br-lan: port 1(lan1) entered disabled state
+[   28.182869] mt7530-mdio mdio-bus:1f lan1: entered allmulticast mode
+[   28.195714] mtk_soc_eth 1e100000.ethernet eth0: entered allmulticast mode
+[   28.212121] mt7530-mdio mdio-bus:1f lan1: entered promiscuous mode
+[   28.234924] mt7530-mdio mdio-bus:1f lan2: configuring for phy/gmii link mode
+[   28.250859] br-lan: port 2(lan2) entered blocking state
+[   28.261602] br-lan: port 2(lan2) entered disabled state
+[   28.272452] mt7530-mdio mdio-bus:1f lan2: entered allmulticast mode
+[   28.287255] mt7530-mdio mdio-bus:1f lan2: entered promiscuous mode
+[   28.308174] mt7530-mdio mdio-bus:1f lan3: configuring for phy/gmii link mode
+[   28.324243] br-lan: port 3(lan3) entered blocking state
+[   28.334839] br-lan: port 3(lan3) entered disabled state
+[   28.345542] mt7530-mdio mdio-bus:1f lan3: entered allmulticast mode
+[   28.360375] mt7530-mdio mdio-bus:1f lan3: entered promiscuous mode
+[   28.381164] mt7530-mdio mdio-bus:1f lan4: configuring for phy/gmii link mode
+[   28.396736] br-lan: port 4(lan4) entered blocking state
+[   28.407355] br-lan: port 4(lan4) entered disabled state
+[   28.417947] mt7530-mdio mdio-bus:1f lan4: entered allmulticast mode
+[   28.432857] mt7530-mdio mdio-bus:1f lan4: entered promiscuous mode
+[   28.450931] mtk_soc_eth 1e100000.ethernet wan: PHY [mt7530-0:04] driver [MediaTek MT7530 PHY] (irq=POLL)
+[   28.470011] mtk_soc_eth 1e100000.ethernet wan: configuring for phy/rgmii link mode
+[   28.492738] br-lan: port 5(wan) entered blocking state
+[   28.503260] br-lan: port 5(wan) entered disabled state
+[   28.513837] mtk_soc_eth 1e100000.ethernet wan: entered allmulticast mode
+[   28.528279] mtk_soc_eth 1e100000.ethernet wan: entered promiscuous mode
+[   30.106889] br-lan: port 6(phy0-ap0) entered blocking state
+[   30.118237] br-lan: port 6(phy0-ap0) entered disabled state
+[   30.129719] mt76x2e 0000:01:00.0 phy0-ap0: entered allmulticast mode
+[   30.143364] mt76x2e 0000:01:00.0 phy0-ap0: entered promiscuous mode
+[   31.000624] br-lan: port 7(phy1-ap0) entered blocking state
+[   31.011819] br-lan: port 7(phy1-ap0) entered disabled state
+[   31.023081] mt76x2e 0000:02:00.0 phy1-ap0: entered allmulticast mode
+[   31.036224] mt76x2e 0000:02:00.0 phy1-ap0: entered promiscuous mode
+[   31.219882] mt7530-mdio mdio-bus:1f lan1: Link is Up - 1Gbps/Full - flow control rx/tx
+[   31.220000] br-lan: port 1(lan1) entered blocking state
+[   31.246172] br-lan: port 1(lan1) entered forwarding state
+[   31.455417] br-lan: port 7(phy1-ap0) entered blocking state
+[   31.466619] br-lan: port 7(phy1-ap0) entered forwarding state
+
+
+
+BusyBox v1.37.0 (2026-06-29 12:59:20 UTC) built-in shell (ash)
+
+  _______                     ________        __
+ |       |.-----.-----.-----.|  |  |  |.----.|  |_
+ |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
+ |_______||   __|_____|__|__||________||__|  |____|
+          |__| W I R E L E S S   F R E E D O M
+ -----------------------------------------------------
+ OpenWrt 25.12.5, r33051-f5dae5ece4 Dave's Guitar
+ -----------------------------------------------------
+
+ OpenWrt recently switched to the "apk" package manager!
+
+ OPKG Command           APK Equivalent      Description
+ ------------------------------------------------------------------
+ opkg install <pkg>     apk add <pkg>       Install a package
+ opkg remove <pkg>      apk del <pkg>       Remove a package
+ opkg upgrade           apk upgrade         Upgrade all packages
+ opkg files <pkg>       apk info -L <pkg>   List package contents
+ opkg list-installed    apk info            List installed packages
+ opkg update            apk update          Update package lists
+ opkg search <pkg>      apk search <pkg>    Search for packages
+ ------------------------------------------------------------------
+
+For more information visit:
+https://openwrt.org/docs/guide-user/additional-software/opkg-to-apk-cheatsheet
+
+root@console-net-ap:~# echo 1 > /proc/sys/kernel/printk; cat /proc/uptime; grep 
+" 30:" /proc/interrupts; echo restarts=$(dmesg | grep -c "Hardware restart"); ec
+ho "@@""END"
+83.79 281.07
+ 30:       4683          0          0          0  MIPS GIC  31  mt76x2e
+restarts=0
+@@END
+root@console-net-ap:~# hexdump -v -e "16/1 \"%02x \" \"\n\"" /sys/bus/pci/device
+s/0000:02:00.0/config; echo "@@""END"
+c3 14 62 76 06 00 10 00 00 00 80 02 00 00 00 00
+04 00 20 60 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 c3 14 62 76
+00 00 00 00 40 00 00 00 00 00 00 00 1e 01 00 00
+01 50 c3 c9 00 00 00 00 00 00 00 00 00 00 00 00
+05 70 80 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+10 00 02 00 c0 8f 00 00 10 20 11 00 11 dc 47 00
+08 00 11 10 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 1f 00 00 00 00 00 00 00 02 00 00 00
+02 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+01 00 82 14 00 00 00 00 00 00 40 00 30 20 46 00
+01 00 00 00 00 60 00 00 a0 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 03 00 81 15 00 00 00 00
+00 00 00 00 00 00 00 00 18 00 01 16 00 00 00 00
+1e 00 01 00 1f 32 28 00 00 00 00 00 28 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+3b 00 b1 00 ff ff ff ff 04 00 00 07 00 ff 28 1b
+20 01 01 00 00 00 00 00 00 80 00 00 80 02 00 00
+00 00 00 00 00 00 00 00 11 81 1a 03 10 04 00 08
+cd f5 06 00 03 80 01 00 1b 0a 0a 00 03 00 00 00
+0f 00 00 00 00 00 00 00 38 30 21 40 04 30 21 00
+00 00 80 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 50 01 02 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+01 00 00 00 d3 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+@@END
+root@console-net-ap:~# hexdump -v -e "16/1 \"%02x \" \"\n\"" /sys/bus/pci/device
+s/0000:01:00.0/config; echo "@@""END"
+c3 14 62 76 06 00 10 00 00 00 80 02 00 00 00 00
+04 00 00 60 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 c3 14 62 76
+00 00 00 00 40 00 00 00 00 00 00 00 1d 01 00 00
+01 50 c3 c9 00 00 00 00 00 00 00 00 00 00 00 00
+05 70 80 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+10 00 02 00 c0 8f 00 00 10 20 10 00 11 dc 47 00
+08 00 11 10 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 1f 00 00 00 00 00 00 00 02 00 00 00
+02 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+01 00 82 14 00 00 00 00 00 00 40 00 30 20 46 00
+00 00 00 00 00 60 00 00 a0 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 03 00 81 15 00 00 00 00
+00 00 00 00 00 00 00 00 18 00 01 16 00 00 00 00
+1e 00 01 00 1f 32 28 00 00 00 00 00 28 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+3b 00 b1 00 ff ff ff ff 04 00 00 07 00 ff 28 1b
+20 01 01 00 00 00 00 00 00 80 00 00 80 02 00 00
+00 00 00 00 00 00 00 00 11 7e 9e 01 10 04 00 08
+1a c0 00 00 03 c0 00 00 73 70 01 00 03 00 00 00
+0f 00 00 00 00 00 00 00 38 30 21 40 04 30 21 00
+00 00 80 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 50 01 02 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+01 00 00 00 d3 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+@@END
+root@console-net-ap:~# reboot
+root@console-net-ap:~# [  141.697776] reboot: Restarting system
+
+===================================================================
+     		MT7621   stage1 code Mar 12 2015 14:43:30 (ASIC)
+     		CPU=500000000 HZ BUS=125000000 HZ
+==================================================================
+Change MPLL source from XTAL to CR...
+do MEMPLL setting..
+MEMPLL Config : 0x31100000
+3PLL mode + External loopback
+=== XTAL-40Mhz === DDR-800Mhz ===
+PLL2 FB_DL: 0xa, 1/0 = 676/348 29000000
+PLL3 FB_DL: 0x14, 1/0 = 534/490 51000000
+PLL4 FB_DL: 0x1a, 1/0 = 701/323 69000000
+do DDR setting..[01F40000]
+Apply DDR2 Setting...(use customer AC)
+          0    8   16   24   32   40   48   56   64   72   80   88   96  104  112  120
+      --------------------------------------------------------------------------------
+0000:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0001:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0002:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0003:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0004:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0005:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0006:|    0    0    0    0    0    0    0    0    0    0    0    0    1    1    1    1
+0007:|    0    0    0    0    1    1    1    1    1    1    1    1    1    1    1    1
+0008:|    1    1    1    1    1    1    1    1    1    1    1    0    0    0    0    0
+0009:|    1    1    1    1    0    0    0    0    0    0    0    0    0    0    0    0
+000A:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000B:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000C:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000D:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000E:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000F:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0010:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0011:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0012:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0013:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0014:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0015:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0016:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0017:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0018:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0019:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001A:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001B:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001C:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001D:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001E:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001F:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+DRAMC_DQSCTL1[0e0]=19000000
+DRAMC_DQSGCTL[124]=80000033
+rank 0 coarse = 7
+rank 0 fine = 80
+B:|    0    0    0    0    0    1    1    1    0    0    0    0    0    0    0    0
+opt_dle value:6
+DRAMC_DDR2CTL[07c]=40001263
+DRAMC_PADCTL4[0e4]=00000005
+DRAMC_DQIDLY1[210]=0B0C0A0C
+DRAMC_DQIDLY2[214]=080B070A
+DRAMC_DQIDLY3[218]=0D070707
+DRAMC_DQIDLY4[21c]=0A070B08
+DRAMC_R0DELDLY[018]=00002B2C
+==================================================================
+		RX	DQS perbit delay software calibration 
+==================================================================
+1.0-15 bit dq delay value
+==================================================================
+bit|     0  1  2  3  4  5  6  7  8  9
+--------------------------------------
+0 |    10 9 9 9 9 7 9 6 6 7 
+10 |    7 13 8 10 6 9 
+--------------------------------------
+
+==================================================================
+2.dqs window
+x=pass dqs delay value (min~max)center 
+y=0-7bit DQ of every group
+input delay:DQS0 =44 DQS1 = 43
+==================================================================
+bit	DQS0	 bit      DQS1
+0  (1~84)42  8  (1~83)42
+1  (1~85)43  9  (1~85)43
+2  (1~82)41  10  (2~84)43
+3  (1~83)42  11  (1~85)43
+4  (2~85)43  12  (2~84)43
+5  (2~86)44  13  (1~83)42
+6  (1~84)42  14  (2~83)42
+7  (1~84)42  15  (1~83)42
+==================================================================
+3.dq delay value last
+==================================================================
+bit|    0  1  2  3  4  5  6  7  8   9
+--------------------------------------
+0 |    12 10 12 11 10 7 11 8 7 7 
+10 |    7 13 8 11 7 10 
+==================================================================
+==================================================================
+     TX  perbyte calibration 
+==================================================================
+DQS loop = 15, cmp_err_1 = ffff0000 
+dqs_perbyte_dly.last_dqsdly_pass[0]=15,  finish count=1 
+dqs_perbyte_dly.last_dqsdly_pass[1]=15,  finish count=2 
+DQ loop=15, cmp_err_1 = ffff0000
+dqs_perbyte_dly.last_dqdly_pass[0]=15,  finish count=1 
+dqs_perbyte_dly.last_dqdly_pass[1]=15,  finish count=2 
+byte:0, (DQS,DQ)=(8,8)
+byte:1, (DQS,DQ)=(8,8)
+DRAMC_DQODLY1[200]=88888888
+DRAMC_DQODLY2[204]=88888888
+20,data:88
+[EMI] DRAMC calibration passed
+
+===================================================================
+     		MT7621   stage1 code done 
+     		CPU=500000000 HZ BUS=125000000 HZ
+===================================================================
+
+
+U-Boot 1.1.3 (Jan 15 2016 - 09:47:18)
+
+Board: Ralink APSoC DRAM:  128 MB
+relocate_code Pointer at: 87fb8000
+
+Config XHCI 40M PLL 
+******************************
+Software System Reset Occurred
+******************************
+flash manufacture id: ef, device id 40 18
+find flash: W25Q128BV
+============================================ 
+Ralink UBoot Version: 4.3.0.0
+-------------------------------------------- 
+ASIC MT7621A DualCore (MAC to MT7530 Mode)
+DRAM_CONF_FROM: Auto-Detection 
+DRAM_TYPE: DDR2 
+DRAM bus: 16 bit
+Xtal Mode=3 OCP Ratio=1/4
+Flash component: SPI Flash
+Date:Jan 15 2016  Time:09:47:18
+============================================ 
+icache: sets:256, ways:4, linesz:32 ,total:32768
+dcache: sets:256, ways:4, linesz:32 ,total:32768 
+
+ ##### The CPU freq = 880 MHZ #### 
+ estimate memory size =128 Mbytes
+#Reset_MT7530
+
+Please choose the operation: 
+   1: Load system code to SDRAM via TFTP. 
+   2: Load system code then write to Flash via TFTP. 
+   3: Boot system code via Flash (default).
+   4: Entr boot command line interface.
+   7: Load Boot Loader code then write to Flash via Serial. 
+   9: Load Boot Loader code then write to Flash via TFTP. 
+ 4  3  2  1  0 
+bootcount: 0
+   
+3: System Boot system code via Flash.
+Erasing SPI Flash...
+.
+Writing to SPI Flash...
+.
+done
+## Booting image at bc050000 ...
+   Image Name:   MIPS OpenWrt Linux-6.12.94
+   Image Type:   MIPS Linux Kernel Image (uncompressed)
+   Data Size:    3321077 Bytes =  3.2 MB
+   Load Address: 80001000
+   Entry Point:  80001000
+   Verifying Checksum ... OK
+OK
+No initrd
+## Transferring control to Linux (at address 80001000) ...
+## Giving linux memsize in MB, 128
+
+Starting kernel ...
+
+
+
+OpenWrt kernel loader for MIPS based SoC
+Copyright (C) 2011 Gabor Juhos <juhosg@openwrt.org>
+Decompressing kernel... done!
+Starting kernel at 80001000...
+
+[    0.000000] Linux version 6.12.94 (builder@buildhost) (mipsel-openwrt-linux-musl-gcc (OpenWrt GCC 14.3.0 r33051-f5dae5ece4) 14.3.0, GNU ld (GNU Binutils) 2.44) #0 SMP Mon Jun 29 12:59:20 2026
+[    0.000000] SoC Type: MediaTek MT7621 ver:1 eco:3
+[    0.000000] printk: legacy bootconsole [early0] enabled
+[    0.000000] CPU0 revision is: 0001992f (MIPS 1004Kc)
+[    0.000000] MIPS: machine is SamKnows Whitebox 8
+[    0.000000] Initrd not found or empty - disabling initrd
+[    0.000000] VPE topology {2,2} total 4
+[    0.000000] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.000000] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.000000] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+[    0.000000] percpu: Embedded 13 pages/cpu s22928 r8192 d22128 u53248
+[    0.000000] Kernel command line: console=ttyS0,57600 rootfstype=squashfs,jffs2
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Writing ErrCtl register=000023c0
+[    0.000000] Readback ErrCtl register=000023c0
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 32768
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] RCU Tasks Trace: Setting shift to 2 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=4.
+[    0.000000] NR_IRQS: 256
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: GIC: mask: 0xffffffffffffffff max_cycles: 0xcaf478abb4, max_idle_ns: 440795247997 ns
+[    0.000005] sched_clock: 64 bits at 880MHz, resolution 1ns, wraps every 4398046511103ns
+[    0.016028] Calibrating delay loop... 586.13 BogoMIPS (lpj=2930688)
+[    0.088281] pid_max: default: 32768 minimum: 301
+[    0.107552] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.121970] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.147871] rcu: Hierarchical SRCU implementation.
+[    0.157275] rcu: 	Max phase no-delay instances is 1000.
+[    0.168193] Timer migration: 1 hierarchy levels; 8 children per group; 1 crossnode level
+[    0.185019] smp: Bringing up secondary CPUs ...
+[    0.194948] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.194979] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.194996] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.195124] CPU1 revision is: 0001992f (MIPS 1004Kc)
+[    0.256611] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.256638] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.256652] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.256755] CPU2 revision is: 0001992f (MIPS 1004Kc)
+[    0.316788] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.316814] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.316829] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.316939] CPU3 revision is: 0001992f (MIPS 1004Kc)
+[    0.375896] smp: Brought up 1 node, 4 CPUs
+[    0.535915] Memory: 116372K/131072K available (8771K kernel code, 651K rwdata, 1088K rodata, 1252K init, 236K bss, 13552K reserved, 0K cma-reserved)
+[    0.568811] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.588322] futex hash table entries: 1024 (order: 3, 32768 bytes, linear)
+[    0.607827] pinctrl core: initialized pinctrl subsystem
+[    0.621216] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.633736] thermal_sys: Registered thermal governor 'step_wise'
+[    0.636358] /pinctrl: Fixed dependency cycle(s) with /pinctrl/pinctrl0
+[    0.682107] clocksource: Switched to clocksource GIC
+[    0.701895] NET: Registered PF_INET protocol family
+[    0.711838] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.727874] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.744433] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.759798] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.774996] TCP bind hash table entries: 1024 (order: 2, 16384 bytes, linear)
+[    0.789217] TCP: Hash tables configured (established 1024 bind 1024)
+[    0.802473] MPTCP token hash table entries: 256 (order: 0, 4096 bytes, linear)
+[    0.817094] UDP hash table entries: 256 (order: 1, 8192 bytes, linear)
+[    0.830001] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes, linear)
+[    0.844865] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    0.856084] PCI: CLS 0 bytes, default 32
+[    0.867378] workingset: timestamp_bits=14 max_order=15 bucket_order=1
+[    0.882380] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.893881] jffs2: version 2.2 (NAND) (SUMMARY) (LZMA) (RTIME) (CMODE_PRIORITY) (c) 2001-2006 Red Hat, Inc.
+[    0.918356] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 251)
+[    0.936463] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    0.947988] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    0.959499] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    0.971192] mt7621-pci 1e140000.pcie: host bridge /pcie@1e140000 ranges:
+[    0.984501] mt7621-pci 1e140000.pcie:   No bus range found for /pcie@1e140000, using [bus 00-ff]
+[    1.001918] mt7621-pci 1e140000.pcie:      MEM 0x0060000000..0x006fffffff -> 0x0060000000
+[    1.018144] mt7621-pci 1e140000.pcie:       IO 0x001e160000..0x001e16ffff -> 0x0000000000
+[    1.362115] mt7621-pci 1e140000.pcie: pcie2 no card, disable it (RST & CLK)
+[    1.375908] mt7621-pci 1e140000.pcie: PCIE0 enabled
+[    1.385549] mt7621-pci 1e140000.pcie: PCIE1 enabled
+[    1.395414] PCI coherence region base: 0x60000000, mask/settings: 0xf0000002
+[    1.409514] mt7621-pci 1e140000.pcie: PCI host bridge to bus 0000:00
+[    1.422162] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    1.432988] pci_bus 0000:00: root bus resource [mem 0x60000000-0x6fffffff]
+[    1.446628] pci_bus 0000:00: root bus resource [io  0x0000-0xffff]
+[    1.459052] pci 0000:00:00.0: [0e8d:0801] type 01 class 0x060400 PCIe Root Port
+[    1.473502] pci 0000:00:00.0: BAR 0 [mem 0x00000000-0x7fffffff]
+[    1.485244] pci 0000:00:00.0: BAR 1 [mem 0x60400000-0x6040ffff]
+[    1.496994] pci 0000:00:00.0: PCI bridge to [bus 01]
+[    1.506832] pci 0000:00:00.0:   bridge window [io  0x0000-0x0fff]
+[    1.518923] pci 0000:00:00.0:   bridge window [mem 0x60000000-0x600fffff]
+[    1.532404] pci 0000:00:00.0:   bridge window [mem 0x60100000-0x601fffff pref]
+[    1.546815] pci 0000:00:00.0: supports D1
+[    1.554704] pci 0000:00:00.0: PME# supported from D0 D1 D3hot
+[    1.566943] pci 0000:00:01.0: [0e8d:0801] type 01 class 0x060400 PCIe Root Port
+[    1.581459] pci 0000:00:01.0: BAR 0 [mem 0x00000000-0x7fffffff]
+[    1.593164] pci 0000:00:01.0: BAR 1 [mem 0x60410000-0x6041ffff]
+[    1.604927] pci 0000:00:01.0: PCI bridge to [bus 02]
+[    1.614771] pci 0000:00:01.0:   bridge window [io  0x0000-0x0fff]
+[    1.626854] pci 0000:00:01.0:   bridge window [mem 0x60200000-0x602fffff]
+[    1.640332] pci 0000:00:01.0:   bridge window [mem 0x60300000-0x603fffff pref]
+[    1.654738] pci 0000:00:01.0: supports D1
+[    1.662627] pci 0000:00:01.0: PME# supported from D0 D1 D3hot
+[    1.676316] pci 0000:01:00.0: [14c3:7662] type 00 class 0x028000 PCIe Endpoint
+[    1.690674] pci 0000:01:00.0: BAR 0 [mem 0x00000000-0x000fffff 64bit]
+[    1.703430] pci 0000:01:00.0: ROM [mem 0x00000000-0x0000ffff pref]
+[    1.715794] pci 0000:01:00.0: PME# supported from D0 D3hot D3cold
+[    1.728198] pci 0000:00:00.0: PCI bridge to [bus 01-ff]
+[    1.738541] pci_bus 0000:01: busn_res: [bus 01-ff] end is updated to 01
+[    1.751906] pci 0000:02:00.0: [14c3:7662] type 00 class 0x028000 PCIe Endpoint
+[    1.766229] pci 0000:02:00.0: BAR 0 [mem 0x60200000-0x602fffff 64bit]
+[    1.779005] pci 0000:02:00.0: ROM [mem 0x00000000-0x0000ffff pref]
+[    1.791349] pci 0000:02:00.0: PME# supported from D0 D3hot D3cold
+[    1.803747] pci 0000:00:01.0: PCI bridge to [bus 02-ff]
+[    1.814074] pci_bus 0000:02: busn_res: [bus 02-ff] end is updated to 02
+[    1.827270] pci 0000:00:00.0: BAR 0 [mem size 0x80000000]: can't assign; no space
+[    1.842076] pci 0000:00:00.0: BAR 0 [mem size 0x80000000]: failed to assign
+[    1.855865] pci 0000:00:01.0: BAR 0 [mem size 0x80000000]: can't assign; no space
+[    1.870732] pci 0000:00:01.0: BAR 0 [mem size 0x80000000]: failed to assign
+[    1.884561] pci 0000:00:00.0: bridge window [mem 0x60000000-0x600fffff]: assigned
+[    1.899412] pci 0000:00:00.0: bridge window [mem 0x60100000-0x601fffff pref]: assigned
+[    1.915136] pci 0000:00:01.0: bridge window [mem 0x60200000-0x602fffff]: assigned
+[    1.930007] pci 0000:00:01.0: bridge window [mem 0x60300000-0x603fffff pref]: assigned
+[    1.945727] pci 0000:00:00.0: BAR 1 [mem 0x60400000-0x6040ffff]: assigned
+[    1.959206] pci 0000:00:01.0: BAR 1 [mem 0x60410000-0x6041ffff]: assigned
+[    1.972689] pci 0000:00:00.0: bridge window [io  0x0000-0x0fff]: assigned
+[    1.986168] pci 0000:00:01.0: bridge window [io  0x1000-0x1fff]: assigned
+[    1.999652] pci 0000:01:00.0: BAR 0 [mem 0x60000000-0x600fffff 64bit]: assigned
+[    2.014164] pci 0000:01:00.0: ROM [mem 0x60100000-0x6010ffff pref]: assigned
+[    2.028148] pci 0000:00:00.0: PCI bridge to [bus 01]
+[    2.037994] pci 0000:00:00.0:   bridge window [io  0x0000-0x0fff]
+[    2.050106] pci 0000:00:00.0:   bridge window [mem 0x60000000-0x600fffff]
+[    2.063571] pci 0000:00:00.0:   bridge window [mem 0x60100000-0x601fffff pref]
+[    2.077919] pci 0000:02:00.0: BAR 0 [mem 0x60200000-0x602fffff 64bit]: assigned
+[    2.092447] pci 0000:02:00.0: ROM [mem 0x60300000-0x6030ffff pref]: assigned
+[    2.106440] pci 0000:00:01.0: PCI bridge to [bus 02]
+[    2.116275] pci 0000:00:01.0:   bridge window [io  0x1000-0x1fff]
+[    2.128368] pci 0000:00:01.0:   bridge window [mem 0x60200000-0x602fffff]
+[    2.141846] pci 0000:00:01.0:   bridge window [mem 0x60300000-0x603fffff pref]
+[    2.156191] pci_bus 0000:00: Some PCI device resources are unassigned, try booting with pci=realloc
+[    2.174178] pci_bus 0000:00: resource 4 [mem 0x60000000-0x6fffffff]
+[    2.186627] pci_bus 0000:00: resource 5 [io  0x0000-0xffff]
+[    2.197663] pci_bus 0000:01: resource 0 [io  0x0000-0x0fff]
+[    2.208719] pci_bus 0000:01: resource 1 [mem 0x60000000-0x600fffff]
+[    2.221168] pci_bus 0000:01: resource 2 [mem 0x60100000-0x601fffff pref]
+[    2.234482] pci_bus 0000:02: resource 0 [io  0x1000-0x1fff]
+[    2.245528] pci_bus 0000:02: resource 1 [mem 0x60200000-0x602fffff]
+[    2.257966] pci_bus 0000:02: resource 2 [mem 0x60300000-0x603fffff pref]
+[    2.274109] Serial: 8250/16550 driver, 16 ports, IRQ sharing enabled
+[    2.295273] printk: legacy console [ttyS0] disabled
+[    2.305937] 1e000c00.uartlite: ttyS0 at MMIO 0x1e000c00 (irq = 18, base_baud = 3125000) is a 16550A
+[    2.323942] printk: legacy console [ttyS0] enabled
+[    2.323942] printk: legacy console [ttyS0] enabled
+[    2.342923] printk: legacy bootconsole [early0] disabled
+[    2.342923] printk: legacy bootconsole [early0] disabled
+[    2.369290] spi-mt7621 1e000b00.spi: sys_freq: 220000000
+[    2.381817] 4 fixed-partitions partitions found on MTD device spi0.0
+[    2.394980] Creating 4 MTD partitions on "spi0.0":
+[    2.404591] 0x000000000000-0x000000030000 : "u-boot"
+[    2.416159] 0x000000030000-0x000000040000 : "u-boot-env"
+[    2.427925] 0x000000040000-0x000000050000 : "factory"
+[    2.440073] 0x000000050000-0x000001000000 : "firmware"
+[    2.451674] 2 uimage-fw partitions found on MTD device firmware
+[    2.463579] Creating 2 MTD partitions on "firmware":
+[    2.473499] 0x000000000000-0x00000032ad35 : "kernel"
+[    2.483406] mtd: partition "kernel" doesn't end on an erase/write block -- force read-only
+[    2.500991] 0x00000032ad35-0x000000fb0000 : "rootfs"
+[    2.510965] mtd: partition "rootfs" doesn't start on an erase/write block boundary -- force read-only
+[    2.530420] mtd: setting mtd5 (rootfs) as root device
+[    2.540686] 1 squashfs-split partitions found on MTD device rootfs
+[    2.553024] 0x000000770000-0x000000fb0000 : "rootfs_data"
+[    2.693976] mtk_soc_eth 1e100000.ethernet: generated random MAC address 20:08:02:00:00:00
+[    2.712158] mt7530-mdio mdio-bus:1f: MT7530 adapts as multi-chip module
+[    2.737153] mtk_soc_eth 1e100000.ethernet eth0: mediatek frame engine at 0xbe100000, irq 19
+[    2.756965] mtk_soc_eth 1e100000.ethernet eth1: mediatek frame engine at 0xbe100000, irq 19
+[    2.775397] i2c_dev: i2c /dev entries driver
+[    2.787932] NET: Registered PF_INET6 protocol family
+[    2.801447] Segment Routing with IPv6
+[    2.808938] In-situ OAM (IOAM) with IPv6
+[    2.816890] NET: Registered PF_PACKET protocol family
+[    2.827057] bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+[    2.853369] 8021q: 802.1Q VLAN Support v1.8
+[    2.891464] mt7530-mdio mdio-bus:1f: MT7530 adapts as multi-chip module
+[    2.931360] mt7530-mdio mdio-bus:1f: configuring for fixed/rgmii link mode
+[    2.946585] mt7530-mdio mdio-bus:1f lan1 (uninitialized): PHY [mt7530-0:00] driver [MediaTek MT7530 PHY] (irq=21)
+[    2.969546] mt7530-mdio mdio-bus:1f: Link is Up - 1Gbps/Full - flow control rx/tx
+[    2.973141] mt7530-mdio mdio-bus:1f lan2 (uninitialized): PHY [mt7530-0:01] driver [MediaTek MT7530 PHY] (irq=22)
+[    3.008017] mt7530-mdio mdio-bus:1f lan3 (uninitialized): PHY [mt7530-0:02] driver [MediaTek MT7530 PHY] (irq=23)
+[    3.031201] mt7530-mdio mdio-bus:1f lan4 (uninitialized): PHY [mt7530-0:03] driver [MediaTek MT7530 PHY] (irq=24)
+[    3.054217] mtk_soc_eth 1e100000.ethernet eth0: entered promiscuous mode
+[    3.067782] DSA: tree 0 setup
+[    3.074728] clk: Disabling unused clocks
+[    3.093430] VFS: Mounted root (squashfs filesystem) readonly on device 31:5.
+[    3.111727] Freeing unused kernel image (initmem) memory: 1252K
+[    3.123652] This architecture does not have kernel memory protection.
+[    3.136513] Run /sbin/init as init process
+[    4.289696] init: Console is alive
+[    4.296888] init: - watchdog -
+[    5.936905] kmodloader: loading kernel modules from /etc/modules-boot.d/*
+[    6.050921] usbcore: registered new interface driver usbfs
+[    6.062225] usbcore: registered new interface driver hub
+[    6.073035] usbcore: registered new device driver usb
+[    6.085059] gpio_button_hotplug: loading out-of-tree module taints kernel.
+[    6.111163] xhci-mtk 1e1c0000.xhci: xHCI Host Controller
+[    6.121883] xhci-mtk 1e1c0000.xhci: new USB bus registered, assigned bus number 1
+[    6.141938] xhci-mtk 1e1c0000.xhci: hcc params 0x01401198 hci version 0x96 quirks 0x0000000000280010
+[    6.160257] xhci-mtk 1e1c0000.xhci: irq 27, io mem 0x1e1c0000
+[    6.172040] xhci-mtk 1e1c0000.xhci: xHCI Host Controller
+[    6.182716] xhci-mtk 1e1c0000.xhci: new USB bus registered, assigned bus number 2
+[    6.197647] xhci-mtk 1e1c0000.xhci: Host supports USB 3.0 SuperSpeed
+[    6.211427] hub 1-0:1.0: USB hub found
+[    6.219074] hub 1-0:1.0: 2 ports detected
+[    6.228207] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+[    6.245434] hub 2-0:1.0: USB hub found
+[    6.253088] hub 2-0:1.0: 1 port detected
+[    6.273075] kmodloader: done loading kernel modules from /etc/modules-boot.d/*
+[    6.290627] init: - preinit -
+[    7.852719] mtk_soc_eth 1e100000.ethernet wan: renamed from eth1
+[    9.422168] random: crng init done
+Cannot parse config file '/etc/fw_env.config': No such file or directory
+Failed to find NVMEM device
+[   10.747829] mtk_soc_eth 1e100000.ethernet eth0: configuring for fixed/rgmii link mode
+[   10.768725] mt7530-mdio mdio-bus:1f lan1: configuring for phy/gmii link mode
+[   10.782983] mtk_soc_eth 1e100000.ethernet eth0: Link is Up - 1Gbps/Full - flow control rx/tx
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+[   13.970633] mt7530-mdio mdio-bus:1f lan1: Link is Up - 1Gbps/Full - flow control rx/tx
+[   15.433768] jffs2: notice: (645) jffs2_build_xattr_subsystem: complete building xattr subsystem, 13 of xdatum (8 unchecked, 4 orphan) and 14 of xref (4 dead, 0 orphan) found.
+[   15.467508] mount_root: switching to jffs2 overlay
+[   15.484587] overlayfs: upper fs does not support tmpfile.
+[   15.507101] urandom-seed: Seeding with /etc/urandom.seed
+[   15.816627] mt7530-mdio mdio-bus:1f lan1: Link is Down
+[   15.838102] procd: - early -
+[   15.844189] procd: - watchdog -
+[   16.496813] procd: - watchdog -
+[   16.504939] procd: - ubus -
+[   16.867372] procd: - init -
+Please press Enter to activate this console.
+
+login[814]: root login on 'ttyS0'
+
+
+BusyBox v1.37.0 (2026-06-29 12:59:20 UTC) built-in shell (ash)
+
+  _______                     ________        __
+ |       |.-----.-----.-----.|  |  |  |.----.|  |_
+ |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
+ |_______||   __|_____|__|__||________||__|  |____|
+          |__| W I R E L E S S   F R E E D O M
+ -----------------------------------------------------
+ OpenWrt 25.12.5, r33051-f5dae5ece4 Dave's Guitar
+ -----------------------------------------------------
+
+ OpenWrt recently switched to the "apk" package manager!
+
+ OPKG Command           APK Equivalent      Description
+ ------------------------------------------------------------------
+ opkg install <pkg>     apk add <pkg>       Install a package
+ opkg remove <pkg>      apk del <pkg>       Remove a package
+ opkg upgrade           apk upgrade         Upgrade all packages
+ opkg files <pkg>       apk info -L <pkg>   List package contents
+ opkg list-installed    apk info            List installed packages
+ opkg update            apk update          Update package lists
+ opkg search <pkg>      apk search <pkg>    Search for packages
+ ------------------------------------------------------------------
+
+For more information visit:
+https://openwrt.org/docs/guide-user/additional-software/opkg-to-apk-cheatsheet
+
+root@(none):~# [   18.501297] kmodloader: loading kernel modules from /etc/modules.d/*
+[   18.536147] mtk-eip93 1e004000.crypto: EIP93 Crypto Engine Initialized.
+[   19.144856] urngd: v1.0.2 started.
+[   19.199914] Loading modules backported from Linux version v6.18.26-0-g1fe060681
+[   19.214594] Backport generated by backports.git 6ecbb44
+[   19.532387] pci 0000:00:00.0: enabling device (0006 -> 0007)
+[   19.543746] mt76x2e 0000:01:00.0: enabling device (0000 -> 0002)
+[   19.556043] mt76x2e 0000:01:00.0: ASIC revision: 76120044
+[   20.215423] mt76x2e 0000:01:00.0: ROM patch build: 20141115060606a
+[   20.230255] mt76x2e 0000:01:00.0: Firmware Version: 0.0.00
+[   20.241383] mt76x2e 0000:01:00.0: Build: 1
+[   20.249574] mt76x2e 0000:01:00.0: Build Time: 201607111443____
+[   20.284703] mt76x2e 0000:01:00.0: Firmware running!
+[   20.294660] mt76x2e 0000:01:00.0: registering led 'mt76-phy0'
+[   20.366646] pci 0000:00:01.0: enabling device (0006 -> 0007)
+[   20.378449] mt76x2e 0000:02:00.0: ASIC revision: 76020044
+[   21.034510] mt76x2e 0000:02:00.0: ROM patch already applied
+[   21.046397] mt76x2e 0000:02:00.0: Firmware Version: 0.0.00
+[   21.057427] mt76x2e 0000:02:00.0: Build: 1
+[   21.065600] mt76x2e 0000:02:00.0: Build Time: 201607111443____
+[   21.080634] mt76x2e 0000:02:00.0: Firmware running!
+[   21.090604] mt76x2e 0000:02:00.0: registering led 'mt76-phy1'
+[   21.244172] PPP generic driver version 2.4.2
+[   21.254760] NET: Registered PF_PPPOX protocol family
+[   21.271527] kmodloader: done loading kernel modules from /etc/modules.d/*
+[   28.289774] mtk_soc_eth 1e100000.ethernet eth0: Link is Down
+[   28.321994] mtk_soc_eth 1e100000.ethernet eth0: configuring for fixed/rgmii link mode
+[   28.338491] mtk_soc_eth 1e100000.ethernet eth0: Link is Up - 1Gbps/Full - flow control rx/tx
+[   28.345052] mt7530-mdio mdio-bus:1f lan1: configuring for phy/gmii link mode
+[   28.372343] br-lan: port 1(lan1) entered blocking state
+[   28.383076] br-lan: port 1(lan1) entered disabled state
+[   28.393790] mt7530-mdio mdio-bus:1f lan1: entered allmulticast mode
+[   28.406475] mtk_soc_eth 1e100000.ethernet eth0: entered allmulticast mode
+[   28.423334] mt7530-mdio mdio-bus:1f lan1: entered promiscuous mode
+[   28.446407] mt7530-mdio mdio-bus:1f lan2: configuring for phy/gmii link mode
+[   28.462553] br-lan: port 2(lan2) entered blocking state
+[   28.473123] br-lan: port 2(lan2) entered disabled state
+[   28.483790] mt7530-mdio mdio-bus:1f lan2: entered allmulticast mode
+[   28.498413] mt7530-mdio mdio-bus:1f lan2: entered promiscuous mode
+[   28.518913] mt7530-mdio mdio-bus:1f lan3: configuring for phy/gmii link mode
+[   28.534132] br-lan: port 3(lan3) entered blocking state
+[   28.544860] br-lan: port 3(lan3) entered disabled state
+[   28.555613] mt7530-mdio mdio-bus:1f lan3: entered allmulticast mode
+[   28.571116] mt7530-mdio mdio-bus:1f lan3: entered promiscuous mode
+[   28.589806] mt7530-mdio mdio-bus:1f lan4: configuring for phy/gmii link mode
+[   28.605545] br-lan: port 4(lan4) entered blocking state
+[   28.616133] br-lan: port 4(lan4) entered disabled state
+[   28.626755] mt7530-mdio mdio-bus:1f lan4: entered allmulticast mode
+[   28.641698] mt7530-mdio mdio-bus:1f lan4: entered promiscuous mode
+[   28.660369] mtk_soc_eth 1e100000.ethernet wan: PHY [mt7530-0:04] driver [MediaTek MT7530 PHY] (irq=POLL)
+[   28.679421] mtk_soc_eth 1e100000.ethernet wan: configuring for phy/rgmii link mode
+[   28.700177] br-lan: port 5(wan) entered blocking state
+[   28.710591] br-lan: port 5(wan) entered disabled state
+[   28.721030] mtk_soc_eth 1e100000.ethernet wan: entered allmulticast mode
+[   28.735048] mtk_soc_eth 1e100000.ethernet wan: entered promiscuous mode
+[   30.311171] br-lan: port 6(phy0-ap0) entered blocking state
+[   30.322473] br-lan: port 6(phy0-ap0) entered disabled state
+[   30.333948] mt76x2e 0000:01:00.0 phy0-ap0: entered allmulticast mode
+[   30.347307] mt76x2e 0000:01:00.0 phy0-ap0: entered promiscuous mode
+[   31.160313] br-lan: port 7(phy1-ap0) entered blocking state
+[   31.171676] br-lan: port 7(phy1-ap0) entered disabled state
+[   31.183087] mt76x2e 0000:02:00.0 phy1-ap0: entered allmulticast mode
+[   31.196583] mt76x2e 0000:02:00.0 phy1-ap0: entered promiscuous mode
+[   31.209767] br-lan: port 7(phy1-ap0) entered blocking state
+[   31.221075] br-lan: port 7(phy1-ap0) entered forwarding state
+[   31.258161] br-lan: port 7(phy1-ap0) entered disabled state
+[   31.476780] mt7530-mdio mdio-bus:1f lan1: Link is Up - 1Gbps/Full - flow control rx/tx
+[   31.476893] br-lan: port 1(lan1) entered blocking state
+[   31.503125] br-lan: port 1(lan1) entered forwarding state
+[   31.803262] br-lan: port 7(phy1-ap0) entered blocking state
+[   31.814483] br-lan: port 7(phy1-ap0) entered forwarding state
+echo 1 > /proc/sys/kernel/printk; cut -d" " -f1 /proc/uptime; gre
+p " 30:" /proc/interrupts; echo restarts=$(dmesg | grep -c "Hardware restart") t
+imeouts=$(dmesg | grep -c "timed out"); iwinfo | grep -c Console-Net; echo "@@""
+END"
+58.40
+ 30:       2384          0          0          0  MIPS GIC  31  mt76x2e
+restarts=0 timeouts=0
+2
+@@END
+root@console-net-ap:~# echo @@$((1+1))BEGIN; cut -d" " -f1 /proc/uptime; grep " 
+30:" /proc/interrupts; echo @@$((1+1))END
+@@2BEGIN
+96.09
+ 30:       5744          0          0          0  MIPS GIC  31  mt76x2e
+@@2END
+root@console-net-ap:~# echo @@$((1+1))BEGIN; uci set wireless.radio1.disabled=1;
+ uci commit wireless; uci get wireless.radio1.disabled; echo @@$((1+1))END
+@@2BEGIN
+1
+@@2END
+root@console-net-ap:~# reboot
+root@console-net-ap:~# [  106.423060] reboot: Restarting system
+
+===================================================================
+     		MT7621   stage1 code Mar 12 2015 14:43:30 (ASIC)
+     		CPU=500000000 HZ BUS=125000000 HZ
+==================================================================
+Change MPLL source from XTAL to CR...
+do MEMPLL setting..
+MEMPLL Config : 0x31100000
+3PLL mode + External loopback
+=== XTAL-40Mhz === DDR-800Mhz ===
+PLL2 FB_DL: 0xa, 1/0 = 705/319 29000000
+PLL3 FB_DL: 0x14, 1/0 = 539/485 51000000
+PLL4 FB_DL: 0x1a, 1/0 = 707/317 69000000
+do DDR setting..[01F40000]
+Apply DDR2 Setting...(use customer AC)
+          0    8   16   24   32   40   48   56   64   72   80   88   96  104  112  120
+      --------------------------------------------------------------------------------
+0000:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0001:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0002:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0003:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0004:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0005:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0006:|    0    0    0    0    0    0    0    0    0    0    0    0    1    1    1    1
+0007:|    0    0    0    0    0    1    1    1    1    1    1    1    1    1    1    1
+0008:|    1    1    1    1    1    1    1    1    1    1    1    0    0    0    0    0
+0009:|    1    1    1    1    0    0    0    0    0    0    0    0    0    0    0    0
+000A:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000B:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000C:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000D:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000E:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+000F:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0010:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0011:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0012:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0013:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0014:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0015:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0016:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0017:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0018:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+0019:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001A:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001B:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001C:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001D:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001E:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+001F:|    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+DRAMC_DQSCTL1[0e0]=1A000000
+DRAMC_DQSGCTL[124]=80000000
+rank 0 coarse = 8
+rank 0 fine = 40
+B:|    0    0    0    0    0    1    1    1    0    0    0    0    0    0    0    0
+opt_dle value:6
+DRAMC_DDR2CTL[07c]=40001263
+DRAMC_PADCTL4[0e4]=00000005
+DRAMC_DQIDLY1[210]=0B0C090C
+DRAMC_DQIDLY2[214]=070A080A
+DRAMC_DQIDLY3[218]=0D070708
+DRAMC_DQIDLY4[21c]=0A070B09
+DRAMC_R0DELDLY[018]=00002B2C
+==================================================================
+		RX	DQS perbit delay software calibration 
+==================================================================
+1.0-15 bit dq delay value
+==================================================================
+bit|     0  1  2  3  4  5  6  7  8  9
+--------------------------------------
+0 |    10 9 9 9 9 7 9 6 7 7 
+10 |    7 13 8 11 6 9 
+--------------------------------------
+
+==================================================================
+2.dqs window
+x=pass dqs delay value (min~max)center 
+y=0-7bit DQ of every group
+input delay:DQS0 =44 DQS1 = 43
+==================================================================
+bit	DQS0	 bit      DQS1
+0  (1~83)42  8  (1~83)42
+1  (2~86)44  9  (1~85)43
+2  (1~82)41  10  (1~85)43
+3  (1~83)42  11  (1~86)43
+4  (2~85)43  12  (1~84)42
+5  (2~85)43  13  (2~84)43
+6  (1~85)43  14  (2~83)42
+7  (1~85)43  15  (1~84)42
+==================================================================
+3.dq delay value last
+==================================================================
+bit|    0  1  2  3  4  5  6  7  8   9
+--------------------------------------
+0 |    12 9 12 11 10 8 10 7 8 7 
+10 |    7 13 9 11 7 10 
+==================================================================
+==================================================================
+     TX  perbyte calibration 
+==================================================================
+DQS loop = 15, cmp_err_1 = ffff0000 
+dqs_perbyte_dly.last_dqsdly_pass[0]=15,  finish count=1 
+dqs_perbyte_dly.last_dqsdly_pass[1]=15,  finish count=2 
+DQ loop=15, cmp_err_1 = ffff0000
+dqs_perbyte_dly.last_dqdly_pass[0]=15,  finish count=1 
+dqs_perbyte_dly.last_dqdly_pass[1]=15,  finish count=2 
+byte:0, (DQS,DQ)=(8,8)
+byte:1, (DQS,DQ)=(8,8)
+DRAMC_DQODLY1[200]=88888888
+DRAMC_DQODLY2[204]=88888888
+20,data:88
+[EMI] DRAMC calibration passed
+
+===================================================================
+     		MT7621   stage1 code done 
+     		CPU=500000000 HZ BUS=125000000 HZ
+===================================================================
+
+
+U-Boot 1.1.3 (Jan 15 2016 - 09:47:18)
+
+Board: Ralink APSoC DRAM:  128 MB
+relocate_code Pointer at: 87fb8000
+
+Config XHCI 40M PLL 
+******************************
+Software System Reset Occurred
+******************************
+flash manufacture id: ef, device id 40 18
+find flash: W25Q128BV
+============================================ 
+Ralink UBoot Version: 4.3.0.0
+-------------------------------------------- 
+ASIC MT7621A DualCore (MAC to MT7530 Mode)
+DRAM_CONF_FROM: Auto-Detection 
+DRAM_TYPE: DDR2 
+DRAM bus: 16 bit
+Xtal Mode=3 OCP Ratio=1/4
+Flash component: SPI Flash
+Date:Jan 15 2016  Time:09:47:18
+============================================ 
+icache: sets:256, ways:4, linesz:32 ,total:32768
+dcache: sets:256, ways:4, linesz:32 ,total:32768 
+
+ ##### The CPU freq = 880 MHZ #### 
+ estimate memory size =128 Mbytes
+#Reset_MT7530
+
+Please choose the operation: 
+   1: Load system code to SDRAM via TFTP. 
+   2: Load system code then write to Flash via TFTP. 
+   3: Boot system code via Flash (default).
+   4: Entr boot command line interface.
+   7: Load Boot Loader code then write to Flash via Serial. 
+   9: Load Boot Loader code then write to Flash via TFTP. 
+ 4  3  2  1  0 
+bootcount: 0
+   
+3: System Boot system code via Flash.
+Erasing SPI Flash...
+.
+Writing to SPI Flash...
+.
+done
+## Booting image at bc050000 ...
+   Image Name:   MIPS OpenWrt Linux-6.12.94
+   Image Type:   MIPS Linux Kernel Image (uncompressed)
+   Data Size:    3321077 Bytes =  3.2 MB
+   Load Address: 80001000
+   Entry Point:  80001000
+   Verifying Checksum ... OK
+OK
+No initrd
+## Transferring control to Linux (at address 80001000) ...
+## Giving linux memsize in MB, 128
+
+Starting kernel ...
+
+
+
+OpenWrt kernel loader for MIPS based SoC
+Copyright (C) 2011 Gabor Juhos <juhosg@openwrt.org>
+Decompressing kernel... done!
+Starting kernel at 80001000...
+
+[    0.000000] Linux version 6.12.94 (builder@buildhost) (mipsel-openwrt-linux-musl-gcc (OpenWrt GCC 14.3.0 r33051-f5dae5ece4) 14.3.0, GNU ld (GNU Binutils) 2.44) #0 SMP Mon Jun 29 12:59:20 2026
+[    0.000000] SoC Type: MediaTek MT7621 ver:1 eco:3
+[    0.000000] printk: legacy bootconsole [early0] enabled
+[    0.000000] CPU0 revision is: 0001992f (MIPS 1004Kc)
+[    0.000000] MIPS: machine is SamKnows Whitebox 8
+[    0.000000] Initrd not found or empty - disabling initrd
+[    0.000000] VPE topology {2,2} total 4
+[    0.000000] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.000000] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.000000] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x0000000007ffffff]
+[    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+[    0.000000] percpu: Embedded 13 pages/cpu s22928 r8192 d22128 u53248
+[    0.000000] Kernel command line: console=ttyS0,57600 rootfstype=squashfs,jffs2
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes, linear)
+[    0.000000] Writing ErrCtl register=000023c0
+[    0.000000] Readback ErrCtl register=000023c0
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 32768
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] RCU Tasks Trace: Setting shift to 2 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=4.
+[    0.000000] NR_IRQS: 256
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: GIC: mask: 0xffffffffffffffff max_cycles: 0xcaf478abb4, max_idle_ns: 440795247997 ns
+[    0.000005] sched_clock: 64 bits at 880MHz, resolution 1ns, wraps every 4398046511103ns
+[    0.016028] Calibrating delay loop... 586.13 BogoMIPS (lpj=2930688)
+[    0.088281] pid_max: default: 32768 minimum: 301
+[    0.107550] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.121966] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.147868] rcu: Hierarchical SRCU implementation.
+[    0.157274] rcu: 	Max phase no-delay instances is 1000.
+[    0.168198] Timer migration: 1 hierarchy levels; 8 children per group; 1 crossnode level
+[    0.185027] smp: Bringing up secondary CPUs ...
+[    0.194968] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.194999] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.195016] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.195143] CPU1 revision is: 0001992f (MIPS 1004Kc)
+[    0.256619] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.256647] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.256661] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.256764] CPU2 revision is: 0001992f (MIPS 1004Kc)
+[    0.316768] Primary instruction cache 32kB, VIPT, 4-way, linesize 32 bytes.
+[    0.316793] Primary data cache 32kB, 4-way, PIPT, no aliases, linesize 32 bytes
+[    0.316806] MIPS secondary cache 256kB, 8-way, linesize 32 bytes.
+[    0.316919] CPU3 revision is: 0001992f (MIPS 1004Kc)
+[    0.375904] smp: Brought up 1 node, 4 CPUs
+[    0.535983] Memory: 116372K/131072K available (8771K kernel code, 651K rwdata, 1088K rodata, 1252K init, 236K bss, 13552K reserved, 0K cma-reserved)
+[    0.568867] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.588377] futex hash table entries: 1024 (order: 3, 32768 bytes, linear)
+[    0.607881] pinctrl core: initialized pinctrl subsystem
+[    0.621271] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.633790] thermal_sys: Registered thermal governor 'step_wise'
+[    0.636408] /pinctrl: Fixed dependency cycle(s) with /pinctrl/pinctrl0
+[    0.681509] clocksource: Switched to clocksource GIC
+[    0.701321] NET: Registered PF_INET protocol family
+[    0.711129] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.727108] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.743711] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.759025] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.774268] TCP bind hash table entries: 1024 (order: 2, 16384 bytes, linear)
+[    0.788477] TCP: Hash tables configured (established 1024 bind 1024)
+[    0.801738] MPTCP token hash table entries: 256 (order: 0, 4096 bytes, linear)
+[    0.816395] UDP hash table entries: 256 (order: 1, 8192 bytes, linear)
+[    0.829315] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes, linear)
+[    0.844204] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    0.855447] PCI: CLS 0 bytes, default 32
+[    0.866635] workingset: timestamp_bits=14 max_order=15 bucket_order=1
+[    0.881789] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.893301] jffs2: version 2.2 (NAND) (SUMMARY) (LZMA) (RTIME) (CMODE_PRIORITY) (c) 2001-2006 Red Hat, Inc.
+[    0.917719] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 251)
+[    0.936309] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    0.947824] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    0.959382] mt7621_gpio 1e000600.gpio: registering 32 gpios
+[    0.971028] mt7621-pci 1e140000.pcie: host bridge /pcie@1e140000 ranges:
+[    0.984292] mt7621-pci 1e140000.pcie:   No bus range found for /pcie@1e140000, using [bus 00-ff]
+[    1.001758] mt7621-pci 1e140000.pcie:      MEM 0x0060000000..0x006fffffff -> 0x0060000000
+[    1.017972] mt7621-pci 1e140000.pcie:       IO 0x001e160000..0x001e16ffff -> 0x0000000000
+[    1.361323] mt7621-pci 1e140000.pcie: pcie2 no card, disable it (RST & CLK)
+[    1.375145] mt7621-pci 1e140000.pcie: PCIE0 enabled
+[    1.384771] mt7621-pci 1e140000.pcie: PCIE1 enabled
+[    1.394639] PCI coherence region base: 0x60000000, mask/settings: 0xf0000002
+[    1.408727] mt7621-pci 1e140000.pcie: PCI host bridge to bus 0000:00
+[    1.421298] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    1.432163] pci_bus 0000:00: root bus resource [mem 0x60000000-0x6fffffff]
+[    1.445788] pci_bus 0000:00: root bus resource [io  0x0000-0xffff]
+[    1.458168] pci 0000:00:00.0: [0e8d:0801] type 01 class 0x060400 PCIe Root Port
+[    1.472636] pci 0000:00:00.0: BAR 0 [mem 0x00000000-0x7fffffff]
+[    1.484358] pci 0000:00:00.0: BAR 1 [mem 0x60400000-0x6040ffff]
+[    1.496109] pci 0000:00:00.0: PCI bridge to [bus 01]
+[    1.505945] pci 0000:00:00.0:   bridge window [io  0x0000-0x0fff]
+[    1.518048] pci 0000:00:00.0:   bridge window [mem 0x60000000-0x600fffff]
+[    1.531536] pci 0000:00:00.0:   bridge window [mem 0x60100000-0x601fffff pref]
+[    1.545935] pci 0000:00:00.0: supports D1
+[    1.553820] pci 0000:00:00.0: PME# supported from D0 D1 D3hot
+[    1.566167] pci 0000:00:01.0: [0e8d:0801] type 01 class 0x060400 PCIe Root Port
+[    1.580677] pci 0000:00:01.0: BAR 0 [mem 0x00000000-0x7fffffff]
+[    1.592392] pci 0000:00:01.0: BAR 1 [mem 0x60410000-0x6041ffff]
+[    1.604143] pci 0000:00:01.0: PCI bridge to [bus 02]
+[    1.613978] pci 0000:00:01.0:   bridge window [io  0x0000-0x0fff]
+[    1.626069] pci 0000:00:01.0:   bridge window [mem 0x60200000-0x602fffff]
+[    1.639549] pci 0000:00:01.0:   bridge window [mem 0x60300000-0x603fffff pref]
+[    1.653960] pci 0000:00:01.0: supports D1
+[    1.661850] pci 0000:00:01.0: PME# supported from D0 D1 D3hot
+[    1.675467] pci 0000:01:00.0: [14c3:7662] type 00 class 0x028000 PCIe Endpoint
+[    1.689814] pci 0000:01:00.0: BAR 0 [mem 0x00000000-0x000fffff 64bit]
+[    1.702583] pci 0000:01:00.0: ROM [mem 0x00000000-0x0000ffff pref]
+[    1.714942] pci 0000:01:00.0: PME# supported from D0 D3hot D3cold
+[    1.727379] pci 0000:00:00.0: PCI bridge to [bus 01-ff]
+[    1.737702] pci_bus 0000:01: busn_res: [bus 01-ff] end is updated to 01
+[    1.751083] pci 0000:02:00.0: [14c3:7662] type 00 class 0x028000 PCIe Endpoint
+[    1.765405] pci 0000:02:00.0: BAR 0 [mem 0x60200000-0x602fffff 64bit]
+[    1.778184] pci 0000:02:00.0: ROM [mem 0x00000000-0x0000ffff pref]
+[    1.790538] pci 0000:02:00.0: PME# supported from D0 D3hot D3cold
+[    1.802916] pci 0000:00:01.0: PCI bridge to [bus 02-ff]
+[    1.813253] pci_bus 0000:02: busn_res: [bus 02-ff] end is updated to 02
+[    1.826392] pci 0000:00:00.0: BAR 0 [mem size 0x80000000]: can't assign; no space
+[    1.841218] pci 0000:00:00.0: BAR 0 [mem size 0x80000000]: failed to assign
+[    1.855024] pci 0000:00:01.0: BAR 0 [mem size 0x80000000]: can't assign; no space
+[    1.869883] pci 0000:00:01.0: BAR 0 [mem size 0x80000000]: failed to assign
+[    1.883719] pci 0000:00:00.0: bridge window [mem 0x60000000-0x600fffff]: assigned
+[    1.898572] pci 0000:00:00.0: bridge window [mem 0x60100000-0x601fffff pref]: assigned
+[    1.914303] pci 0000:00:01.0: bridge window [mem 0x60200000-0x602fffff]: assigned
+[    1.929163] pci 0000:00:01.0: bridge window [mem 0x60300000-0x603fffff pref]: assigned
+[    1.944885] pci 0000:00:00.0: BAR 1 [mem 0x60400000-0x6040ffff]: assigned
+[    1.958366] pci 0000:00:01.0: BAR 1 [mem 0x60410000-0x6041ffff]: assigned
+[    1.971849] pci 0000:00:00.0: bridge window [io  0x0000-0x0fff]: assigned
+[    1.985318] pci 0000:00:01.0: bridge window [io  0x1000-0x1fff]: assigned
+[    1.998808] pci 0000:01:00.0: BAR 0 [mem 0x60000000-0x600fffff 64bit]: assigned
+[    2.013321] pci 0000:01:00.0: ROM [mem 0x60100000-0x6010ffff pref]: assigned
+[    2.027307] pci 0000:00:00.0: PCI bridge to [bus 01]
+[    2.037169] pci 0000:00:00.0:   bridge window [io  0x0000-0x0fff]
+[    2.049257] pci 0000:00:00.0:   bridge window [mem 0x60000000-0x600fffff]
+[    2.062729] pci 0000:00:00.0:   bridge window [mem 0x60100000-0x601fffff pref]
+[    2.077080] pci 0000:02:00.0: BAR 0 [mem 0x60200000-0x602fffff 64bit]: assigned
+[    2.091607] pci 0000:02:00.0: ROM [mem 0x60300000-0x6030ffff pref]: assigned
+[    2.105589] pci 0000:00:01.0: PCI bridge to [bus 02]
+[    2.115434] pci 0000:00:01.0:   bridge window [io  0x1000-0x1fff]
+[    2.127530] pci 0000:00:01.0:   bridge window [mem 0x60200000-0x602fffff]
+[    2.141007] pci 0000:00:01.0:   bridge window [mem 0x60300000-0x603fffff pref]
+[    2.155364] pci_bus 0000:00: Some PCI device resources are unassigned, try booting with pci=realloc
+[    2.173324] pci_bus 0000:00: resource 4 [mem 0x60000000-0x6fffffff]
+[    2.185766] pci_bus 0000:00: resource 5 [io  0x0000-0xffff]
+[    2.196821] pci_bus 0000:01: resource 0 [io  0x0000-0x0fff]
+[    2.207881] pci_bus 0000:01: resource 1 [mem 0x60000000-0x600fffff]
+[    2.220330] pci_bus 0000:01: resource 2 [mem 0x60100000-0x601fffff pref]
+[    2.233631] pci_bus 0000:02: resource 0 [io  0x1000-0x1fff]
+[    2.244705] pci_bus 0000:02: resource 1 [mem 0x60200000-0x602fffff]
+[    2.257134] pci_bus 0000:02: resource 2 [mem 0x60300000-0x603fffff pref]
+[    2.273274] Serial: 8250/16550 driver, 16 ports, IRQ sharing enabled
+[    2.294436] printk: legacy console [ttyS0] disabled
+[    2.305056] 1e000c00.uartlite: ttyS0 at MMIO 0x1e000c00 (irq = 18, base_baud = 3125000) is a 16550A
+[    2.323110] printk: legacy console [ttyS0] enabled
+[    2.323110] printk: legacy console [ttyS0] enabled
+[    2.342094] printk: legacy bootconsole [early0] disabled
+[    2.342094] printk: legacy bootconsole [early0] disabled
+[    2.368529] spi-mt7621 1e000b00.spi: sys_freq: 220000000
+[    2.381051] 4 fixed-partitions partitions found on MTD device spi0.0
+[    2.394201] Creating 4 MTD partitions on "spi0.0":
+[    2.403807] 0x000000000000-0x000000030000 : "u-boot"
+[    2.415303] 0x000000030000-0x000000040000 : "u-boot-env"
+[    2.427031] 0x000000040000-0x000000050000 : "factory"
+[    2.439120] 0x000000050000-0x000001000000 : "firmware"
+[    2.450680] 2 uimage-fw partitions found on MTD device firmware
+[    2.462559] Creating 2 MTD partitions on "firmware":
+[    2.472533] 0x000000000000-0x00000032ad35 : "kernel"
+[    2.482453] mtd: partition "kernel" doesn't end on an erase/write block -- force read-only
+[    2.500103] 0x00000032ad35-0x000000fb0000 : "rootfs"
+[    2.510070] mtd: partition "rootfs" doesn't start on an erase/write block boundary -- force read-only
+[    2.529420] mtd: setting mtd5 (rootfs) as root device
+[    2.539667] 1 squashfs-split partitions found on MTD device rootfs
+[    2.552024] 0x000000770000-0x000000fb0000 : "rootfs_data"
+[    2.693017] mtk_soc_eth 1e100000.ethernet: generated random MAC address 20:08:02:00:00:00
+[    2.711101] mt7530-mdio mdio-bus:1f: MT7530 adapts as multi-chip module
+[    2.736281] mtk_soc_eth 1e100000.ethernet eth0: mediatek frame engine at 0xbe100000, irq 19
+[    2.756357] mtk_soc_eth 1e100000.ethernet eth1: mediatek frame engine at 0xbe100000, irq 19
+[    2.774847] i2c_dev: i2c /dev entries driver
+[    2.787498] NET: Registered PF_INET6 protocol family
+[    2.801025] Segment Routing with IPv6
+[    2.808494] In-situ OAM (IOAM) with IPv6
+[    2.816540] NET: Registered PF_PACKET protocol family
+[    2.826728] bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+[    2.853141] 8021q: 802.1Q VLAN Support v1.8
+[    2.891905] mt7530-mdio mdio-bus:1f: MT7530 adapts as multi-chip module
+[    2.931664] mt7530-mdio mdio-bus:1f: configuring for fixed/rgmii link mode
+[    2.946823] mt7530-mdio mdio-bus:1f lan1 (uninitialized): PHY [mt7530-0:00] driver [MediaTek MT7530 PHY] (irq=21)
+[    2.967889] mt7530-mdio mdio-bus:1f: Link is Up - 1Gbps/Full - flow control rx/tx
+[    2.974365] mt7530-mdio mdio-bus:1f lan2 (uninitialized): PHY [mt7530-0:01] driver [MediaTek MT7530 PHY] (irq=22)
+[    3.006257] mt7530-mdio mdio-bus:1f lan3 (uninitialized): PHY [mt7530-0:02] driver [MediaTek MT7530 PHY] (irq=23)
+[    3.029525] mt7530-mdio mdio-bus:1f lan4 (uninitialized): PHY [mt7530-0:03] driver [MediaTek MT7530 PHY] (irq=24)
+[    3.052499] mtk_soc_eth 1e100000.ethernet eth0: entered promiscuous mode
+[    3.066041] DSA: tree 0 setup
+[    3.072906] clk: Disabling unused clocks
+[    3.091449] VFS: Mounted root (squashfs filesystem) readonly on device 31:5.
+[    3.109731] Freeing unused kernel image (initmem) memory: 1252K
+[    3.121608] This architecture does not have kernel memory protection.
+[    3.134459] Run /sbin/init as init process
+[    4.287925] init: Console is alive
+[    4.295169] init: - watchdog -
+[    5.934558] kmodloader: loading kernel modules from /etc/modules-boot.d/*
+[    6.048575] usbcore: registered new interface driver usbfs
+[    6.059760] usbcore: registered new interface driver hub
+[    6.070520] usbcore: registered new device driver usb
+[    6.082493] gpio_button_hotplug: loading out-of-tree module taints kernel.
+[    6.108775] xhci-mtk 1e1c0000.xhci: xHCI Host Controller
+[    6.119581] xhci-mtk 1e1c0000.xhci: new USB bus registered, assigned bus number 1
+[    6.139632] xhci-mtk 1e1c0000.xhci: hcc params 0x01401198 hci version 0x96 quirks 0x0000000000280010
+[    6.157973] xhci-mtk 1e1c0000.xhci: irq 27, io mem 0x1e1c0000
+[    6.169819] xhci-mtk 1e1c0000.xhci: xHCI Host Controller
+[    6.180479] xhci-mtk 1e1c0000.xhci: new USB bus registered, assigned bus number 2
+[    6.195428] xhci-mtk 1e1c0000.xhci: Host supports USB 3.0 SuperSpeed
+[    6.209276] hub 1-0:1.0: USB hub found
+[    6.216971] hub 1-0:1.0: 2 ports detected
+[    6.226051] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+[    6.243255] hub 2-0:1.0: USB hub found
+[    6.250837] hub 2-0:1.0: 1 port detected
+[    6.270845] kmodloader: done loading kernel modules from /etc/modules-boot.d/*
+[    6.288013] init: - preinit -
+[    7.864718] mtk_soc_eth 1e100000.ethernet wan: renamed from eth1
+[    9.391235] random: crng init done
+Cannot parse config file '/etc/fw_env.config': No such file or directory
+Failed to find NVMEM device
+[   10.722969] mtk_soc_eth 1e100000.ethernet eth0: configuring for fixed/rgmii link mode
+[   10.743810] mtk_soc_eth 1e100000.ethernet eth0: Link is Up - 1Gbps/Full - flow control rx/tx
+[   10.744292] mt7530-mdio mdio-bus:1f lan1: configuring for phy/gmii link mode
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+[   13.881384] mt7530-mdio mdio-bus:1f lan1: Link is Up - 1Gbps/Full - flow control rx/tx
+[   15.419380] jffs2: notice: (645) jffs2_build_xattr_subsystem: complete building xattr subsystem, 14 of xdatum (8 unchecked, 5 orphan) and 15 of xref (5 dead, 0 orphan) found.
+[   15.453234] mount_root: switching to jffs2 overlay
+[   15.473282] overlayfs: upper fs does not support tmpfile.
+[   15.495757] urandom-seed: Seeding with /etc/urandom.seed
+[   15.806163] mt7530-mdio mdio-bus:1f lan1: Link is Down
+[   15.827383] procd: - early -
+[   15.833443] procd: - watchdog -
+[   16.485496] procd: - watchdog -
+[   16.493654] procd: - ubus -
+[   16.855774] procd: - init -
+Please press Enter to activate this console.
+[   18.357728] kmodloader: loading kernel modules from /etc/modules.d/*
+[   18.478422] mtk-eip93 1e004000.crypto: EIP93 Crypto Engine Initialized.
+[   19.025161] urngd: v1.0.2 started.
+[   19.139150] Loading modules backported from Linux version v6.18.26-0-g1fe060681
+[   19.153921] Backport generated by backports.git 6ecbb44
+[   19.512189] pci 0000:00:00.0: enabling device (0006 -> 0007)
+[   19.523533] mt76x2e 0000:01:00.0: enabling device (0000 -> 0002)
+[   19.535742] mt76x2e 0000:01:00.0: ASIC revision: 76120044
+[   20.194541] mt76x2e 0000:01:00.0: ROM patch build: 20141115060606a
+[   20.209375] mt76x2e 0000:01:00.0: Firmware Version: 0.0.00
+[   20.220478] mt76x2e 0000:01:00.0: Build: 1
+[   20.228652] mt76x2e 0000:01:00.0: Build Time: 201607111443____
+[   20.263784] mt76x2e 0000:01:00.0: Firmware running!
+[   20.273710] mt76x2e 0000:01:00.0: registering led 'mt76-phy0'
+[   20.326207] pci 0000:00:01.0: enabling device (0006 -> 0007)
+[   20.338103] mt76x2e 0000:02:00.0: ASIC revision: 76020044
+[   20.993572] mt76x2e 0000:02:00.0: ROM patch already applied
+[   21.005493] mt76x2e 0000:02:00.0: Firmware Version: 0.0.00
+[   21.016580] mt76x2e 0000:02:00.0: Build: 1
+[   21.024755] mt76x2e 0000:02:00.0: Build Time: 201607111443____
+[   21.039800] mt76x2e 0000:02:00.0: Firmware running!
+[   21.049770] mt76x2e 0000:02:00.0: registering led 'mt76-phy1'
+[   21.176017] PPP generic driver version 2.4.2
+[   21.186801] NET: Registered PF_PPPOX protocol family
+[   21.203811] kmodloader: done loading kernel modules from /etc/modules.d/*
+[   28.076322] mtk_soc_eth 1e100000.ethernet eth0: Link is Down
+[   28.110032] mtk_soc_eth 1e100000.ethernet eth0: configuring for fixed/rgmii link mode
+[   28.126402] mtk_soc_eth 1e100000.ethernet eth0: Link is Up - 1Gbps/Full - flow control rx/tx
+[   28.136542] mt7530-mdio mdio-bus:1f lan1: configuring for phy/gmii link mode
+[   28.161933] br-lan: port 1(lan1) entered blocking state
+[   28.172600] br-lan: port 1(lan1) entered disabled state
+[   28.183368] mt7530-mdio mdio-bus:1f lan1: entered allmulticast mode
+[   28.196147] mtk_soc_eth 1e100000.ethernet eth0: entered allmulticast mode
+[   28.212930] mt7530-mdio mdio-bus:1f lan1: entered promiscuous mode
+[   28.237259] mt7530-mdio mdio-bus:1f lan2: configuring for phy/gmii link mode
+[   28.253173] br-lan: port 2(lan2) entered blocking state
+[   28.263831] br-lan: port 2(lan2) entered disabled state
+[   28.274569] mt7530-mdio mdio-bus:1f lan2: entered allmulticast mode
+[   28.289310] mt7530-mdio mdio-bus:1f lan2: entered promiscuous mode
+[   28.309744] mt7530-mdio mdio-bus:1f lan3: configuring for phy/gmii link mode
+[   28.326198] br-lan: port 3(lan3) entered blocking state
+[   28.336845] br-lan: port 3(lan3) entered disabled state
+[   28.347474] mt7530-mdio mdio-bus:1f lan3: entered allmulticast mode
+[   28.362332] mt7530-mdio mdio-bus:1f lan3: entered promiscuous mode
+[   28.381828] mt7530-mdio mdio-bus:1f lan4: configuring for phy/gmii link mode
+[   28.397359] br-lan: port 4(lan4) entered blocking state
+[   28.407947] br-lan: port 4(lan4) entered disabled state
+[   28.418667] mt7530-mdio mdio-bus:1f lan4: entered allmulticast mode
+[   28.433505] mt7530-mdio mdio-bus:1f lan4: entered promiscuous mode
+[   28.452620] mtk_soc_eth 1e100000.ethernet wan: PHY [mt7530-0:04] driver [MediaTek MT7530 PHY] (irq=POLL)
+[   28.471602] mtk_soc_eth 1e100000.ethernet wan: configuring for phy/rgmii link mode
+[   28.493398] br-lan: port 5(wan) entered blocking state
+[   28.503790] br-lan: port 5(wan) entered disabled state
+[   28.514279] mtk_soc_eth 1e100000.ethernet wan: entered allmulticast mode
+[   28.528218] mtk_soc_eth 1e100000.ethernet wan: entered promiscuous mode
+[   30.093655] br-lan: port 6(phy0-ap0) entered blocking state
+[   30.104929] br-lan: port 6(phy0-ap0) entered disabled state
+[   30.116323] mt76x2e 0000:01:00.0 phy0-ap0: entered allmulticast mode
+[   30.129837] mt76x2e 0000:01:00.0 phy0-ap0: entered promiscuous mode
+[   31.247962] mt7530-mdio mdio-bus:1f lan1: Link is Up - 1Gbps/Full - flow control rx/tx
+[   31.263965] br-lan: port 1(lan1) entered blocking state
+[   31.274411] br-lan: port 1(lan1) entered forwarding state
+
+
+
+BusyBox v1.37.0 (2026-06-29 12:59:20 UTC) built-in shell (ash)
+
+  _______                     ________        __
+ |       |.-----.-----.-----.|  |  |  |.----.|  |_
+ |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
+ |_______||   __|_____|__|__||________||__|  |____|
+          |__| W I R E L E S S   F R E E D O M
+ -----------------------------------------------------
+ OpenWrt 25.12.5, r33051-f5dae5ece4 Dave's Guitar
+ -----------------------------------------------------
+
+ OpenWrt recently switched to the "apk" package manager!
+
+ OPKG Command           APK Equivalent      Description
+ ------------------------------------------------------------------
+ opkg install <pkg>     apk add <pkg>       Install a package
+ opkg remove <pkg>      apk del <pkg>       Remove a package
+ opkg upgrade           apk upgrade         Upgrade all packages
+ opkg files <pkg>       apk info -L <pkg>   List package contents
+ opkg list-installed    apk info            List installed packages
+ opkg update            apk update          Update package lists
+ opkg search <pkg>      apk search <pkg>    Search for packages
+ ------------------------------------------------------------------
+
+For more information visit:
+https://openwrt.org/docs/guide-user/additional-software/opkg-to-apk-cheatsheet
+
+root@console-net-ap:~# echo @@$((1+1))BEGIN; echo 1 > /proc/sys/kernel/printk; c
+ut -d" " -f1 /proc/uptime; grep " 30:" /proc/interrupts; iwinfo | grep -c Consol
+e-Net; echo @@$((1+1))END
+@@2BEGIN
+50.41
+ 30:          2          0          0          0  MIPS GIC  31  mt76x2e
+1
+@@2END
+root@console-net-ap:~# echo @@$((1+1))BEGIN; cut -d" " -f1 /proc/uptime; grep " 
+30:" /proc/interrupts; uci set wireless.radio1.disabled=0; uci commit wireless; 
+wifi reload; echo @@$((1+1))END
+@@2BEGIN
+891.99
+ 30:          2          0          0          0  MIPS GIC  31  mt76x2e
+@@2END
+root@console-net-ap:~# echo @@$((1+1))BEGIN; cut -d" " -f1 /proc/uptime; grep " 
+30:" /proc/interrupts; echo restarts=$(dmesg | grep -c "Hardware restart") timeo
+uts=$(dmesg | grep -c "timed out"); iwinfo | grep -c Console-Net; echo @@$((1+1)
+)END
+@@2BEGIN
+912.87
+ 30:       1239          0          0          0  MIPS GIC  31  mt76x2e
+restarts=0 timeouts=0
+2
+@@2END
+root@console-net-ap:~# echo @@$((1+1))BEGIN; uci get wireless.radio1.disabled; c
+ut -d" " -f1 /proc/uptime; grep " 30:" /proc/interrupts; wifi reload; echo reloa
+ded; echo @@$((1+1))END
+@@2BEGIN
+0
+940.56
+ 30:       3025          0          0          0  MIPS GIC  31  mt76x2e
+reloaded
+@@2END
+root@console-net-ap:~# echo @@$((1+1))BEGIN; grep " 30:" /proc/interrupts; echo 
+restarts=$(dmesg | grep -c "Hardware restart") timeouts=$(dmesg | grep -c "timed
+ out"); iwinfo | grep -E "ESSID|Channel"; echo @@$((1+1))END
+@@2BEGIN
+ 30:       4203          0          0          0  MIPS GIC  31  mt76x2e
+restarts=0 timeouts=0
+phy0-ap0 ESSID: "Console-Net"
+         Mode: Master  Channel: 100 (5.500 GHz)  HT Mode: VHT80
+         Center Channel 1: 106 2: unknown
+         Channel offset: none
+phy1-ap0 ESSID: "Console-Net"
+         Mode: Master  Channel: 6 (2.437 GHz)  HT Mode: HT20
+         Center Channel 1: 6 2: unknown
+         Channel offset: none
+@@2END
+root@console-net-ap:~# 

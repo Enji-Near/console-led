@@ -18,11 +18,9 @@ for r in 0 1; do
   uci set wireless.default_radio$r.encryption=sae-mixed   # WPA2/WPA3
   uci set wireless.default_radio$r.disabled=0
 done
-# 2.4 GHz (radio1, MT7602) is off for now: on 25.12.5 its firmware times out on the
-# first command (MCU message 02) and the radio restarts about once a second.
-# Channel fixed to 6 did not help. See README "Known issues".
+# 2.4 GHz (radio1, MT7602) on a fixed channel. Once, right after install, it got stuck
+# in an MCU-timeout restart loop that only a power cycle cleared; see README "Known issues".
 uci set wireless.radio1.channel=6
-uci set wireless.radio1.disabled=1
 uci set system.@system[0].hostname=console-net-ap
 uci commit wireless
 uci commit system
