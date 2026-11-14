@@ -64,6 +64,16 @@ Applied over the serial console: OpenWrt's serial shell has no login (`ttylogin=
   on the first command at radio start, then `Hardware restart was requested` about once a second
   (111 restarts in ~2 min). Fixed channel 6 didn't help. Disabled for now; 5 GHz (MT7612) is fine.
   Wiki note #2: the MT7602 reports itself as 0x14c3:0x7612 and needed an mt76 patch.
+  - Upstream bug: [openwrt/openwrt#19451](https://github.com/openwrt/openwrt/issues/19451) (open).
+    Reporter: 2.4 GHz works on 18.06.9 to 21.02.7, broken from 22.03.0 (24.10.x too). No fix posted.
+  - Diagnosis (2026-11-14): the MT7602's interrupts never reach the CPU. `/proc/interrupts`:
+    IRQ 29 (01:00.0, MT7612, GIC shared 4) counts normally; IRQ 30 (02:00.0, MT7602, GIC shared 24) stays 0.
+    Meanwhile the chip *is* asserting INTx: PCI status `0x0018` (interrupt bit set),
+    `INT_SOURCE=0x00300000` with `INT_MASK=0x00703ff3` (read via debugfs `regidx`/`regval`).
+    Device tree interrupt-map is standard (port 0/1/2 to GIC 4/24/25), PERST on GPIO 19.
+  - The MT7602 is not reset on warm reboot: its BAR keeps `0x60200000` across reboots while
+    the MT7612's is cleared. All failures so far were after warm reboots; cold boot not yet tested.
+  - A PCI bus reset (`reset_method=bus`) drops the MT7602 off the bus until power cycle. Don't use it.
 
 ## Images (OpenWrt 25.12.5, checksums in `openwrt-25.12.5-sha256sums`)
 
